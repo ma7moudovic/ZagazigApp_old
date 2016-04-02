@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp">
+
+            <ImageView
+                android:id="@+id/photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginRight="16dp"
+                android:scaleType="fitXY"
+                android:src="@mipmap/ic_launcher" />
+
+            <TextView
+                android:id="@+id/tvtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_toRightOf="@+id/photo"
+                android:text="Karim"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/tvdesc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvtitle"
+                android:layout_toRightOf="@+id/photo"
+                android:text="Dabour" />
+            <TextView
+                android:id="@+id/tvtxt1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="type"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/tvdesc"
+                android:layout_toEndOf="@+id/photo"
+                android:background="@drawable/custombackground"
+                android:paddingRight="15dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:paddingLeft="15dp"
+
+
+                android:layout_toRightOf="@+id/photo"/>
+            <TextView
+                android:id="@+id/tvtxt2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="tag"
+                android:layout_marginTop="8dp"
+                android:layout_below="@+id/tvdesc"
+                android:layout_marginLeft="5dp"
+                android:paddingTop="3dp"
+                android:paddingBottom="3dp"
+                android:background="@drawable/custombackground"
+                android:paddingRight="15dp"
+                android:paddingLeft="15dp"
+                android:layout_toRightOf="@+id/tvtxt1"/>
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</LinearLayout>
