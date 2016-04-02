@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getBaseContext(), "DAbour", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getBaseContext(), "clicked", Toast.LENGTH_SHORT).show();
             }
         });
 
