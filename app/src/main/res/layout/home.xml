@@ -11,7 +11,6 @@
         android:layout_alignParentTop="true"
         android:padding="10dp">
 
-
         <LinearLayout
             android:layout_width="0.0dip"
             android:layout_height="fill_parent"
@@ -33,31 +32,21 @@
                 android:id="@+id/etsearch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-
-
                 android:background="@drawable/custombackground"
                 android:hint="Search"
                 android:padding="3dp"
                 android:singleLine="true"
-
                 android:textColor="@color/colorPrimary" />
-
-
         </LinearLayout>
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/rel1"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="20dp">
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:layout_below="@id/rel1"
+            android:id="@+id/btns">
 
             <Button
                 android:id="@+id/btn1"
@@ -65,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:text="Category 1"
+                android:text="Food – hangouts"
                 android:textColor="@color/colorPrimary" />
 
             <Button
@@ -73,7 +62,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:text="Category 2"
+                android:text="Shopping"
                 android:textColor="@color/colorPrimary" />
 
             <Button
@@ -81,7 +70,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:text="Category 3"
+                android:text="Sports"
                 android:textColor="@color/colorPrimary" />
 
             <Button
@@ -89,7 +78,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:text="Category 4"
+                android:text="Occasions"
                 android:textColor="@color/colorPrimary" />
 
             <Button
@@ -97,30 +86,17 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
-                android:text="Category 5"
+                android:text="General services"
                 android:textColor="@color/colorPrimary" />
 
         </LinearLayout>
-    </ScrollView>
-
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tabs"
         android:layout_width="match_parent"
-        android:layout_height="90dp"
-
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignParentStart="true" />
 
-        android:layout_gravity="bottom"
-        android:gravity="bottom" />
-
-
-    <!--<TabWidget-->
-    <!--android:id="@+id/tabs"-->
-    <!--android:layout_width="fill_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_alignParentBottom="true"></TabWidget>-->
 </RelativeLayout>
