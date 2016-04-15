@@ -75,7 +75,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.titleView.setText(pObjects.get(position).getName());
         holder.descView.setText(pObjects.get(position).getDesc());
-        holder.descView.setText(pObjects.get(position).getDesc());
+//        holder.descView.setText(pObjects.get(position).getDesc());
         holder.tab1.setText(pObjects.get(position).getTag());
     }
 

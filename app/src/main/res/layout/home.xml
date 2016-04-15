@@ -49,7 +49,7 @@
             android:id="@+id/btns">
 
             <Button
-                android:id="@+id/btn1"
+                android:id="@+id/btn_cat_1"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
@@ -63,6 +63,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:text="Shopping"
+                android:id="@+id/btn_cat_2"
                 android:textColor="@color/colorPrimary" />
 
             <Button
@@ -70,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
+                android:id="@+id/btn_cat_3"
                 android:text="Sports"
                 android:textColor="@color/colorPrimary" />
 
@@ -79,6 +81,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:text="Occasions"
+                android:id="@+id/btn_cat_4"
                 android:textColor="@color/colorPrimary" />
 
             <Button
@@ -87,6 +90,7 @@
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="40dp"
                 android:text="General services"
+                android:id="@+id/btn_cat_5"
                 android:textColor="@color/colorPrimary" />
 
         </LinearLayout>

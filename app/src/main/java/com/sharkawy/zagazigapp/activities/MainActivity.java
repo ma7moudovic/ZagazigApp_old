@@ -36,7 +36,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     Spinner s1;
-    Button btn1;
+    Button btn_cat_1 ,btn_cat_2,btn_cat_3,btn_cat_4,btn_cat_5;
     EditText search_input ;
     TabLayout tabLayout ;
     ProgressDialog pDialog ;
@@ -77,18 +77,55 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(courses,3);
 
         s1.setAdapter(dataAdapter);
-        btn1=(Button)findViewById(R.id.btn1);
+        btn_cat_1=(Button)findViewById(R.id.btn_cat_1);
+        btn_cat_2=(Button)findViewById(R.id.btn_cat_2);
+        btn_cat_3=(Button)findViewById(R.id.btn_cat_3);
+        btn_cat_4=(Button)findViewById(R.id.btn_cat_4);
+        btn_cat_5=(Button)findViewById(R.id.btn_cat_5);
+
         Animation animation = new TranslateAnimation(0, 500,0, 0);
         animation.setDuration(1000);
-        btn1.startAnimation(animation);
-        btn1.setOnClickListener(new View.OnClickListener() {
+        btn_cat_1.startAnimation(animation);
+        btn_cat_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,CategoryActivity.class);
+                Intent i = new Intent(MainActivity.this, CategoryActivity.class);
+                i.putExtra("cat_index",0);
                 startActivity(i);
             }
         });
-
+        btn_cat_2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,CategoryActivity.class);
+                i.putExtra("cat_index",1);
+                startActivity(i);
+            }
+        });
+        btn_cat_3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,CategoryActivity.class);
+                i.putExtra("cat_index",2);
+                startActivity(i);
+            }
+        });
+        btn_cat_4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,CategoryActivity.class);
+                i.putExtra("cat_index",3);
+                startActivity(i);
+            }
+        });
+        btn_cat_5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MainActivity.this,CategoryActivity.class);
+                i.putExtra("cat_index",4);
+                startActivity(i);
+            }
+        });
 
         search_input.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -96,11 +133,15 @@ public class MainActivity extends AppCompatActivity {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     // Perform action on key press
-                    String URL ="http://www.mashaly.net/zag.php?filter="+s1.getSelectedItem().toString();
-                    Toast.makeText(MainActivity.this,URL, Toast.LENGTH_SHORT).show();
-                    makeJsonObjectRequest();
-                    Intent i = new Intent(MainActivity.this,SearchResultActivity.class);
-                    startActivity(i);
+                    if(search_input.getText().length()!=0){
+
+                        String URL ="http://www.mashaly.net/handler.php?action=search&area="+s1.getSelectedItemPosition()+"&name="+search_input.getText();
+                        Toast.makeText(MainActivity.this,URL, Toast.LENGTH_SHORT).show();
+                        makeJsonObjectRequest(URL);
+//                        Intent i = new Intent(MainActivity.this,SearchResultActivity.class);
+//                        startActivity(i);
+                    }
+
                     return true;
                 }
                 return false;
@@ -108,9 +149,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
-    private void makeJsonObjectRequest() {
+    private void makeJsonObjectRequest(String URL) {
         showpDialog();
-        String URL ="http://www.mashaly.net/zag.php?filter="+s1.getSelectedItem().toString().replace(" ","%20");
+//        String URL ="http://www.mashaly.net/zag.php?filter="+s1.getSelectedItem().toString().replace(" ","%20");
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 URL, null, new Response.Listener<JSONObject>() {
 
@@ -124,8 +165,12 @@ public class MainActivity extends AppCompatActivity {
                     if(response.getString("message").toString().equals("success")){
 
                         Toast.makeText(MainActivity.this,response.toString(), Toast.LENGTH_LONG).show();
+                        JSONArray data = response.getJSONArray("data");
 
-                    }else {
+                    }else if(response.getString("message").toString().equals("no data recived")){
+                        Toast.makeText(MainActivity.this,"no places with this name", Toast.LENGTH_LONG).show();
+
+                    } else{
                         Toast.makeText(getApplicationContext(),
                                 "Something went wrong..!", Toast.LENGTH_SHORT).show();
                     }
