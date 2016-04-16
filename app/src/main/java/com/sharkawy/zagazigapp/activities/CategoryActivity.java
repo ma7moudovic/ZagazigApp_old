@@ -49,7 +49,7 @@ public class CategoryActivity extends AppCompatActivity {
         pDialog = new ProgressDialog(this);
         pDialog.setMessage(getResources().getString(R.string.msg_loading));
 
-        String [] arr ={"القومية ","شارع المحافظة","مفارق المنصورة","فلل الجامعة","حي الزهور","المنتزة","شارع البحر","المحطة","شارع مديرالامن","عمر افندي","عمارة الاوقاف","حي ثاني","شارع الغشام"};
+        String [] arr ={"القومية ","شارع المحافظة","مفارق المنصورة","فلل الجامعة","حي الزهور","المنتزة","شارع البحر","المحطة","شارع مديرالامن","عمر افندي","حي ثاني","شارع الغشام" ,"عمارة الاوقاف"};
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_spinner_item, arr);
         dataAdapter.setDropDownViewResource

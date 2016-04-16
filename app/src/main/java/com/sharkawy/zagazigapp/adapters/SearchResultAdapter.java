@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import com.sharkawy.zagazigapp.R;
 import com.sharkawy.zagazigapp.dataModels.Place;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -77,6 +78,11 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         holder.descView.setText(pObjects.get(position).getDesc());
 //        holder.descView.setText(pObjects.get(position).getDesc());
         holder.tab1.setText(pObjects.get(position).getTag());
+        //http://mashaly.net/places_imgs/icons/0.jpg
+//        Toast.makeText(getpContext(), "http://mashaly.net/" Toast.LENGTH_LONG).show();
+        Picasso.with(getpContext()).load("http://mashaly.net/" +"/places_imgs/icons/0.jpg").into(holder.imageView);
+//        Picasso.with(getpContext()).load("http://mashaly.net/"+pObjects.get(position).getImageURL()).into(holder.imageView);
+
     }
 
     @Override

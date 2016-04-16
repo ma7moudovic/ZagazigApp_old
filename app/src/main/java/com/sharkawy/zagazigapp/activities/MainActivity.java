@@ -30,6 +30,9 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         pDialog = new ProgressDialog(this);
         pDialog.setMessage(getResources().getString(R.string.msg_loading));
 
-        String [] arr ={"القومية ","شارع المحافظة","مفارق المنصورة","فلل الجامعة","حي الزهور","المنتزة","شارع البحر","المحطة","شارع مديرالامن","عمر افندي","عمارة الاوقاف","حي ثاني","شارع الغشام"};
+        String [] arr ={"القومية ","شارع المحافظة","مفارق المنصورة","فلل الجامعة","حي الزهور","المنتزة","شارع البحر","المحطة","شارع مديرالامن","عمر افندي","حي ثاني","شارع الغشام" ,"عمارة الاوقاف"};
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_spinner_item, arr);
         dataAdapter.setDropDownViewResource
@@ -135,7 +138,13 @@ public class MainActivity extends AppCompatActivity {
                     // Perform action on key press
                     if(search_input.getText().length()!=0){
 
-                        String URL ="http://www.mashaly.net/handler.php?action=search&area="+s1.getSelectedItemPosition()+"&name="+search_input.getText();
+                        String url ="http://www.mashaly.net/handler.php?action=search&area="+s1.getSelectedItemPosition()+"&name="+search_input.getText();
+                        String URL = null;
+                        try {
+                            URL = URLDecoder.decode(URLEncoder.encode(url, "iso8859-1"), "UTF-8");
+                        } catch (UnsupportedEncodingException e) {
+                            e.printStackTrace();
+                        }
                         Toast.makeText(MainActivity.this,URL, Toast.LENGTH_SHORT).show();
                         makeJsonObjectRequest(URL);
 //                        Intent i = new Intent(MainActivity.this,SearchResultActivity.class);
