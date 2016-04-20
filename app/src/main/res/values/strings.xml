@@ -2,4 +2,5 @@
     <string name="app_name">ZagazigApp</string>
     <string name="title_activity_search_result">SearchResultActivity</string>
     <string name="msg_loading">Loading..</string>
+    <string name="title_activity_sector">SectorActivity</string>
 </resources>

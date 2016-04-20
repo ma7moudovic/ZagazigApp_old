@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         pDialog.setMessage(getResources().getString(R.string.msg_loading));
 
         String [] arr ={"القومية ","شارع المحافظة","مفارق المنصورة","فلل الجامعة","حي الزهور","المنتزة","شارع البحر","المحطة","شارع مديرالامن","عمر افندي","حي ثاني","شارع الغشام" ,"عمارة الاوقاف"};
+        String [] TAGS = {"مطاعم","كافيهات","سينمات","هدوم ولادى","هدوم بناتى","هدوم اطفال","موبيلات ولابات","جيم شبابي","جيم بناتى","مراكز تجميل","قاعات افراح","ستوديو تصوير","فوتوجرافيك","مستشفيات","عيادات","خدمات عربيات"};
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_spinner_item, arr);
         dataAdapter.setDropDownViewResource
@@ -78,6 +79,33 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(offers, 1);
         tabLayout.addTab(job, 2);
         tabLayout.addTab(courses,3);
+
+
+        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+                if(tab.getPosition()==0){
+                    Toast.makeText(MainActivity.this,"Favorities", Toast.LENGTH_SHORT).show();
+                }else if(tab.getPosition()==1){
+                    Toast.makeText(MainActivity.this,"Offers", Toast.LENGTH_SHORT).show();
+                }else if(tab.getPosition()==2){
+                    Toast.makeText(MainActivity.this,"JOBS", Toast.LENGTH_SHORT).show();
+                }else if(tab.getPosition()==3){
+                    Toast.makeText(MainActivity.this,"Courses", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
         s1.setAdapter(dataAdapter);
         btn_cat_1=(Button)findViewById(R.id.btn_cat_1);

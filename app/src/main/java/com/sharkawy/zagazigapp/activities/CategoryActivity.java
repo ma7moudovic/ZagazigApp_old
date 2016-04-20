@@ -1,11 +1,14 @@
 package com.sharkawy.zagazigapp.activities;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -16,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.sharkawy.zagazigapp.R;
+import com.sharkawy.zagazigapp.RecyclerItemClickListener;
 import com.sharkawy.zagazigapp.adapters.SearchResultAdapter;
 import com.sharkawy.zagazigapp.dataModels.Place;
 import com.sharkawy.zagazigapp.utilities.AppController;
@@ -29,7 +33,7 @@ import java.util.List;
 
 public class CategoryActivity extends AppCompatActivity {
 
-    Spinner sp_areas ;
+    Spinner sp_areas , sp_tags;
     ProgressDialog pDialog ;
     private static String TAG = CategoryActivity.class.getSimpleName();
 
@@ -37,19 +41,22 @@ public class CategoryActivity extends AppCompatActivity {
     SearchResultAdapter adapter ;
     RecyclerView.LayoutManager layoutManager ;
     private List<Place> list;
-
-
+    String URL ,area,sub_cat;
+    int index ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
-        int index = getIntent().getExtras().getInt("cat_index");
+        index = getIntent().getExtras().getInt("cat_index");
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage(getResources().getString(R.string.msg_loading));
 
         String [] arr ={"القومية ","شارع المحافظة","مفارق المنصورة","فلل الجامعة","حي الزهور","المنتزة","شارع البحر","المحطة","شارع مديرالامن","عمر افندي","حي ثاني","شارع الغشام" ,"عمارة الاوقاف"};
+        String [] TAGS = {"مطاعم","كافيهات","سينمات","هدوم ولادى","هدوم بناتى","هدوم اطفال","موبيلات ولابات","جيم شبابي","جيم بناتى","مراكز تجميل","قاعات افراح","ستوديو تصوير","فوتوجرافيك","مستشفيات","عيادات","خدمات عربيات"};
+        String [] SubTags={"سندوتشات","بيتزا","كشري","مشويات","حلويات","كريب","اكل بيتي","هدوم خروج","بدل","احذية","توكيلات","هدوم خروج","بيجامات ولانجري","اكسسورات وميك اب","ششنط واحذية"};
+
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_spinner_item, arr);
         dataAdapter.setDropDownViewResource
@@ -57,8 +64,18 @@ public class CategoryActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource
                 (android.R.layout.simple_spinner_dropdown_item);
 
+        ArrayAdapter<String> tagsAdapter = new ArrayAdapter<String>
+                (this, android.R.layout.simple_spinner_item, TAGS);
+        tagsAdapter.setDropDownViewResource
+                (android.R.layout.simple_spinner_dropdown_item);
+        tagsAdapter.setDropDownViewResource
+                (android.R.layout.simple_spinner_dropdown_item);
+
         sp_areas = (Spinner) findViewById(R.id.sp_aresa);
         sp_areas.setAdapter(dataAdapter);
+
+        sp_tags= (Spinner) findViewById(R.id.sp_subCats);
+        sp_tags.setAdapter(tagsAdapter);
 
         list= new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerListview_category);
@@ -68,15 +85,54 @@ public class CategoryActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(adapter);
 
-        String URL = "http://www.mashaly.net/handler.php?action=search&category="+index ;
-        makeJsonObjectRequest(URL);
+        area="";
+        sub_cat="";
+        makeJsonObjectRequest();
 
+//        Toast.makeText(CategoryActivity.this,adapter.getItemCount()+"", Toast.LENGTH_LONG).show();
 
-        Toast.makeText(CategoryActivity.this,adapter.getItemCount()+"", Toast.LENGTH_LONG).show();
+        sp_areas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                area=(position+1)+"";
+                makeJsonObjectRequest();
+            }
 
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        sp_tags.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                sub_cat = (position+1)+"";
+                makeJsonObjectRequest();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+
+                        Intent i = new Intent(CategoryActivity.this, DetailedItemActivity.class);
+                        i.putExtra("Item",adapter.getItem(position).getObject().toString());
+                        startActivity(i);
+                    }
+
+                })
+        );
     }
 
-    private void makeJsonObjectRequest(String URL) {
+    private void makeJsonObjectRequest() {
+        URL = "http://www.mashaly.net/handler.php?action=search&category="+index+"&area="+area+ "&sub_category="+sub_cat;
+
         Toast.makeText(CategoryActivity.this,URL, Toast.LENGTH_LONG).show();
 
         showpDialog();
@@ -88,12 +144,13 @@ public class CategoryActivity extends AppCompatActivity {
                 Log.d(TAG, response.toString());
                 // Parsing json object response
                 hidepDialog();
+                adapter.clear();
                 try {
 
 //                    Toast.makeText(CategoryActivity.this,response.getString("message").toString(), Toast.LENGTH_LONG).show();
                     if(response.getString("message").toString().equals("success")){
 
-                        Toast.makeText(CategoryActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+//                        Toast.makeText(CategoryActivity.this, response.toString(), Toast.LENGTH_LONG).show();
                         JSONArray data = response.getJSONArray("data");
 
                     }else if(response.getString("message").toString().equals("no data recived")){
@@ -102,12 +159,11 @@ public class CategoryActivity extends AppCompatActivity {
                     }else if(response.getString("message").toString().equals("sucess")){
 
                         JSONArray data = response.getJSONArray("data");
-                        Toast.makeText(CategoryActivity.this, data.toString(), Toast.LENGTH_LONG).show();
+//                        Toast.makeText(CategoryActivity.this, data.toString(), Toast.LENGTH_LONG).show();
                         for(int i =0 ;i<data.length();i++){
                             adapter.add(new Place(data.getJSONObject(i)));
                         }
-                        Toast.makeText(CategoryActivity.this, adapter.getItemCount()+"", Toast.LENGTH_LONG).show();
-
+//                        Toast.makeText(CategoryActivity.this, adapter.getItemCount()+"", Toast.LENGTH_LONG).show();
 
                     }
                     else{
@@ -153,4 +209,6 @@ public class CategoryActivity extends AppCompatActivity {
         if (pDialog.isShowing())
             pDialog.dismiss();
     }
+
+
 }

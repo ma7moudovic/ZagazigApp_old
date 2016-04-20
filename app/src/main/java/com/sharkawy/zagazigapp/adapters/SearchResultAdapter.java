@@ -42,7 +42,6 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
     public Context getpContext() {
         return pContext;
     }
-
     public void add(Place object) {
         synchronized (pLock) {
             pObjects.add(object);

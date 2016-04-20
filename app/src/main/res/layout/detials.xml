@@ -38,7 +38,7 @@
                 android:textSize="30sp" />
 
             <TextView
-                android:id="@+id/tvdesc"
+                android:id="@+id/tvcat"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvtitle"
@@ -49,7 +49,7 @@
                 android:id="@+id/tvtxt1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvdesc"
+                android:layout_below="@+id/tvcat"
                 android:layout_marginTop="8dp"
                 android:layout_toEndOf="@+id/photo"
                 android:layout_toRightOf="@+id/photo"
@@ -66,7 +66,7 @@
                 android:id="@+id/tvtxt2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvdesc"
+                android:layout_below="@+id/tvcat"
                 android:layout_marginLeft="5dp"
                 android:layout_marginTop="8dp"
                 android:layout_toRightOf="@+id/tvtxt1"
@@ -91,6 +91,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/tvdesc"
         android:text="jkkdhf gjfdjgj;hfdkjhgjfd kjhhf;kjgfd kjgfdkjhg jfdg kjhfdj hjfdh gkfd gklfhjd ijri jg'rkijg irdshfgkjhdflkjhgio fdgk fdkj; gkjfdhg kjhfdjk gfdkjh gjkfdhg u rkfdgkfd jgidfh kjndf;kghd;kf jj;dhf kjh h gkfdh gidfog dfioghsfd[oi h" />
 
     <TextView
@@ -103,6 +104,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/tvadd"
         android:text="jkkdhf hjd ijri jg'rkijg irdshfgkjhdflkjhgio fdgk fdkj; gkjfdhg kjhfdjk gfdkjh gjkfdhg u rkfdgkfd jgidfh kjndf;kghd;kf jj;dhf kjh h gkfdh gidfog dfioghsfd[oi h" />
 
     <TextView
@@ -115,6 +117,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/tvtel"
         android:text="0123456789" />
 
 </LinearLayout>

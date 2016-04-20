@@ -23,7 +23,11 @@
             android:label="@string/title_activity_search_result"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.DetailedItemActivity" />
-        <activity android:name=".activities.CategoryActivity"></activity>
+        <activity android:name=".activities.CategoryActivity" />
+        <activity
+            android:name=".activities.SectorActivity"
+            android:label="@string/title_activity_sector"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
