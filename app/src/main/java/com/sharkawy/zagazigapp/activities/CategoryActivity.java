@@ -133,11 +133,12 @@ public class CategoryActivity extends AppCompatActivity {
     private void makeJsonObjectRequest() {
         URL = "http://www.mashaly.net/handler.php?action=search&category="+index+"&area="+area+ "&sub_category="+sub_cat;
 
+        String tmp_url = "http://www.mashaly.net/handler.php?action=search&area=1";
         Toast.makeText(CategoryActivity.this,URL, Toast.LENGTH_LONG).show();
 
         showpDialog();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                URL, null, new Response.Listener<JSONObject>() {
+                tmp_url, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
