@@ -87,12 +87,24 @@ public class MainActivity extends AppCompatActivity {
 
                 if(tab.getPosition()==0){
                     Toast.makeText(MainActivity.this,"Favorities", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
+                    i.putExtra("type",0);
+                    startActivity(i);
                 }else if(tab.getPosition()==1){
                     Toast.makeText(MainActivity.this,"Offers", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
+                    i.putExtra("type",1);
+                    startActivity(i);
                 }else if(tab.getPosition()==2){
                     Toast.makeText(MainActivity.this,"JOBS", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
+                    i.putExtra("type",2);
+                    startActivity(i);
                 }else if(tab.getPosition()==3){
                     Toast.makeText(MainActivity.this,"Courses", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
+                    i.putExtra("type",3);
+                    startActivity(i);
                 }
             }
 

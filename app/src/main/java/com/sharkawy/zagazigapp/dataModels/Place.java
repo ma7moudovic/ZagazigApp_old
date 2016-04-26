@@ -1,5 +1,6 @@
 package com.sharkawy.zagazigapp.dataModels;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -31,6 +32,7 @@ public class Place {
     String subCategory ;
     String imageURL ;
     JSONObject object ;
+    JSONArray serviceTags ;
 
     public Place() {
     }
@@ -46,6 +48,7 @@ public class Place {
             this.categoryID=object.getString("categoryId");
             this.subCategory=object.getString("");
             this.imageURL=object.getString("icoImage");
+            this.serviceTags=object.getJSONArray("serviceTags");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -99,11 +102,15 @@ public class Place {
     public JSONObject getObject() {
         return object;
     }
+
     public String getCategoryID() {
         return categoryID;
-    }
 
-    public String getSubCategory() {
-        return subCategory;
     }
+    public JSONArray getServiceTags() {
+        return serviceTags;
+    }
+    public String getSubCategory() {
+    return subCategory;
+}
 }

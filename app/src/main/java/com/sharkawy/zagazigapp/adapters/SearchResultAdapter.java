@@ -99,7 +99,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 //            holder.recyclerView.setLayoutManager(new LinearLayoutManager(getpContext(),LinearLayoutManager.VERTICAL,false));
             holder.recyclerView.setAdapter(tagAdapter);
             tagAdapter.notifyDataSetChanged();
-            Toast.makeText(getpContext(),tagAdapter.getItemCount()+" tag ",Toast.LENGTH_SHORT).show();
+//            Toast.makeText(getpContext(),tagAdapter.getItemCount()+" tag ",Toast.LENGTH_SHORT).show();
         }
         catch (Exception e){
 

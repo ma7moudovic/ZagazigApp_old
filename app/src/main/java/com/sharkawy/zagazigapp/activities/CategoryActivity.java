@@ -54,8 +54,8 @@ public class CategoryActivity extends AppCompatActivity {
         pDialog.setMessage(getResources().getString(R.string.msg_loading));
 
         String [] arr ={"القومية ","شارع المحافظة","مفارق المنصورة","فلل الجامعة","حي الزهور","المنتزة","شارع البحر","المحطة","شارع مديرالامن","عمر افندي","حي ثاني","شارع الغشام" ,"عمارة الاوقاف"};
-        String [] TAGS = {"مطاعم","كافيهات","سينمات","هدوم ولادى","هدوم بناتى","هدوم اطفال","موبيلات ولابات","جيم شبابي","جيم بناتى","مراكز تجميل","قاعات افراح","ستوديو تصوير","فوتوجرافيك","مستشفيات","عيادات","خدمات عربيات"};
-        String [] SubTags={"سندوتشات","بيتزا","كشري","مشويات","حلويات","كريب","اكل بيتي","هدوم خروج","بدل","احذية","توكيلات","هدوم خروج","بيجامات ولانجري","اكسسورات وميك اب","ششنط واحذية"};
+        String [] subcategory = {"مطاعم","كافيهات","سينمات","هدوم ولادى","هدوم بناتى","هدوم اطفال","موبيلات ولابات","جيم شبابي","جيم بناتى","مراكز تجميل","قاعات افراح","ستوديو تصوير","فوتوجرافيك","مستشفيات","عيادات","خدمات عربيات"};
+        String [] serviceTags={"سندوتشات","بيتزا","كشري","مشويات","حلويات","كريب","اكل بيتي","هدوم خروج","بدل","احذية","توكيلات","هدوم خروج","بيجامات ولانجري","اكسسورات وميك اب","ششنط واحذية"};
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_spinner_item, arr);
@@ -65,7 +65,7 @@ public class CategoryActivity extends AppCompatActivity {
                 (android.R.layout.simple_spinner_dropdown_item);
 
         ArrayAdapter<String> tagsAdapter = new ArrayAdapter<String>
-                (this, android.R.layout.simple_spinner_item, TAGS);
+                (this, android.R.layout.simple_spinner_item, subcategory);
         tagsAdapter.setDropDownViewResource
                 (android.R.layout.simple_spinner_dropdown_item);
         tagsAdapter.setDropDownViewResource
@@ -133,7 +133,7 @@ public class CategoryActivity extends AppCompatActivity {
     private void makeJsonObjectRequest() {
         URL = "http://www.mashaly.net/handler.php?action=search&category="+index+"&area="+area+ "&sub_category="+sub_cat;
 
-        String tmp_url = "http://www.mashaly.net/handler.php?action=search&area=1";
+        String tmp_url = "http://www.mashaly.net/handler.php?action=search&name=";
         Toast.makeText(CategoryActivity.this,URL, Toast.LENGTH_LONG).show();
 
         showpDialog();
@@ -149,7 +149,7 @@ public class CategoryActivity extends AppCompatActivity {
                 try {
 
 //                    Toast.makeText(CategoryActivity.this,response.getString("message").toString(), Toast.LENGTH_LONG).show();
-                    if(response.getString("message").toString().equals("success")){
+                    if(response.getString("message").toString().equals("sucess")){
 
 //                        Toast.makeText(CategoryActivity.this, response.toString(), Toast.LENGTH_LONG).show();
                         JSONArray data = response.getJSONArray("data");
@@ -157,7 +157,7 @@ public class CategoryActivity extends AppCompatActivity {
                     }else if(response.getString("message").toString().equals("no data recived")){
                         Toast.makeText(CategoryActivity.this,"no places with this name", Toast.LENGTH_LONG).show();
 
-                    }else if(response.getString("message").toString().equals("sucess")){
+                    }else if(response.getString("message").toString().equals("success")){
 
                         JSONArray data = response.getJSONArray("data");
 //                        Toast.makeText(CategoryActivity.this, data.toString(), Toast.LENGTH_LONG).show();
