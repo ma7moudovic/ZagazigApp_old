@@ -5,6 +5,7 @@ package com.sharkawy.zagazigapp.dataModels;
  */
 public class Tag {
     String Tag ;
+    String [] TAGS = {"مطاعم","كافيهات","سينمات","هدوم ولادى","هدوم بناتى","هدوم اطفال","موبيلات ولابات","جيم شبابي","جيم بناتى","مراكز تجميل","قاعات افراح","ستوديو تصوير","فوتوجرافيك","مستشفيات","عيادات","خدمات عربيات"};
 
     public Tag() {
     }
@@ -14,7 +15,7 @@ public class Tag {
     }
 
     public String getTag() {
-        return Tag;
+        return TAGS[Integer.parseInt(Tag)];
     }
 
     public void setTag(String tag) {

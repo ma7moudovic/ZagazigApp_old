@@ -1,17 +1,26 @@
 package com.sharkawy.zagazigapp.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sharkawy.zagazigapp.R;
+import com.sharkawy.zagazigapp.activities.PhotoActivity;
 import com.sharkawy.zagazigapp.dataModels.Photo;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.List;
 
 
@@ -79,7 +88,8 @@ public class GallaryAdapter extends BaseAdapter {
 
         String yt_thumbnail_url = "http://mashaly.net/" + trailer.getPhotoURL();
 //        String yt_thumbnail_url = "http://mashaly.net/" +"/places_imgs/icons/0.jpg";
-        Picasso.with(getContext()).load(yt_thumbnail_url).into(viewHolder.imageView);
+//        Picasso.with(getContext()).load(yt_thumbnail_url).into(viewHolder.imageView);
+        ImageHandler(trailer.getPhotoURL(),viewHolder.imageView);
 
 //        viewHolder.nameView.setText(trailer.getName());
 
@@ -96,5 +106,51 @@ public class GallaryAdapter extends BaseAdapter {
         }
     }
 
+    private void ImageHandler(final String URL , final ImageView imageV) {
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/ZagApp/"+URL.replace("/","_"));
+        if (myDir.exists()) {
+            // Do Whatever you want sdcard exists
+            Bitmap bitmap1 = BitmapFactory.decodeFile(myDir.getAbsolutePath());
+            imageV.setImageBitmap(bitmap1);
+        }
+        else{
+//            Toast.makeText(getContext(), "not Exists", Toast.LENGTH_SHORT).show();
+            Picasso.with(getContext()).load("http://mashaly.net/"+URL).into(new Target() {
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    try {
+                        String root = Environment.getExternalStorageDirectory().toString();
+                        File myDir = new File(root + "/ZagApp");
+                        if (!myDir.exists()) {
+                            myDir.mkdirs();
+                        }
+//                    String name = new Date().toString() + ".jpg";
+                        String name = URL.replace("/","_");
+
+                        myDir = new File(myDir, name);
+                        FileOutputStream out = new FileOutputStream(myDir);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                        out.flush();
+                        out.close();
+                        Toast.makeText(getContext(), "imageDownloaded", Toast.LENGTH_SHORT).show();
+                        imageV.setImageBitmap(bitmap);
+
+                    } catch (Exception e) {
+                        Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
+                @Override
+                public void onBitmapFailed(Drawable errorDrawable) {
+                }
+
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable) {
+                }
+            });
+        }
+    }
 
 }

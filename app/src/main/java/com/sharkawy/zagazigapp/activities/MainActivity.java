@@ -80,16 +80,16 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addTab(job, 2);
         tabLayout.addTab(courses,3);
 
-
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
                 if(tab.getPosition()==0){
                     Toast.makeText(MainActivity.this,"Favorities", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
+                    Intent i = new Intent(MainActivity.this,FavorivtesActivity.class);
                     i.putExtra("type",0);
                     startActivity(i);
+
                 }else if(tab.getPosition()==1){
                     Toast.makeText(MainActivity.this,"Offers", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(MainActivity.this,SectorActivity.class);

@@ -163,8 +163,8 @@ public class CategoryActivity extends AppCompatActivity {
 //                        Toast.makeText(CategoryActivity.this, data.toString(), Toast.LENGTH_LONG).show();
                         for(int i =0 ;i<data.length();i++){
                             adapter.add(new Place(data.getJSONObject(i)));
+//                            Toast.makeText(CategoryActivity.this,data.getJSONObject(i).getString("icoImage"), Toast.LENGTH_LONG).show();
                         }
-//                        Toast.makeText(CategoryActivity.this, adapter.getItemCount()+"", Toast.LENGTH_LONG).show();
 
                     }
                     else{

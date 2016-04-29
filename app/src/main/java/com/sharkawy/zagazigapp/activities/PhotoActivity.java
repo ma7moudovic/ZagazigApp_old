@@ -22,26 +22,39 @@ public class PhotoActivity extends AppCompatActivity {
 
     ImageView imageView ;
     String EXTRA_IMAGE ="extra_image";
+//    String URL = "http://mashaly.net/places_imgs//icons//29.jpg" ;
+    String URL ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo);
 
-        imageView = (ImageView) findViewById(R.id.imageID);
-        String URL = "http://mashaly.net/places_imgs//icons//29.jpg" ;
+        if(getIntent()!=null&&getIntent().getExtras()!=null){
+            if(getIntent().getExtras().containsKey(EXTRA_IMAGE)) {
 
+                URL = getIntent().getExtras().getString(EXTRA_IMAGE);
+            }
+        }
+        imageView = (ImageView) findViewById(R.id.imageID);
+
+        ImageHandler(URL,imageView);
+
+    }
+
+    private void ImageHandler(final String URL , final ImageView imageV) {
         String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/ZagApp/29.jpg");
+        File myDir = new File(root + "/ZagApp/"+URL.replace("/","_"));
         if (myDir.exists()) {
             // Do Whatever you want sdcard exists
             Toast.makeText(PhotoActivity.this, "Exists", Toast.LENGTH_SHORT).show();
             Bitmap bitmap1 = BitmapFactory.decodeFile(myDir.getAbsolutePath());
-            imageView.setImageBitmap(bitmap1);
+            imageV.setImageBitmap(bitmap1);
 
         }
         else{
             Toast.makeText(PhotoActivity.this, "not Exists", Toast.LENGTH_SHORT).show();
-            Picasso.with(this).load(URL).into(new Target() {
+            Picasso.with(this).load("http://mashaly.net/"+URL).into(new Target() {
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                     try {
@@ -51,7 +64,7 @@ public class PhotoActivity extends AppCompatActivity {
                             myDir.mkdirs();
                         }
 //                    String name = new Date().toString() + ".jpg";
-                        String name = "29.jpg";
+                        String name = URL.replace("/","_");
 
                         myDir = new File(myDir, name);
                         FileOutputStream out = new FileOutputStream(myDir);
@@ -59,7 +72,7 @@ public class PhotoActivity extends AppCompatActivity {
                         out.flush();
                         out.close();
                         Toast.makeText(PhotoActivity.this, "imageDownloaded", Toast.LENGTH_SHORT).show();
-                        imageView.setImageBitmap(bitmap);
+                        imageV.setImageBitmap(bitmap);
 
                     } catch (Exception e) {
                         Toast.makeText(PhotoActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -75,15 +88,6 @@ public class PhotoActivity extends AppCompatActivity {
                 public void onPrepareLoad(Drawable placeHolderDrawable) {
                 }
             });
-        }
-
-
-
-        if(getIntent()!=null&&getIntent().getExtras()!=null){
-            if(getIntent().getExtras().containsKey(EXTRA_IMAGE)){
-//                String URL = "http://mashaly.net/"+getIntent().getExtras().getString(EXTRA_IMAGE) ;
-
-            }
         }
     }
 }

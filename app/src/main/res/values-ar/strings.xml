@@ -2,4 +2,5 @@
     <string name="app_name">ZagazigApp</string>
     <string name="title_activity_search_result">نتائج البحث</string>
     <string name="msg_loading">جارى تحميل البينات..</string>
+    <string name="nav_item_favorite">favorite</string>
 </resources>

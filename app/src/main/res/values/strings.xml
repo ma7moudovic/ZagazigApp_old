@@ -3,4 +3,6 @@
     <string name="title_activity_search_result">SearchResultActivity</string>
     <string name="msg_loading">Loading..</string>
     <string name="title_activity_sector">SectorActivity</string>
+    <string name="nav_item_favorite">favorite</string>
+    <string name="title_activity_favorivtes">FavorivtesActivity</string>
 </resources>

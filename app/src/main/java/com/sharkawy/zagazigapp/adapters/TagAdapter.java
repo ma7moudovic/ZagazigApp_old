@@ -91,8 +91,6 @@ public class TagAdapter  extends RecyclerView.Adapter<TagAdapter.ViewHolder>{
         public ViewHolder(View itemView) {
             super(itemView);
             tagView = (TextView) itemView.findViewById(R.id.tv_tag);
-
-
         }//holder
     }
 }

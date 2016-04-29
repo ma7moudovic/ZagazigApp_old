@@ -4,35 +4,23 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import io.realm.RealmObject;
+
 /**
  * Created by T on 4/3/2016.
  */
 public class Place {
-    /**
-     * "Id": "25",
-     "name": "cat 1,2 sub 1 tag 2 ,4",
-     "description": "cat 1 sub 1 tag 2 ",
-     "address": "cat 1 sub 1 tag 2 ??????? ???????",
-     "areaCode": "1",
-     "telephoneNum": "2323",
-     "categoryId": "1",
-     "subcategory": ["1", "3"],
-     "ownerId": null,
-     "serviceTags": ["1", "2", "3", "4"],
-     "icoImage": "places_imgs\/icons\/0.jpg",
-     "imagesPathes": [],
-     "offers": []
-     * **/
-    String name ;
-    String Desc;
-    String address ;
-    String telephone ;
-    String tag ;
-    String categoryID;
-    String subCategory ;
-    String imageURL ;
-    JSONObject object ;
-    JSONArray serviceTags ;
+
+    private String name ;
+    private String Desc;
+    private String address ;
+    private String telephone ;
+    private String tag ;
+    private String categoryID;
+    private String subCategory ;
+    private String imageURL ;
+    private JSONObject object ;
+    private JSONArray serviceTags ;
 
     public Place() {
     }
@@ -46,7 +34,7 @@ public class Place {
             this.telephone=object.getString("telephoneNum");
 //            this.tag=object.getString("");
             this.categoryID=object.getString("categoryId");
-            this.subCategory=object.getString("");
+//            this.subCategory=object.getString("");
             this.imageURL=object.getString("icoImage");
             this.serviceTags=object.getJSONArray("serviceTags");
         } catch (JSONException e) {
@@ -56,7 +44,7 @@ public class Place {
 
     public Place(String name, String desc, String address, String telephone, String tag, String categoryID,String subCategory) {
         this.name = name;
-        Desc = desc;
+        this.Desc = desc;
         this.address = address;
         this.telephone = telephone;
         this.tag = tag;
@@ -66,7 +54,7 @@ public class Place {
 
     public Place(String name, String desc, String address, String telephone, String tag, String categoryID,String subCategory,JSONObject object) {
         this.name = name;
-        Desc = desc;
+        this.Desc = desc;
         this.address = address;
         this.telephone = telephone;
         this.tag = tag;
@@ -77,10 +65,6 @@ public class Place {
 
     public String getName() {
         return name;
-    }
-
-    public String getDesc() {
-        return Desc;
     }
 
     public String getAddress() {
@@ -111,6 +95,50 @@ public class Place {
         return serviceTags;
     }
     public String getSubCategory() {
-    return subCategory;
-}
+        return subCategory;
+    }
+
+    public String getDesc() {
+        return Desc;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setDesc(String desc) {
+        Desc = desc;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    public void setCategoryID(String categoryID) {
+        this.categoryID = categoryID;
+    }
+
+    public void setSubCategory(String subCategory) {
+        this.subCategory = subCategory;
+    }
+
+    public void setImageURL(String imageURL) {
+        this.imageURL = imageURL;
+    }
+
+    public void setObject(JSONObject object) {
+        this.object = object;
+    }
+
+    public void setServiceTags(JSONArray serviceTags) {
+        this.serviceTags = serviceTags;
+    }
 }

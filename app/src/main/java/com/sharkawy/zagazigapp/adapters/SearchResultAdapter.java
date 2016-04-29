@@ -1,6 +1,10 @@
 package com.sharkawy.zagazigapp.adapters;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.os.Environment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,7 +19,10 @@ import com.sharkawy.zagazigapp.R;
 import com.sharkawy.zagazigapp.dataModels.Place;
 import com.sharkawy.zagazigapp.dataModels.Tag;
 import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,11 +91,11 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         holder.descView.setText(pObjects.get(position).getDesc());
 //        holder.descView.setText(pObjects.get(position).getDesc());
 //        holder.tab1.setText(pObjects.get(position).getTag());
-        //http://mashaly.net/places_imgs/icons/0.jpg
-//        Toast.makeText(getpContext(), "http://mashaly.net/" Toast.LENGTH_LONG).show();
-        Picasso.with(getpContext()).load("http://mashaly.net/" +"/places_imgs/icons/0.jpg").into(holder.imageView);
+//        Picasso.with(getpContext()).load("http://mashaly.net/" +"places_imgs//icons//29.jpg").into(holder.imageView);
 //        Picasso.with(getpContext()).load("http://mashaly.net/"+pObjects.get(position).getImageURL()).into(holder.imageView);
 
+//        Toast.makeText(getpContext(),pObjects.get(position).getImageURL() , Toast.LENGTH_LONG).show();
+        ImageHandler(pObjects.get(position).getImageURL(),holder.imageView);
         try {
             List<Tag> tags = new ArrayList<>();
             for (int i = 0; i < pObjects.get(position).getObject().getJSONArray("serviceTags").length(); i++) {
@@ -132,4 +139,51 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         }
 
     }//holder
+
+    private void ImageHandler(final String URL , final ImageView imageV) {
+        String root = Environment.getExternalStorageDirectory().toString();
+        File myDir = new File(root + "/ZagApp/"+URL.replace("/","_"));
+        if (myDir.exists()) {
+            // Do Whatever you want sdcard exists
+            Bitmap bitmap1 = BitmapFactory.decodeFile(myDir.getAbsolutePath());
+            imageV.setImageBitmap(bitmap1);
+        }
+        else{
+//            Toast.makeText(getContext(), "not Exists", Toast.LENGTH_SHORT).show();
+            Picasso.with(getpContext()).load("http://mashaly.net/"+URL).into(new Target() {
+                @Override
+                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+                    try {
+                        String root = Environment.getExternalStorageDirectory().toString();
+                        File myDir = new File(root + "/ZagApp");
+                        if (!myDir.exists()) {
+                            myDir.mkdirs();
+                        }
+//                    String name = new Date().toString() + ".jpg";
+                        String name = URL.replace("/","_");
+
+                        myDir = new File(myDir, name);
+                        FileOutputStream out = new FileOutputStream(myDir);
+                        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
+                        out.flush();
+                        out.close();
+                        Toast.makeText(getpContext(), "imageDownloaded", Toast.LENGTH_SHORT).show();
+                        imageV.setImageBitmap(bitmap);
+
+                    } catch (Exception e) {
+                        Toast.makeText(getpContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+
+                @Override
+                public void onBitmapFailed(Drawable errorDrawable) {
+                }
+
+                @Override
+                public void onPrepareLoad(Drawable placeHolderDrawable) {
+                }
+            });
+        }
+    }
 }

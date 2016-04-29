@@ -59,17 +59,10 @@ public class SectorActivity extends AppCompatActivity {
 
         if(getIntent().getExtras().getInt("type")==1){
             url="http://www.mashaly.net/handler.php?action=announce&type=offer";
-
         }else if(getIntent().getExtras().getInt("type")==2){
-            url="http://www.mashaly.net/handler.php?action=announce&type=offer";
-
-        }else if(getIntent().getExtras().getInt("type")==3){
             url="http://www.mashaly.net/handler.php?action=announce&type=job";
-
-        }else {
+        }else if(getIntent().getExtras().getInt("type")==3){
             url="http://www.mashaly.net/handler.php?action=announce&type=course";
-
-            //http://www.mashaly.net/handler.php?action=announce&type=offer
         }
 
         makeJsonObjectRequest(url);
