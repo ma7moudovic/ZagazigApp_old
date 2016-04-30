@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.home);
         s1=(Spinner)findViewById(R.id.spinner);
          search_input = (EditText) findViewById(R.id.etsearch);
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+//        tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage(getResources().getString(R.string.msg_loading));
@@ -64,20 +64,20 @@ public class MainActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource
                 (android.R.layout.simple_spinner_dropdown_item);
 
-        final TabLayout.Tab favorites = tabLayout.newTab();
-        final TabLayout.Tab offers = tabLayout.newTab();
-        final TabLayout.Tab job = tabLayout.newTab();
-        final TabLayout.Tab courses = tabLayout.newTab();
+//        final TabLayout.Tab favorites = tabLayout.newTab();
+//        final TabLayout.Tab offers = tabLayout.newTab();
+//        final TabLayout.Tab job = tabLayout.newTab();
+//        final TabLayout.Tab courses = tabLayout.newTab();
 
-        favorites.setText("Favorites");
-        offers.setText("Offers");
-        job.setText("Job");
-        courses.setText("Courses");
-
-        tabLayout.addTab(favorites, 0);
-        tabLayout.addTab(offers, 1);
-        tabLayout.addTab(job, 2);
-        tabLayout.addTab(courses,3);
+//        favorites.setText("Favorites");
+//        offers.setText("Offers");
+//        job.setText("Job");
+//        courses.setText("Courses");
+//
+//        tabLayout.addTab(favorites, 0);
+//        tabLayout.addTab(offers, 1);
+//        tabLayout.addTab(job, 2);
+//        tabLayout.addTab(courses,3);
 
         s1.setAdapter(dataAdapter);
         btn_cat_1=(Button)findViewById(R.id.btn_cat_1);
@@ -86,9 +86,7 @@ public class MainActivity extends AppCompatActivity {
         btn_cat_4=(Button)findViewById(R.id.btn_cat_4);
         btn_cat_5=(Button)findViewById(R.id.btn_cat_5);
 
-        Animation animation = new TranslateAnimation(0, 500,0, 0);
-        animation.setDuration(1000);
-        btn_cat_1.startAnimation(animation);
+
         btn_cat_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
         btn_cat_2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,CategoryActivity.class);
+                Intent i = new Intent(MainActivity.this,SecondActivity.class);
                 i.putExtra("cat_index",1);
                 startActivity(i);
             }
@@ -108,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
         btn_cat_3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,CategoryActivity.class);
+                Intent i = new Intent(MainActivity.this,ThirdActivity.class);
                 i.putExtra("cat_index",2);
                 startActivity(i);
             }
@@ -116,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
         btn_cat_4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,CategoryActivity.class);
+                Intent i = new Intent(MainActivity.this,FourthActivity.class);
                 i.putExtra("cat_index",3);
                 startActivity(i);
             }
@@ -124,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
         btn_cat_5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this,CategoryActivity.class);
+                Intent i = new Intent(MainActivity.this,FifthActivity.class);
                 i.putExtra("cat_index",4);
                 startActivity(i);
             }

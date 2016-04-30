@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
+    android:background="@mipmap/home_background"
     android:layout_height="fill_parent">
 
     <LinearLayout
@@ -14,93 +14,210 @@
         <LinearLayout
             android:layout_width="0.0dip"
             android:layout_height="fill_parent"
-            android:layout_weight="1.04">
+            android:layout_marginRight="3dp"
+            android:layout_weight=".5">
 
-            <Spinner
-                android:id="@+id/spinner"
+            <ImageButton
+                android:id="@+id/btnsearch"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></Spinner>
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:background="@drawable/custombackgroundbutton"
+                android:gravity="right"
+                android:src="@android:drawable/ic_menu_search"
+                android:textColor="@color/white"></ImageButton>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0.0dip"
             android:layout_height="fill_parent"
-            android:layout_weight="1.04">
+            android:layout_weight="2">
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:layout_marginRight="3dp"
+                android:gravity="right"
+                android:minHeight="0dp"
+                android:spinnerMode="dropdown"
+                android:textColor="@color/white"></Spinner>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="0.0dip"
+            android:layout_height="fill_parent"
+            android:layout_weight="2">
 
             <EditText
                 android:id="@+id/etsearch"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@drawable/custombackground"
-                android:hint="Search"
+                android:layout_alignParentLeft="true"
+                android:layout_marginLeft="3dp"
+                android:background="@drawable/custombackgroundbutton"
+                android:gravity="right|center"
+                android:hint="بحث ..."
                 android:padding="3dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
                 android:singleLine="true"
-                android:textColor="@color/colorPrimary" />
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
+                android:textSize="18sp" />
+
+
         </LinearLayout>
+
     </LinearLayout>
 
 
-        <LinearLayout
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_above="@+id/LinearLayout02"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+
+        android:layout_below="@id/rel1">
+
+    <LinearLayout
+        android:id="@+id/btns"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical">
+
+        <Button
+            android:id="@+id/btn_cat_1"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_below="@id/rel1"
-            android:id="@+id/btns">
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/custombackgroundbutton"
+            android:text="خروجات"
+            android:textColor="#fff"
+            android:textSize="25sp" />
 
-            <Button
-                android:id="@+id/btn_cat_1"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:text="Food – hangouts"
-                android:textColor="@color/colorPrimary" />
+        <Button
+            android:id="@+id/btn_cat_2"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/custombackgroundbutton"
 
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:text="Shopping"
-                android:id="@+id/btn_cat_2"
-                android:textColor="@color/colorPrimary" />
 
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:id="@+id/btn_cat_3"
-                android:text="Sports"
-                android:textColor="@color/colorPrimary" />
+            android:text="أناقه"
+            android:textColor="#fff"
+            android:textSize="25sp" />
 
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:text="Occasions"
-                android:id="@+id/btn_cat_4"
-                android:textColor="@color/colorPrimary" />
 
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:text="General services"
-                android:id="@+id/btn_cat_5"
-                android:textColor="@color/colorPrimary" />
+        <Button
+            android:id="@+id/btn_cat_3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
 
-        </LinearLayout>
+            android:background="@drawable/custombackgroundbutton"
+            android:text="صحه وجمال"
+            android:textColor="#fff"
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/btn_cat_4"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/custombackgroundbutton"
+
+            android:text="أفراح ومناسبات"
+            android:textColor="#fff"
+            android:textSize="25sp" />
+
+        <Button
+            android:id="@+id/btn_cat_5"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:background="@drawable/custombackgroundbutton"
+
+            android:text="خدمات"
+            android:textColor="#fff"
+            android:textSize="25sp" />
+    </LinearLayout>
+
+</ScrollView>
+
+
+    <LinearLayout
+        android:id="@+id/LinearLayout02"
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:gravity="bottom">
+        <!---->
+        <ImageButton
+            android:id="@+id/Button1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/myplaces" />
+        <!---->
+        <ImageButton
+            android:id="@+id/Button2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/offers" />
+        <!---->
+        <!---->
+        <ImageButton
+            android:id="@+id/Button4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/jobs" />
+        <!---->
+        <ImageButton
+            android:id="@+id/Button5"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:scaleType="fitCenter"
+            android:src="@mipmap/courses">
+            <!---->
+        </ImageButton>
+        <!---->
+        <!---->
+    </LinearLayout>
+    <!---->
+    <!--<android.support.design.widget.TabLayout-->
+    <!--android:id="@+id/tabs"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_alignParentBottom="true"-->
+    <!--android:layout_alignParentLeft="true"-->
+    <!--android:layout_alignParentStart="true" />-->
 
 </RelativeLayout>

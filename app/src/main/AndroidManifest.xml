@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sharkawy.zagazigapp">
+    package="com.sharkawy.zagazigapp" >
 
     <uses-permission android:name="android.permission.INTERNET" />
 
@@ -10,8 +10,10 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity">
+        android:theme="@style/AppTheme" >
+        <activity android:name=".activities.MainActivity"
+            android:windowSoftInputMode="stateHidden" >
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,7 +25,23 @@
             android:label="@string/title_activity_search_result"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activities.DetailedItemActivity" />
-        <activity android:name=".activities.CategoryActivity"></activity>
+        <activity android:name=".activities.CategoryActivity" />
+        <activity
+            android:name=".activities.SecondActivity"
+            android:label="@string/title_activity_second" >
+        </activity>
+        <activity
+            android:name=".activities.ThirdActivity"
+            android:label="@string/title_activity_third" >
+        </activity>
+        <activity
+            android:name=".activities.FourthActivity"
+            android:label="@string/title_activity_fourth" >
+        </activity>
+        <activity
+            android:name=".activities.FifthActivity"
+            android:label="@string/title_activity_fifth" >
+        </activity>
     </application>
 
 </manifest>

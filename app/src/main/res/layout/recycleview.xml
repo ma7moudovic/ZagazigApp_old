@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity">
+    android:background="@drawable/firstcatgory"
+    tools:context=".MainActivity">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerListview"
@@ -10,6 +11,80 @@
         android:background="#fff"
         android:layout_height="match_parent">
 
+
     </android.support.v7.widget.RecyclerView>
+    <HorizontalScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="10px" >
+        <ScrollView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10px" >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal" >
+                    <ImageButton
+                        android:id="@+id/button1"
+                        android:layout_width="70dp"
+                        android:layout_height="60dp"
+                        android:src="@mipmap/ayhaga"
+                        android:scaleType="centerCrop"
+                        android:background="@null"/>
+                    <ImageButton
+                        android:id="@+id/button111"
+                        android:layout_width="70dp"
+                        android:layout_height="60dp"
+                        android:src="@mipmap/eat"
+                        android:scaleType="centerCrop"
+                        android:background="@null" />
+                    <ImageButton
+                        android:id="@+id/button21"
+                        android:layout_width="70dp"
+                        android:layout_height="60dp"
+                        android:src="@mipmap/icecream"
+                        android:scaleType="centerCrop"
+                        android:background="@null"/>
+                    <ImageButton
+                        android:id="@+id/button31"
+                        android:layout_width="70dp"
+                        android:layout_height="60dp"
+                        android:src="@mipmap/kbab"
+                        android:scaleType="centerCrop"
+                        android:background="@null" />
+                    <ImageButton
+                        android:id="@+id/button121"
+                        android:layout_width="70dp"
+                        android:layout_height="60dp"
+                        android:src="@mipmap/sandawitch"
+                        android:scaleType="centerCrop"
+                        android:background="@null" />
+                    <ImageButton
+                        android:id="@+id/button41"
+                        android:layout_width="70dp
+                        "
+                        android:layout_height="60dp"
+                        android:src="@mipmap/pop"
+                        android:scaleType="centerCrop"
+                        android:background="@null"/>
+                    <ImageButton
+                        android:id="@+id/button51"
+                        android:layout_width="70dp"
+                        android:layout_height="60dp"
+                        android:src="@mipmap/pizza"
+                        android:scaleType="centerCrop"
+                        android:background="@null" />
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </HorizontalScrollView>
+
 
 </RelativeLayout>
