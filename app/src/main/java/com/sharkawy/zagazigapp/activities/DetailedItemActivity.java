@@ -264,7 +264,7 @@ public class DetailedItemActivity extends AppCompatActivity {
         }
         else{
 //            Toast.makeText(getContext(), "not Exists", Toast.LENGTH_SHORT).show();
-            Picasso.with(DetailedItemActivity.this).load("http://mashaly.net/"+URL).into(new Target() {
+            Picasso.with(DetailedItemActivity.this).load("http://176.32.230.50/zagapp.com/"+URL).into(new Target() {
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
                     try {

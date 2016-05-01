@@ -57,12 +57,12 @@ public class SectorActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setAdapter(annonuceAdapter);
 
-        if(getIntent().getExtras().getInt("type")==1){
-            url="http://www.mashaly.net/handler.php?action=announce&type=offer";
-        }else if(getIntent().getExtras().getInt("type")==2){
-            url="http://www.mashaly.net/handler.php?action=announce&type=job";
+        if(getIntent().getExtras().getInt("type")==2){
+            url="http://176.32.230.50/zagapp.com/handler.php?action=announce&type=offer";
         }else if(getIntent().getExtras().getInt("type")==3){
-            url="http://www.mashaly.net/handler.php?action=announce&type=course";
+            url="http://176.32.230.50/zagapp.com/handler.php?action=announce&type=job";
+        }else if(getIntent().getExtras().getInt("type")==4){
+            url="http://176.32.230.50/zagapp.com/handler.php?action=announce&type=course";
         }
 
         makeJsonObjectRequest(url);
@@ -92,7 +92,7 @@ public class SectorActivity extends AppCompatActivity {
                         }
 
                     }else if(response.getString("message").toString().equals("no data recived")){
-                        Toast.makeText(SectorActivity.this,"no places with this name", Toast.LENGTH_LONG).show();
+                        Toast.makeText(SectorActivity.this,"no items found", Toast.LENGTH_LONG).show();
 
                     } else{
                         Toast.makeText(getApplicationContext(),

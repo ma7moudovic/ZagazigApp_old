@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         pDialog = new ProgressDialog(this);
         pDialog.setMessage(getResources().getString(R.string.msg_loading));
 
-        String [] arr ={"القومية ","شارع المحافظة","مفارق المنصورة","فلل الجامعة","حي الزهور","المنتزة","شارع البحر","المحطة","شارع مديرالامن","عمر افندي","حي ثاني","شارع الغشام" ,"عمارة الاوقاف"};
+        String [] arr ={"كل المناطق","القومية ","شارع المحافظة","مفارق المنصورة","فلل الجامعة","حي الزهور","المنتزة","شارع البحر","المحطة","شارع مديرالامن","عمر افندي","حي ثاني","شارع الغشام" ,"عمارة الاوقاف"};
         String [] TAGS = {"مطاعم","كافيهات","سينمات","هدوم ولادى","هدوم بناتى","هدوم اطفال","موبيلات ولابات","جيم شبابي","جيم بناتى","مراكز تجميل","قاعات افراح","ستوديو تصوير","فوتوجرافيك","مستشفيات","عيادات","خدمات عربيات"};
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_spinner_item, arr);
@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, CategoryActivity.class);
-                i.putExtra("cat_index",0);
+                i.putExtra("cat_index",1);
                 startActivity(i);
             }
         });
@@ -145,7 +145,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this,CategoryActivity.class);
-                i.putExtra("cat_index",1);
+                i.putExtra("cat_index",2);
                 startActivity(i);
             }
         });
@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this,CategoryActivity.class);
-                i.putExtra("cat_index",2);
+                i.putExtra("cat_index",3);
                 startActivity(i);
             }
         });
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this,CategoryActivity.class);
-                i.putExtra("cat_index",3);
+                i.putExtra("cat_index",4);
                 startActivity(i);
             }
         });
@@ -169,7 +169,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this,CategoryActivity.class);
-                i.putExtra("cat_index",4);
+                i.putExtra("cat_index",5);
                 startActivity(i);
             }
         });
@@ -180,10 +180,15 @@ public class MainActivity extends AppCompatActivity {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     // Perform action on key press
+                    String url="";
                     if(search_input.getText().length()!=0){
-                        String tmp_url = "http://www.mashaly.net/handler.php?action=search&name=";
+                        String tmp_url = "http://176.32.230.50/zagapp.com/handler.php?action=search&name=";
+                        if(s1.getSelectedItemPosition()==0){
 
-                        String url ="http://www.mashaly.net/handler.php?action=search&area="+s1.getSelectedItemPosition()+"&name="+search_input.getText();
+                            url ="http://176.32.230.50/zagapp.com/handler.php??action=search&&name="+search_input.getText();
+                        }else {
+                            url ="http://176.32.230.50/zagapp.com/handler.php??action=search&area="+s1.getSelectedItemPosition()+"&name="+search_input.getText();
+                        }
                         String URL = null;
                         try {
                             URL = URLDecoder.decode(URLEncoder.encode(url, "iso8859-1"), "UTF-8");
@@ -191,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 //                        Toast.makeText(MainActivity.this,, Toast.LENGTH_SHORT).show();
-                        makeJsonObjectRequest(tmp_url);
+                        makeJsonObjectRequest(url);
 //                        Intent i = new Intent(MainActivity.this,SearchResultActivity.class);
 //                        startActivity(i);
                     }

@@ -44,6 +44,7 @@ public class CategoryActivity extends AppCompatActivity {
 
     String URL ,area,sub_cat;
     int index ;
+    boolean isFirstTime=true ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,8 +55,8 @@ public class CategoryActivity extends AppCompatActivity {
         pDialog = new ProgressDialog(this);
         pDialog.setMessage(getResources().getString(R.string.msg_loading));
 
-        String [] arr ={"القومية ","شارع المحافظة","مفارق المنصورة","فلل الجامعة","حي الزهور","المنتزة","شارع البحر","المحطة","شارع مديرالامن","عمر افندي","حي ثاني","شارع الغشام" ,"عمارة الاوقاف"};
-        String [] subcategory = {"مطاعم","كافيهات","سينمات","هدوم ولادى","هدوم بناتى","هدوم اطفال","موبيلات ولابات","جيم شبابي","جيم بناتى","مراكز تجميل","قاعات افراح","ستوديو تصوير","فوتوجرافيك","مستشفيات","عيادات","خدمات عربيات"};
+        String [] arr ={"كل المناطق","القومية ","شارع المحافظة","مفارق المنصورة","فلل الجامعة","حي الزهور","المنتزة","شارع البحر","المحطة","شارع مديرالامن","عمر افندي","حي ثاني","شارع الغشام" ,"عمارة الاوقاف"};
+        String [] subcategory = {"الكل","مطاعم","كافيهات","سينمات","هدوم ولادى","هدوم بناتى","هدوم اطفال","موبيلات ولابات","جيم شبابي","جيم بناتى","مراكز تجميل","قاعات افراح","ستوديو تصوير","فوتوجرافيك","مستشفيات","عيادات","خدمات عربيات"};
         String [] serviceTags={"سندوتشات","بيتزا","كشري","مشويات","حلويات","كريب","اكل بيتي","هدوم خروج","بدل","احذية","توكيلات","هدوم خروج","بيجامات ولانجري","اكسسورات وميك اب","ششنط واحذية"};
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
@@ -88,15 +89,21 @@ public class CategoryActivity extends AppCompatActivity {
 
         area="";
         sub_cat="";
-        makeJsonObjectRequest();
 
 //        Toast.makeText(CategoryActivity.this,adapter.getItemCount()+"", Toast.LENGTH_LONG).show();
 
         sp_areas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                area=(position+1)+"";
-                makeJsonObjectRequest();
+                if(position!=0){
+                    isFirstTime=false;
+                    area=position+"";
+                }else {
+                    area="";
+                }
+                if(!isFirstTime){
+                    makeJsonObjectRequest();
+                }
             }
 
             @Override
@@ -108,8 +115,16 @@ public class CategoryActivity extends AppCompatActivity {
         sp_tags.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                sub_cat = (position+1)+"";
-                makeJsonObjectRequest();
+                if(position!=0){
+                    isFirstTime=false;
+                    sub_cat = position+"";
+                }else {
+                    sub_cat="";
+                }
+
+                if(!isFirstTime){
+                    makeJsonObjectRequest();
+                }
             }
 
             @Override
@@ -129,17 +144,19 @@ public class CategoryActivity extends AppCompatActivity {
 
                 })
         );
+        makeJsonObjectRequest();
+
     }
 
     private void makeJsonObjectRequest() {
-        URL = "http://www.mashaly.net/handler.php?action=search&category="+index+"&area="+area+ "&sub_category="+sub_cat;
+        URL = "http://176.32.230.50/zagapp.com/handler.php?action=search&category="+index+"&area="+area+ "&sub_category="+sub_cat;
 
-        String tmp_url = "http://www.mashaly.net/handler.php?action=search&name=";
-//        Toast.makeText(CategoryActivity.this,URL, Toast.LENGTH_LONG).show();
+        String tmp_url = "http://176.32.230.50/zagapp.com/handler.php?action=search&name=";
+        Toast.makeText(CategoryActivity.this,URL, Toast.LENGTH_LONG).show();
 
         showpDialog();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                tmp_url, null, new Response.Listener<JSONObject>() {
+                URL, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
@@ -148,7 +165,6 @@ public class CategoryActivity extends AppCompatActivity {
                 hidepDialog();
                 adapter.clear();
                 try {
-
 //                    Toast.makeText(CategoryActivity.this,response.getString("message").toString(), Toast.LENGTH_LONG).show();
                     if(response.getString("message").toString().equals("sucess")){
 
@@ -162,6 +178,7 @@ public class CategoryActivity extends AppCompatActivity {
 
                         JSONArray data = response.getJSONArray("data");
 //                        Toast.makeText(CategoryActivity.this, data.toString(), Toast.LENGTH_LONG).show();
+                        adapter.clear();
                         for(int i =0 ;i<data.length();i++){
                             adapter.add(new Place(data.getJSONObject(i)));
 //                            Toast.makeText(CategoryActivity.this,data.getJSONObject(i).getString("icoImage"), Toast.LENGTH_LONG).show();
@@ -211,6 +228,5 @@ public class CategoryActivity extends AppCompatActivity {
         if (pDialog.isShowing())
             pDialog.dismiss();
     }
-
 
 }
