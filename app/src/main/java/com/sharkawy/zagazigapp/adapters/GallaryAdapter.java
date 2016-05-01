@@ -133,7 +133,7 @@ public class GallaryAdapter extends BaseAdapter {
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
                         out.flush();
                         out.close();
-                        Toast.makeText(getContext(), "imageDownloaded", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getContext(), "imageDownloaded", Toast.LENGTH_SHORT).show();
                         imageV.setImageBitmap(bitmap);
 
                     } catch (Exception e) {

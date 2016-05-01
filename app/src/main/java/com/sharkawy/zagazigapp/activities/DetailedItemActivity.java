@@ -30,6 +30,7 @@ import com.sharkawy.zagazigapp.dataModels.Tag;
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -53,11 +54,13 @@ public class DetailedItemActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String FAVORITES = "Product_Favorite";
+    boolean isFavorited =false;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detailed_menu, menu);
         JSONObject jsonObject = null;
+        //isFavorited
         try{
             jsonObject = new JSONObject(getIntent().getExtras().getString("Item"));
         }catch (JSONException e){
@@ -66,12 +69,23 @@ public class DetailedItemActivity extends AppCompatActivity {
 
         place = new Place(jsonObject);
         final MenuItem action_favorite = menu.findItem(R.id.action_favorite);
+//        Toast.makeText(DetailedItemActivity.this,getCart(DetailedItemActivity.this).get(0).getObject().toString(),Toast.LENGTH_SHORT).show();
 
-        if(getCart(DetailedItemActivity.this)!=null&&getCart(DetailedItemActivity.this).contains(place)){
-            action_favorite.setIcon(android.R.drawable.star_big_on);
+        if(getCart(DetailedItemActivity.this)!=null){
+            for(int i =0 ; i<getCart(DetailedItemActivity.this).size();i++){
+                if(getCart(DetailedItemActivity.this).get(i).getObject().toString().equals(place.getObject().toString())){
+                    isFavorited = true ;
+                    break;
+                }
+            }
         }else {
-            action_favorite.setIcon(android.R.drawable.star_big_off);
+            isFavorited = false ;
         }
+
+        action_favorite.setIcon(isFavorited ?
+                R.drawable.abc_btn_rating_star_on_mtrl_alpha :
+                R.drawable.abc_btn_rating_star_off_mtrl_alpha);
+
         return true;
     }
 
@@ -79,15 +93,15 @@ public class DetailedItemActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
 
         int id = item.getItemId();
-        boolean ico = item.getIcon().equals(android.R.drawable.star_big_on );
+//        boolean ico = item.getIcon().equals(R.drawable.abc_btn_rating_star_on_mtrl_alpha );
         switch (id){
             case R.id.action_favorite:
-                if(ico){
+                if(isFavorited){
                     RemoveToFav();
-//                    item.setIcon(android.R.drawable.star_big_off);
+                    item.setIcon(R.drawable.abc_btn_rating_star_off_mtrl_alpha);
                 }else {
                     AddToFav();
-                    item.setIcon(android.R.drawable.star_big_on);
+                    item.setIcon(R.drawable.abc_btn_rating_star_on_mtrl_alpha);
                 }
                 break;
         }
@@ -96,10 +110,17 @@ public class DetailedItemActivity extends AppCompatActivity {
 
     private void AddToFav(){
         ArrayList<Place> tmp ;
+        boolean exists =false;
         if (getCart(DetailedItemActivity.this) != null) {
             tmp = getCart(DetailedItemActivity.this);
-            if(tmp.contains(place)){
-                Toast.makeText(this,"Exists",Toast.LENGTH_SHORT).show();
+            for(int i =0 ; i<tmp.size();i++){
+                if(tmp.get(i).getObject().toString().equals(place.getObject().toString())){
+                    exists = true ;
+                        break;
+                }
+            }
+            if(exists){
+
             }else{
                 tmp.add(place);
                 Toast.makeText(this,"Added",Toast.LENGTH_SHORT).show();
@@ -109,17 +130,25 @@ public class DetailedItemActivity extends AppCompatActivity {
             tmp.add(place);
         }
         saveToCart(DetailedItemActivity.this,tmp);
+        isFavorited = true ;
     }
     private void RemoveToFav(){
         ArrayList<Place> tmp =new ArrayList<>();
+        boolean exists =false ;
         if (getCart(DetailedItemActivity.this) != null) {
             tmp.addAll(getCart(DetailedItemActivity.this));
-            if(tmp.contains(place)){
-                tmp.remove(place);
-                Toast.makeText(this,"Removed from my Favorites",Toast.LENGTH_SHORT).show();
+
+            for(int i =0 ; i<tmp.size();i++){
+                if(tmp.get(i).getObject().toString().equals(place.getObject().toString())){
+                    exists = true ;
+                    tmp.remove(i);
+                    Toast.makeText(this,"Removed from my Favorites",Toast.LENGTH_SHORT).show();
+                    break;
+                }
             }
         }
         saveToCart(DetailedItemActivity.this, tmp);
+        isFavorited = false;
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -165,7 +194,7 @@ public class DetailedItemActivity extends AppCompatActivity {
 //            Picasso.with(this).load("http://mashaly.net/" +place.getImageURL()).into(logo);
 
             ImageHandler(place.getImageURL(),logo);
-            Toast.makeText(this,place.getObject().getJSONArray("serviceTags")+"",Toast.LENGTH_SHORT).show();
+//            Toast.makeText(this,place.getObject().getJSONArray("serviceTags")+"",Toast.LENGTH_SHORT).show();
             for (int i = 0; i < place.getObject().getJSONArray("serviceTags").length(); i++) {
                 tags.add(new Tag(place.getObject().getJSONArray("serviceTags").getString(i)));
             }
@@ -192,29 +221,38 @@ public class DetailedItemActivity extends AppCompatActivity {
 
     }
     public ArrayList<Place> getCart(Context context) {
-        List<Place> favorites;
+        ArrayList<Place> favorites= new ArrayList<>();
+        JSONArray jsonArray ;
         sharedpreferences = context.getSharedPreferences(MyPREFERENCES,
                 Context.MODE_PRIVATE);
         if (sharedpreferences.contains(FAVORITES)) {
-            String jsonFavorites = sharedpreferences.getString(FAVORITES, null);
-            Gson gson = new Gson();
-            Place[] favoriteItems = gson.fromJson(jsonFavorites,
-                    Place[].class);
-            favorites = Arrays.asList(favoriteItems);
-            favorites = new ArrayList<Place>(favorites);
+            String StringFavorites = sharedpreferences.getString(FAVORITES, null);
+            try {
+                jsonArray = new JSONArray(StringFavorites);
+                favorites = new ArrayList<Place>();
+                for(int i = 0 ;i<jsonArray.length();i++){
+                    favorites.add(new Place(jsonArray.getJSONObject(i)));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         } else
             return null;
-        return (ArrayList<Place>) favorites;
+        return favorites;
     }
     public void saveToCart(Context context, List<Place> favorites) {
 
         sharedpreferences = context.getSharedPreferences(MyPREFERENCES,
                 Context.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String jsonFavorites = gson.toJson(favorites);
-        editor.putString(FAVORITES, jsonFavorites);
+        JSONArray jsonArray = new JSONArray();
+        for(int i = 0 ;i<favorites.size();i++){
+            jsonArray.put(favorites.get(i).getObject());
+        }
+        editor.clear();
+        editor.putString(FAVORITES, jsonArray.toString());
         editor.commit();
-        Toast.makeText(DetailedItemActivity.this,"Saved to your Favorites",Toast.LENGTH_SHORT).show();
+//        Toast.makeText(DetailedItemActivity.this,"Saved to your Favorites",Toast.LENGTH_SHORT).show();
     }
     private void ImageHandler(final String URL , final ImageView imageV) {
         String root = Environment.getExternalStorageDirectory().toString();
@@ -243,11 +281,11 @@ public class DetailedItemActivity extends AppCompatActivity {
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
                         out.flush();
                         out.close();
-                        Toast.makeText(DetailedItemActivity.this, "imageDownloaded", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(DetailedItemActivity.this, "imageDownloaded", Toast.LENGTH_SHORT).show();
                         imageV.setImageBitmap(bitmap);
 
                     } catch (Exception e) {
-                        Toast.makeText(DetailedItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(DetailedItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
                 }

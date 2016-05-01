@@ -19,6 +19,9 @@ import com.sharkawy.zagazigapp.RecyclerItemClickListener;
 import com.sharkawy.zagazigapp.adapters.SearchResultAdapter;
 import com.sharkawy.zagazigapp.dataModels.Place;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -53,7 +56,7 @@ public class FavorivtesActivity extends AppCompatActivity {
             list.addAll(getCart(this));
             adapter.notifyDataSetChanged();
         }else {
-            Toast.makeText(this, "Empty Cart", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "No items in Favorites.", Toast.LENGTH_LONG).show();
         }
 
         recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(this, new RecyclerItemClickListener.OnItemClickListener() {
@@ -69,27 +72,36 @@ public class FavorivtesActivity extends AppCompatActivity {
         );
     }
     public ArrayList<Place> getCart(Context context) {
-        List<Place> favorites;
+        ArrayList<Place> favorites= new ArrayList<>();
+        JSONArray jsonArray ;
         sharedpreferences = context.getSharedPreferences(MyPREFERENCES,
                 Context.MODE_PRIVATE);
         if (sharedpreferences.contains(FAVORITES)) {
-            String jsonFavorites = sharedpreferences.getString(FAVORITES, null);
-            Gson gson = new Gson();
-            Place[] favoriteItems = gson.fromJson(jsonFavorites,
-                    Place[].class);
-            favorites = Arrays.asList(favoriteItems);
-            favorites = new ArrayList<Place>(favorites);
+            String StringFavorites = sharedpreferences.getString(FAVORITES, null);
+            try {
+                jsonArray = new JSONArray(StringFavorites);
+                favorites = new ArrayList<Place>();
+                for(int i = 0 ;i<jsonArray.length();i++){
+                    favorites.add(new Place(jsonArray.getJSONObject(i)));
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
         } else
             return null;
-        return (ArrayList<Place>) favorites;
+        return favorites;
     }
     public void saveToCart(Context context, List<Place> favorites) {
 
         sharedpreferences = context.getSharedPreferences(MyPREFERENCES,
                 Context.MODE_PRIVATE);
-        Gson gson = new Gson();
-        String jsonFavorites = gson.toJson(favorites);
-        editor.putString(FAVORITES, jsonFavorites);
+        JSONArray jsonArray = new JSONArray();
+        for(int i = 0 ;i<favorites.size();i++){
+            jsonArray.put(favorites.get(i).getObject());
+        }
+        editor.putString(FAVORITES, jsonArray.toString());
         editor.commit();
+//        Toast.makeText(FavorivtesActivity.this,"Saved to your Favorites",Toast.LENGTH_SHORT).show();
     }
 }

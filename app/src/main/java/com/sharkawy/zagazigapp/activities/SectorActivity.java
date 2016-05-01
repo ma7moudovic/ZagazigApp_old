@@ -69,7 +69,7 @@ public class SectorActivity extends AppCompatActivity {
 
     }
     private void makeJsonObjectRequest(String URL) {
-        Toast.makeText(SectorActivity.this, URL, Toast.LENGTH_LONG).show();
+//        Toast.makeText(SectorActivity.this, URL, Toast.LENGTH_LONG).show();
 
         showpDialog();
 //        String URL ="http://www.mashaly.net/zag.php?filter="+s1.getSelectedItem().toString().replace(" ","%20");
@@ -85,7 +85,7 @@ public class SectorActivity extends AppCompatActivity {
                 try {
                     if(response.getString("message").toString().equals("success")){
 
-                        Toast.makeText(SectorActivity.this, response.toString(), Toast.LENGTH_LONG).show();
+//                        Toast.makeText(SectorActivity.this, response.toString(), Toast.LENGTH_LONG).show();
                         JSONArray data = response.getJSONArray("data");
                         for(int i =0 ;i<data.length();i++){
                             annonuceAdapter.add(new Annonce(data.getJSONObject(i)));

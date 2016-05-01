@@ -24,6 +24,7 @@ import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.sharkawy.zagazigapp.R;
 import com.sharkawy.zagazigapp.RecyclerItemClickListener;
+import com.sharkawy.zagazigapp.dataModels.Place;
 import com.sharkawy.zagazigapp.utilities.AppController;
 
 import org.json.JSONArray;
@@ -69,41 +70,44 @@ public class MainActivity extends AppCompatActivity {
         final TabLayout.Tab offers = tabLayout.newTab();
         final TabLayout.Tab job = tabLayout.newTab();
         final TabLayout.Tab courses = tabLayout.newTab();
+        final TabLayout.Tab home = tabLayout.newTab();
 
         favorites.setText("Favorites");
         offers.setText("Offers");
         job.setText("Job");
         courses.setText("Courses");
+        home.setText("Home");
 
-        tabLayout.addTab(favorites, 0);
-        tabLayout.addTab(offers, 1);
-        tabLayout.addTab(job, 2);
-        tabLayout.addTab(courses,3);
+        tabLayout.addTab(home,0);
+        tabLayout.addTab(favorites, 1);
+        tabLayout.addTab(offers, 2);
+        tabLayout.addTab(job, 3);
+        tabLayout.addTab(courses,4);
 
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 
-                if(tab.getPosition()==0){
-                    Toast.makeText(MainActivity.this,"Favorities", Toast.LENGTH_SHORT).show();
+                if(tab.getPosition()==1){
+//                    Toast.makeText(MainActivity.this,"Favorities", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(MainActivity.this,FavorivtesActivity.class);
-                    i.putExtra("type",0);
-                    startActivity(i);
-
-                }else if(tab.getPosition()==1){
-                    Toast.makeText(MainActivity.this,"Offers", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
                     i.putExtra("type",1);
                     startActivity(i);
+
                 }else if(tab.getPosition()==2){
-                    Toast.makeText(MainActivity.this,"JOBS", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MainActivity.this,"Offers", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(MainActivity.this,SectorActivity.class);
                     i.putExtra("type",2);
                     startActivity(i);
                 }else if(tab.getPosition()==3){
-                    Toast.makeText(MainActivity.this,"Courses", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(MainActivity.this,"JOBS", Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(MainActivity.this,SectorActivity.class);
                     i.putExtra("type",3);
+                    startActivity(i);
+                }else if(tab.getPosition()==4){
+//                    Toast.makeText(MainActivity.this,"Courses", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
+                    i.putExtra("type",4);
                     startActivity(i);
                 }
             }
@@ -177,6 +181,7 @@ public class MainActivity extends AppCompatActivity {
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     // Perform action on key press
                     if(search_input.getText().length()!=0){
+                        String tmp_url = "http://www.mashaly.net/handler.php?action=search&name=";
 
                         String url ="http://www.mashaly.net/handler.php?action=search&area="+s1.getSelectedItemPosition()+"&name="+search_input.getText();
                         String URL = null;
@@ -185,8 +190,8 @@ public class MainActivity extends AppCompatActivity {
                         } catch (UnsupportedEncodingException e) {
                             e.printStackTrace();
                         }
-                        Toast.makeText(MainActivity.this,URL, Toast.LENGTH_SHORT).show();
-                        makeJsonObjectRequest(URL);
+//                        Toast.makeText(MainActivity.this,, Toast.LENGTH_SHORT).show();
+                        makeJsonObjectRequest(tmp_url);
 //                        Intent i = new Intent(MainActivity.this,SearchResultActivity.class);
 //                        startActivity(i);
                     }
@@ -213,8 +218,12 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     if(response.getString("message").toString().equals("success")){
 
-                        Toast.makeText(MainActivity.this,response.toString(), Toast.LENGTH_LONG).show();
+//                        Toast.makeText(MainActivity.this,response.toString(), Toast.LENGTH_LONG).show();
                         JSONArray data = response.getJSONArray("data");
+
+                        Intent intent = new Intent(MainActivity.this,SearchResultActivity.class);
+                        intent.putExtra("data",data.toString());
+                        startActivity(intent);
 
                     }else if(response.getString("message").toString().equals("no data recived")){
                         Toast.makeText(MainActivity.this,"no places with this name", Toast.LENGTH_LONG).show();

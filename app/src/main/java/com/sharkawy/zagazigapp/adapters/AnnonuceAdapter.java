@@ -141,7 +141,7 @@ public class AnnonuceAdapter  extends RecyclerView.Adapter<AnnonuceAdapter.ViewH
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
                         out.flush();
                         out.close();
-                        Toast.makeText(getpContext(), "imageDownloaded", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getpContext(), "imageDownloaded", Toast.LENGTH_SHORT).show();
                         imageV.setImageBitmap(bitmap);
 
                     } catch (Exception e) {

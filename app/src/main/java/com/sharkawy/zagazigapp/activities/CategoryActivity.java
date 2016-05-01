@@ -41,6 +41,7 @@ public class CategoryActivity extends AppCompatActivity {
     SearchResultAdapter adapter ;
     RecyclerView.LayoutManager layoutManager ;
     private List<Place> list;
+
     String URL ,area,sub_cat;
     int index ;
     @Override
@@ -134,7 +135,7 @@ public class CategoryActivity extends AppCompatActivity {
         URL = "http://www.mashaly.net/handler.php?action=search&category="+index+"&area="+area+ "&sub_category="+sub_cat;
 
         String tmp_url = "http://www.mashaly.net/handler.php?action=search&name=";
-        Toast.makeText(CategoryActivity.this,URL, Toast.LENGTH_LONG).show();
+//        Toast.makeText(CategoryActivity.this,URL, Toast.LENGTH_LONG).show();
 
         showpDialog();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,

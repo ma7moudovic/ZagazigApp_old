@@ -109,7 +109,8 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 //            Toast.makeText(getpContext(),tagAdapter.getItemCount()+" tag ",Toast.LENGTH_SHORT).show();
         }
         catch (Exception e){
-
+            e.printStackTrace();
+            e.getMessage();
         }
 
     }
@@ -167,11 +168,11 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
                         out.flush();
                         out.close();
-                        Toast.makeText(getpContext(), "imageDownloaded", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getpContext(), "imageDownloaded", Toast.LENGTH_SHORT).show();
                         imageV.setImageBitmap(bitmap);
 
                     } catch (Exception e) {
-                        Toast.makeText(getpContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getpContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
                 }

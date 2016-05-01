@@ -47,13 +47,13 @@ public class PhotoActivity extends AppCompatActivity {
         File myDir = new File(root + "/ZagApp/"+URL.replace("/","_"));
         if (myDir.exists()) {
             // Do Whatever you want sdcard exists
-            Toast.makeText(PhotoActivity.this, "Exists", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(PhotoActivity.this, "Exists", Toast.LENGTH_SHORT).show();
             Bitmap bitmap1 = BitmapFactory.decodeFile(myDir.getAbsolutePath());
             imageV.setImageBitmap(bitmap1);
 
         }
         else{
-            Toast.makeText(PhotoActivity.this, "not Exists", Toast.LENGTH_SHORT).show();
+//            Toast.makeText(PhotoActivity.this, "not Exists", Toast.LENGTH_SHORT).show();
             Picasso.with(this).load("http://mashaly.net/"+URL).into(new Target() {
                 @Override
                 public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
@@ -71,7 +71,7 @@ public class PhotoActivity extends AppCompatActivity {
                         bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
                         out.flush();
                         out.close();
-                        Toast.makeText(PhotoActivity.this, "imageDownloaded", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(PhotoActivity.this, "imageDownloaded", Toast.LENGTH_SHORT).show();
                         imageV.setImageBitmap(bitmap);
 
                     } catch (Exception e) {
