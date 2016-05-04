@@ -172,7 +172,7 @@ public class CategoryActivity extends AppCompatActivity {
         URL = "http://176.32.230.50/zagapp.com/handler.php?action=search&category="+index+"&area="+area+ "&sub_category="+sub_cat;
 
         String tmp_url = "http://176.32.230.50/zagapp.com/handler.php?action=search&name=";
-        Toast.makeText(CategoryActivity.this,URL, Toast.LENGTH_LONG).show();
+//        Toast.makeText(CategoryActivity.this,URL, Toast.LENGTH_LONG).show();
 
         showpDialog();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,

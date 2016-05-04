@@ -230,10 +230,9 @@ public class MainActivity extends AppCompatActivity {
                     if(search_input.getText().length()!=0){
                         String tmp_url = "http://176.32.230.50/zagapp.com/handler.php?action=search&name=";
                         if(s1.getSelectedItemPosition()==0){
-
-                            url ="http://176.32.230.50/zagapp.com/handler.php??action=search&&name="+search_input.getText();
+                            url ="http://176.32.230.50/zagapp.com/handler.php?action=search&name="+search_input.getText().toString().replace(" ","%20");
                         }else {
-                            url ="http://176.32.230.50/zagapp.com/handler.php??action=search&area="+s1.getSelectedItemPosition()+"&name="+search_input.getText();
+                            url ="http://176.32.230.50/zagapp.com/handler.php?action=search&area="+s1.getSelectedItemPosition()+"&name="+search_input.getText().toString().replace(" ","%20");
                         }
                         String URL = null;
                         try {
@@ -256,6 +255,8 @@ public class MainActivity extends AppCompatActivity {
     }
     private void makeJsonObjectRequest(String URL) {
         showpDialog();
+//                        Toast.makeText(MainActivity.this,URL,Toast.LENGTH_LONG).show();
+
 //        String URL ="http://www.mashaly.net/zag.php?filter="+s1.getSelectedItem().toString().replace(" ","%20");
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 URL, null, new Response.Listener<JSONObject>() {
