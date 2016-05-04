@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@null"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -22,8 +23,8 @@
 
             <ImageView
                 android:id="@+id/photo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentTop="true"
                 android:layout_marginLeft="16dp"
@@ -49,6 +50,16 @@
 
                 android:text="اكل سورى"
                 android:textColor="@color/white" />
+            <TextView
+                android:id="@+id/tvdesc2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvdesc"
+android:layout_toLeftOf="@+id/photo"
+                android:text="اكل سورى"
+                android:textColor="@color/white" />
+
+
 
             <TextView
                 android:id="@+id/tvtxt1"
@@ -82,6 +93,10 @@
                 android:textColor="@color/white" />
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerListview_tags"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="0dp"
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/tvtxt1"

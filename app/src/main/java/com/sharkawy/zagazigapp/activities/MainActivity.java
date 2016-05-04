@@ -176,9 +176,9 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(i);
             }
         });
-        Animation animation = new TranslateAnimation(0, 500,0, 0);
-        animation.setDuration(1000);
-        btn_cat_1.startAnimation(animation);
+//        Animation animation = new TranslateAnimation(0, 500,0, 0);
+//        animation.setDuration(1000);
+//        btn_cat_1.startAnimation(animation);
         btn_cat_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

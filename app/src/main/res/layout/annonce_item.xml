@@ -2,11 +2,14 @@
 
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    android:padding="16dp"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv"
     android:layout_width="match_parent"
     android:layout_height="120dp"
+    android:orientation="vertical"
+    android:padding="16dp"
+    card_view:cardBackgroundColor="@android:color/transparent"
+    card_view:cardElevation="0dp"
     app:cardCornerRadius="5dp">
 
     <RelativeLayout
@@ -34,12 +37,11 @@
             android:textSize="30sp" />
 
         <TextView
+            android:id="@+id/annonceDesc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/annonceDesc"
             android:layout_below="@id/photo"
-            android:text="announce Description announce Description announce Description announce Description"
-            />
+            android:text="announce Description announce Description announce Description announce Description" />
     </RelativeLayout>
 
 
