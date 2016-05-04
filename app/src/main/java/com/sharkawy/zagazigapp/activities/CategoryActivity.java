@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -45,12 +46,31 @@ public class CategoryActivity extends AppCompatActivity {
     String URL ,area,sub_cat;
     int index ;
     boolean isFirstTime=true ;
+    RelativeLayout category_bk ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
+        category_bk = (RelativeLayout) findViewById(R.id.category_bk);
         index = getIntent().getExtras().getInt("cat_index");
+        switch (index){
+            case 1:
+                category_bk.setBackgroundResource(R.mipmap.firstcatgory);
+                break;
+            case 2:
+                category_bk.setBackgroundResource(R.mipmap.cattwo);
+                break;
+            case 3:
+                category_bk.setBackgroundResource(R.mipmap.catthree);
+                break;
+            case 4:
+                category_bk.setBackgroundResource(R.mipmap.catfour);
+                break;
+            case 5:
+                category_bk.setBackgroundResource(R.mipmap.catfive);
+                break;
+        }
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage(getResources().getString(R.string.msg_loading));

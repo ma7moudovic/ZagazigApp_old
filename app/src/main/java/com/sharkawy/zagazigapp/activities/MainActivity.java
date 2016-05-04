@@ -14,6 +14,7 @@ import android.view.animation.TranslateAnimation;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -41,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     Spinner s1;
     Button btn_cat_1 ,btn_cat_2,btn_cat_3,btn_cat_4,btn_cat_5;
+    ImageButton Image_btn_fav ,Image_btn_offer , Image_btn_job ,Image_btn_course ;
     EditText search_input ;
     TabLayout tabLayout ;
     ProgressDialog pDialog ;
@@ -66,62 +68,62 @@ public class MainActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource
                 (android.R.layout.simple_spinner_dropdown_item);
 
-        final TabLayout.Tab favorites = tabLayout.newTab();
-        final TabLayout.Tab offers = tabLayout.newTab();
-        final TabLayout.Tab job = tabLayout.newTab();
-        final TabLayout.Tab courses = tabLayout.newTab();
-        final TabLayout.Tab home = tabLayout.newTab();
+//        final TabLayout.Tab favorites = tabLayout.newTab();
+//        final TabLayout.Tab offers = tabLayout.newTab();
+//        final TabLayout.Tab job = tabLayout.newTab();
+//        final TabLayout.Tab courses = tabLayout.newTab();
+//        final TabLayout.Tab home = tabLayout.newTab();
 
-        favorites.setText("Favorites");
-        offers.setText("Offers");
-        job.setText("Job");
-        courses.setText("Courses");
-        home.setText("Home");
+//        favorites.setText("Favorites");
+//        offers.setText("Offers");
+//        job.setText("Job");
+//        courses.setText("Courses");
+//        home.setText("Home");
 
-        tabLayout.addTab(home,0);
-        tabLayout.addTab(favorites, 1);
-        tabLayout.addTab(offers, 2);
-        tabLayout.addTab(job, 3);
-        tabLayout.addTab(courses,4);
+//        tabLayout.addTab(home,0);
+//        tabLayout.addTab(favorites, 1);
+//        tabLayout.addTab(offers, 2);
+//        tabLayout.addTab(job, 3);
+//        tabLayout.addTab(courses,4);
 
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-
-                if(tab.getPosition()==1){
-//                    Toast.makeText(MainActivity.this,"Favorities", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(MainActivity.this,FavorivtesActivity.class);
-                    i.putExtra("type",1);
-                    startActivity(i);
-
-                }else if(tab.getPosition()==2){
-//                    Toast.makeText(MainActivity.this,"Offers", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
-                    i.putExtra("type",2);
-                    startActivity(i);
-                }else if(tab.getPosition()==3){
-//                    Toast.makeText(MainActivity.this,"JOBS", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
-                    i.putExtra("type",3);
-                    startActivity(i);
-                }else if(tab.getPosition()==4){
-//                    Toast.makeText(MainActivity.this,"Courses", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
-                    i.putExtra("type",4);
-                    startActivity(i);
-                }
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
+//        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+//            @Override
+//            public void onTabSelected(TabLayout.Tab tab) {
+//
+//                if(tab.getPosition()==1){
+////                    Toast.makeText(MainActivity.this,"Favorities", Toast.LENGTH_SHORT).show();
+//                    Intent i = new Intent(MainActivity.this,FavorivtesActivity.class);
+//                    i.putExtra("type",1);
+//                    startActivity(i);
+//
+//                }else if(tab.getPosition()==2){
+////                    Toast.makeText(MainActivity.this,"Offers", Toast.LENGTH_SHORT).show();
+//                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
+//                    i.putExtra("type",2);
+//                    startActivity(i);
+//                }else if(tab.getPosition()==3){
+////                    Toast.makeText(MainActivity.this,"JOBS", Toast.LENGTH_SHORT).show();
+//                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
+//                    i.putExtra("type",3);
+//                    startActivity(i);
+//                }else if(tab.getPosition()==4){
+////                    Toast.makeText(MainActivity.this,"Courses", Toast.LENGTH_SHORT).show();
+//                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
+//                    i.putExtra("type",4);
+//                    startActivity(i);
+//                }
+//            }
+//
+//            @Override
+//            public void onTabUnselected(TabLayout.Tab tab) {
+//
+//            }
+//
+//            @Override
+//            public void onTabReselected(TabLayout.Tab tab) {
+//
+//            }
+//        });
 
         s1.setAdapter(dataAdapter);
         btn_cat_1=(Button)findViewById(R.id.btn_cat_1);
@@ -130,6 +132,50 @@ public class MainActivity extends AppCompatActivity {
         btn_cat_4=(Button)findViewById(R.id.btn_cat_4);
         btn_cat_5=(Button)findViewById(R.id.btn_cat_5);
 
+        Image_btn_fav = (ImageButton) findViewById(R.id.Btn_fav);
+        Image_btn_offer = (ImageButton) findViewById(R.id.Btn_offer);
+        Image_btn_job = (ImageButton) findViewById(R.id.Btn_job);
+        Image_btn_course = (ImageButton) findViewById(R.id.Btn_course);
+
+        Image_btn_fav.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                    Toast.makeText(MainActivity.this,"Favorities", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MainActivity.this,FavorivtesActivity.class);
+                    i.putExtra("type",1);
+                    startActivity(i);
+            }
+        });
+        Image_btn_offer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                    Toast.makeText(MainActivity.this,"Offers", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
+                    i.putExtra("type",2);
+                    startActivity(i);
+            }
+        });
+        Image_btn_job.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+//                    Toast.makeText(MainActivity.this,"JOBS", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
+                    i.putExtra("type",3);
+                    startActivity(i);
+            }
+        });
+        Image_btn_course.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//                Toast.makeText(MainActivity.this,"Courses", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
+                    i.putExtra("type",4);
+                    startActivity(i);
+            }
+        });
         Animation animation = new TranslateAnimation(0, 500,0, 0);
         animation.setDuration(1000);
         btn_cat_1.startAnimation(animation);
