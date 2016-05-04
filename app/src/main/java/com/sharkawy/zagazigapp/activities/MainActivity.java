@@ -241,7 +241,7 @@ public class MainActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
 //                        Toast.makeText(MainActivity.this,, Toast.LENGTH_SHORT).show();
-                        makeJsonObjectRequest(url);
+                        makeJsonObjectRequest(URL);
 //                        Intent i = new Intent(MainActivity.this,SearchResultActivity.class);
 //                        startActivity(i);
                     }
