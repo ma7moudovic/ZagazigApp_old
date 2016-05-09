@@ -61,6 +61,22 @@ public class MainActivity extends AppCompatActivity {
 
         String [] arr ={"كل المناطق","القومية ","شارع المحافظة","مفارق المنصورة","فلل الجامعة","حي الزهور","المنتزة","شارع البحر","المحطة","شارع مديرالامن","عمر افندي","حي ثاني","شارع الغشام" ,"عمارة الاوقاف"};
         String [] TAGS = {"مطاعم","كافيهات","سينمات","هدوم ولادى","هدوم بناتى","هدوم اطفال","موبيلات ولابات","جيم شبابي","جيم بناتى","مراكز تجميل","قاعات افراح","ستوديو تصوير","فوتوجرافيك","مستشفيات","عيادات","خدمات عربيات"};
+        String [] serviceTAGS = {"سندوتشات" ,
+                "بيتزا" ,
+                "كشرى ",
+                "مشويات ",
+                "حلويات ",
+                "كريب ",
+                "اكل بيتى" ,
+                "هدوم خروج" ,
+                "بدل ",
+                "احزية ",
+                "توكيلات ",
+                "هدوم خروج",
+                "بيجامات و لانجرى",
+                "اكسسوارات و ميك اب",
+                "شنط و احذية"
+                ,"" };
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_spinner_item, arr);
         dataAdapter.setDropDownViewResource
@@ -155,6 +171,7 @@ public class MainActivity extends AppCompatActivity {
                     Intent i = new Intent(MainActivity.this,SectorActivity.class);
                     i.putExtra("type",2);
                     startActivity(i);
+               // configure
             }
         });
         Image_btn_job.setOnClickListener(new View.OnClickListener() {

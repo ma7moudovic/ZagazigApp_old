@@ -47,6 +47,7 @@ public class DetailedItemActivity extends AppCompatActivity {
     RecyclerView recyclerView ;
     private LinearListView mTrailersView;
     GallaryAdapter gallaryAdapter ;
+    TextView txtView_photos ;
     List<Tag> tags ;
     Place place ;
     boolean exits =false ;
@@ -157,11 +158,29 @@ public class DetailedItemActivity extends AppCompatActivity {
         setContentView(R.layout.detials);
 
         String [] subcategory = {"مطاعم","كافيهات","سينمات","هدوم ولادى","هدوم بناتى","هدوم اطفال","موبيلات ولابات","جيم شبابي","جيم بناتى","مراكز تجميل","قاعات افراح","ستوديو تصوير","فوتوجرافيك","مستشفيات","عيادات","خدمات عربيات"};
-        String [] serviceTags={"سندوتشات","بيتزا","كشري","مشويات","حلويات","كريب","اكل بيتي","هدوم خروج","بدل","احذية","توكيلات","هدوم خروج","بيجامات ولانجري","اكسسورات وميك اب","ششنط واحذية"};
+//        String [] serviceTags={"سندوتشات","بيتزا","كشري","مشويات","حلويات","كريب","اكل بيتي","هدوم خروج","بدل","احذية","توكيلات","هدوم خروج","بيجامات ولانجري","اكسسورات وميك اب","ششنط واحذية"};
+
+        String [] serviceTAGS = {"سندوتشات" ,
+                "بيتزا" ,
+                "كشرى ",
+                "مشويات ",
+                "حلويات ",
+                "كريب ",
+                "اكل بيتى" ,
+                "هدوم خروج" ,
+                "بدل ",
+                "احزية ",
+                "توكيلات ",
+                "هدوم خروج",
+                "بيجامات و لانجرى",
+                "اكسسوارات و ميك اب",
+                "شنط و احذية"
+                ,"" };
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
 
+        txtView_photos = (TextView) findViewById(R.id.txtView_photos);
         title = (TextView) findViewById(R.id.tvtitle);
         category = (TextView) findViewById(R.id.tvcat);
         desc = (TextView) findViewById(R.id.tvdesc);
@@ -194,15 +213,18 @@ public class DetailedItemActivity extends AppCompatActivity {
 //            Picasso.with(this).load("http://mashaly.net/" +place.getImageURL()).into(logo);
 
             ImageHandler(place.getImageURL(),logo);
-//            Toast.makeText(this,place.getObject().getJSONArray("serviceTags")+"",Toast.LENGTH_SHORT).show();
             for (int i = 0; i < place.getObject().getJSONArray("serviceTags").length(); i++) {
                 tags.add(new Tag(place.getObject().getJSONArray("serviceTags").getString(i)));
             }
-
             tagAdapter.notifyDataSetChanged();
-
-            for (int i = 0; i < place.getObject().getJSONArray("imagesPathes").length(); i++) {
-                gallaryAdapter.add(new Photo(place.getObject().getJSONArray("imagesPathes").getJSONObject(i).getString("path")));
+//            Toast.makeText(this,"count of pics "+place.getObject().getJSONArray("imagesPathes").length()+"",Toast.LENGTH_SHORT).show();
+            if(place.getObject().getJSONArray("imagesPathes").length()==0||place.getObject().getJSONArray("imagesPathes")==null){
+                mTrailersView.setVisibility(View.GONE);
+                txtView_photos.setVisibility(View.GONE);
+            }else {
+                for (int i = 0; i < place.getObject().getJSONArray("imagesPathes").length(); i++) {
+                    gallaryAdapter.add(new Photo(place.getObject().getJSONArray("imagesPathes").getJSONObject(i).getString("path")));
+                }
             }
 
         } catch (JSONException e) {

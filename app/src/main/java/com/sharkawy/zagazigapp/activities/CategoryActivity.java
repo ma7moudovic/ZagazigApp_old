@@ -23,6 +23,7 @@ import com.sharkawy.zagazigapp.R;
 import com.sharkawy.zagazigapp.RecyclerItemClickListener;
 import com.sharkawy.zagazigapp.adapters.SearchResultAdapter;
 import com.sharkawy.zagazigapp.dataModels.Place;
+import com.sharkawy.zagazigapp.utilities.APIConfigure;
 import com.sharkawy.zagazigapp.utilities.AppController;
 
 import org.json.JSONArray;
@@ -77,7 +78,24 @@ public class CategoryActivity extends AppCompatActivity {
 
         String [] arr ={"كل المناطق","القومية ","شارع المحافظة","مفارق المنصورة","فلل الجامعة","حي الزهور","المنتزة","شارع البحر","المحطة","شارع مديرالامن","عمر افندي","حي ثاني","شارع الغشام" ,"عمارة الاوقاف"};
         String [] subcategory = {"الكل","مطاعم","كافيهات","سينمات","هدوم ولادى","هدوم بناتى","هدوم اطفال","موبيلات ولابات","جيم شبابي","جيم بناتى","مراكز تجميل","قاعات افراح","ستوديو تصوير","فوتوجرافيك","مستشفيات","عيادات","خدمات عربيات"};
-        String [] serviceTags={"سندوتشات","بيتزا","كشري","مشويات","حلويات","كريب","اكل بيتي","هدوم خروج","بدل","احذية","توكيلات","هدوم خروج","بيجامات ولانجري","اكسسورات وميك اب","ششنط واحذية"};
+//        String [] serviceTags={"سندوتشات","بيتزا","كشري","مشويات","حلويات","كريب","اكل بيتي","هدوم خروج","بدل","احذية","توكيلات","هدوم خروج","بيجامات ولانجري","اكسسورات وميك اب","ششنط واحذية"};
+
+        String [] serviceTAGS = {"سندوتشات" ,
+                "بيتزا" ,
+                "كشرى ",
+                "مشويات ",
+                "حلويات ",
+                "كريب ",
+                "اكل بيتى" ,
+                "هدوم خروج" ,
+                "بدل ",
+                "احزية ",
+                "توكيلات ",
+                "هدوم خروج",
+                "بيجامات و لانجرى",
+                "اكسسوارات و ميك اب",
+                "شنط و احذية"
+                ,"" };
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_spinner_item, arr);
@@ -169,10 +187,10 @@ public class CategoryActivity extends AppCompatActivity {
     }
 
     private void makeJsonObjectRequest() {
-        URL = "http://176.32.230.50/zagapp.com/handler.php?action=search&category="+index+"&area="+area+ "&sub_category="+sub_cat;
+        URL = APIConfigure.API_DOMAIN+APIConfigure.API_SEARCH_PATH+"category="+index+"&area="+area+ "&sub_category="+sub_cat;
 
         String tmp_url = "http://176.32.230.50/zagapp.com/handler.php?action=search&name=";
-//        Toast.makeText(CategoryActivity.this,URL, Toast.LENGTH_LONG).show();
+        Toast.makeText(CategoryActivity.this,URL, Toast.LENGTH_LONG).show();
 
         showpDialog();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
