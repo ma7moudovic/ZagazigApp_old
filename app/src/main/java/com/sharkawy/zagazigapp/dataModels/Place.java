@@ -21,7 +21,7 @@ public class Place {
     private String imageURL ;
     private JSONObject object ;
     private JSONArray serviceTags ;
-
+    String lat , lng ;
     public Place() {
     }
 
@@ -37,6 +37,8 @@ public class Place {
 //            this.subCategory=object.getString("");
             this.imageURL=object.getString("icoImage");
             this.serviceTags=object.getJSONArray("serviceTags");
+            this.lat= object.getString("latitude");
+            this.lng = object.getString("longitude");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -140,5 +142,13 @@ public class Place {
 
     public void setServiceTags(JSONArray serviceTags) {
         this.serviceTags = serviceTags;
+    }
+
+    public String getLat() {
+        return lat;
+    }
+
+    public String getLng() {
+        return lng;
     }
 }

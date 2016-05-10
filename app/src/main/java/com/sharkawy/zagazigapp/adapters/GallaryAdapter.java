@@ -144,7 +144,7 @@ public class GallaryAdapter extends BaseAdapter {
 
                 @Override
                 public void onBitmapFailed(Drawable errorDrawable) {
-                    Toast.makeText(getContext(),errorDrawable.toString(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getContext(),errorDrawable.toString(), Toast.LENGTH_SHORT).show();
                 }
 
                 @Override

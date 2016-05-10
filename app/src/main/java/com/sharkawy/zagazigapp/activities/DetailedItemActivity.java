@@ -3,9 +3,12 @@ package com.sharkawy.zagazigapp.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -39,10 +42,11 @@ import java.io.FileOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
 public class DetailedItemActivity extends AppCompatActivity {
     String EXTRA_IMAGE ="extra_image";
-    TextView title ,category , desc ,address ,tel ;
+    TextView title ,category , desc ,address ,tel ,facebookPage;
     ImageView logo ;
     RecyclerView recyclerView ;
     private LinearListView mTrailersView;
@@ -56,7 +60,7 @@ public class DetailedItemActivity extends AppCompatActivity {
     public static final String MyPREFERENCES = "MyPrefs";
     public static final String FAVORITES = "Product_Favorite";
     boolean isFavorited =false;
-
+    double latitude , longitude ;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detailed_menu, menu);
@@ -187,6 +191,7 @@ public class DetailedItemActivity extends AppCompatActivity {
         address = (TextView) findViewById(R.id.tvadd);
         tel = (TextView) findViewById(R.id.tvtel);
         logo = (ImageView) findViewById(R.id.photo);
+        facebookPage = (TextView) findViewById(R.id.fbPage);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerListview_tags_detailed);
         tags = new ArrayList<>();
@@ -209,7 +214,10 @@ public class DetailedItemActivity extends AppCompatActivity {
             desc.setText(place.getDesc());
             address.setText(place.getAddress());
             tel.setText(place.getTelephone());
-
+            if(!place.getLat().equals("null")&&!place.getLng().equals("null")){
+                latitude=Double.parseDouble(place.getLat());
+                longitude =Double.parseDouble(place.getLng());
+            }
 //            Picasso.with(this).load("http://mashaly.net/" +place.getImageURL()).into(logo);
 
             ImageHandler(place.getImageURL(),logo);
@@ -241,6 +249,22 @@ public class DetailedItemActivity extends AppCompatActivity {
             }
         });
 
+        address.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(latitude!=0&&longitude!=0){
+                    String uri = String.format(Locale.ENGLISH, "geo:%f,%f", latitude, longitude);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                    startActivity(intent);
+                }
+            }
+        });
+        facebookPage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(newFacebookIntent(getPackageManager(),"https://www.facebook.com/JRummyApps"));
+            }
+        });
     }
     public ArrayList<Place> getCart(Context context) {
         ArrayList<Place> favorites= new ArrayList<>();
@@ -322,5 +346,16 @@ public class DetailedItemActivity extends AppCompatActivity {
             });
         }
     }
-
+    public static Intent newFacebookIntent(PackageManager pm, String url) {
+        Uri uri = Uri.parse(url);
+        try {
+            ApplicationInfo applicationInfo = pm.getApplicationInfo("com.facebook.katana", 0);
+            if (applicationInfo.enabled) {
+                // http://stackoverflow.com/a/24547437/1048340
+                uri = Uri.parse("fb://facewebmodal/f?href=" + url);
+            }
+        } catch (PackageManager.NameNotFoundException ignored) {
+        }
+        return new Intent(Intent.ACTION_VIEW, uri);
+    }
 }

@@ -126,7 +126,11 @@
             android:layout_height="wrap_content"
             android:id="@+id/tvtel"
             android:text="0123456789" />
-
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Facebook page"
+            android:id="@+id/fbPage"/>
         <android.support.v7.widget.CardView
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
