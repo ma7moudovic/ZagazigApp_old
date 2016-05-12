@@ -19,6 +19,8 @@ public class Place {
     private String categoryID;
     private String subCategory ;
     private String imageURL ;
+    private String imageThumbURL ;
+    private String fbPageURL ;
     private JSONObject object ;
     private JSONArray serviceTags ;
     String lat , lng ;
@@ -39,6 +41,7 @@ public class Place {
             this.serviceTags=object.getJSONArray("serviceTags");
             this.lat= object.getString("latitude");
             this.lng = object.getString("longitude");
+            this.fbPageURL=object.getString("facebookLink");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -145,10 +148,22 @@ public class Place {
     }
 
     public String getLat() {
-        return lat;
+        if(lat==null){
+            return null;
+        }else{
+            return lat;
+        }
     }
 
     public String getLng() {
-        return lng;
+        if(lng==null){
+            return null;
+        }else{
+            return lng;
+        }
+    }
+
+    public String getFbPageURL() {
+        return fbPageURL;
     }
 }

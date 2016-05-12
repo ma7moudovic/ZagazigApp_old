@@ -5,9 +5,16 @@ package com.sharkawy.zagazigapp.dataModels;
  */
 public class Photo {
     String photoURL ;
+    String photoThumb ;
 
-    public Photo(String photoURL) {
+    public String getPhotoThumb() {
+        return photoThumb;
+    }
+
+    public Photo(String photoURL , String photoThumb) {
         this.photoURL = photoURL;
+        this.photoThumb = photoThumb ;
+
     }
 
     public Photo() {

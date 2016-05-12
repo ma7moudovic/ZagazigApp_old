@@ -61,6 +61,8 @@ public class DetailedItemActivity extends AppCompatActivity {
     public static final String FAVORITES = "Product_Favorite";
     boolean isFavorited =false;
     double latitude , longitude ;
+    String fbPageURL ;
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detailed_menu, menu);
@@ -218,6 +220,10 @@ public class DetailedItemActivity extends AppCompatActivity {
                 latitude=Double.parseDouble(place.getLat());
                 longitude =Double.parseDouble(place.getLng());
             }
+
+            if(place.getFbPageURL()!=null){
+                fbPageURL=place.getFbPageURL();
+            }
 //            Picasso.with(this).load("http://mashaly.net/" +place.getImageURL()).into(logo);
 
             ImageHandler(place.getImageURL(),logo);
@@ -231,7 +237,7 @@ public class DetailedItemActivity extends AppCompatActivity {
                 txtView_photos.setVisibility(View.GONE);
             }else {
                 for (int i = 0; i < place.getObject().getJSONArray("imagesPathes").length(); i++) {
-                    gallaryAdapter.add(new Photo(place.getObject().getJSONArray("imagesPathes").getJSONObject(i).getString("path")));
+                    gallaryAdapter.add(new Photo(place.getObject().getJSONArray("imagesPathes").getJSONObject(i).getString("path"),place.getObject().getJSONArray("imagesPathes").getJSONObject(i).getString("thumb")));
                 }
             }
 
@@ -262,7 +268,7 @@ public class DetailedItemActivity extends AppCompatActivity {
         facebookPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(newFacebookIntent(getPackageManager(),"https://www.facebook.com/JRummyApps"));
+                startActivity(newFacebookIntent(getPackageManager(),fbPageURL));
             }
         });
     }

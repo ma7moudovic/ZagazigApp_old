@@ -86,10 +86,10 @@ public class GallaryAdapter extends BaseAdapter {
 
         viewHolder = (ViewHolder) view.getTag();
 
-        String yt_thumbnail_url = "http://mashaly.net/" + trailer.getPhotoURL();
+        String yt_thumbnail_url = "http://mashaly.net/" + trailer.getPhotoThumb();
 //        String yt_thumbnail_url = "http://mashaly.net/" +"/places_imgs/icons/0.jpg";
 //        Picasso.with(getContext()).load(yt_thumbnail_url).into(viewHolder.imageView);
-        ImageHandler(trailer.getPhotoURL(),viewHolder.imageView);
+        ImageHandler(trailer.getPhotoThumb(),viewHolder.imageView);
 
 //        viewHolder.nameView.setText(trailer.getName());
 
@@ -138,7 +138,6 @@ public class GallaryAdapter extends BaseAdapter {
 
                     } catch (Exception e) {
                         Toast.makeText(getContext(), e.getMessage(), Toast.LENGTH_SHORT).show();
-
                     }
                 }
 
