@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sharkawy.zagazigapp">
+    package="com.sharkawy.zagazigapp" >
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".utilities.AppController"
@@ -13,9 +13,10 @@
         android:icon="@drawable/ic_zag_app"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity"
-            android:windowSoftInputMode="stateHidden">
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".activities.MainActivity"
+            android:windowSoftInputMode="stateHidden" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -32,14 +33,20 @@
             android:name=".activities.SectorActivity"
             android:label="@string/title_activity_sector"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activities.PhotoActivity"></activity>
+        <activity android:name=".activities.PhotoActivity" />
         <activity
             android:name=".activities.FavorivtesActivity"
             android:label="@string/title_activity_favorivtes"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="1459ed4b9ae4165789f025e939e362a6396f309d" />
+
+        <activity
+            android:name=".activities.ContactUs"
+            android:label="@string/title_activity_contact_us" >
+        </activity>
     </application>
 
 </manifest>
