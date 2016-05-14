@@ -99,7 +99,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         try {
             List<Tag> tags = new ArrayList<>();
             for (int i = 0; i < pObjects.get(position).getObject().getJSONArray("serviceTags").length(); i++) {
-                tags.add(new Tag(pObjects.get(position).getObject().getJSONArray("serviceTags").getString(i)));
+                tags.add(new Tag(pObjects.get(position).getObject().getJSONArray("serviceTags").getJSONObject(i)));
             }
             TagAdapter tagAdapter = new TagAdapter(getpContext(),tags);
             holder.recyclerView.setLayoutManager(new GridLayoutManager(getpContext(),3));

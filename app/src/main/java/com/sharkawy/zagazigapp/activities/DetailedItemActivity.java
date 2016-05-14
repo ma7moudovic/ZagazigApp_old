@@ -228,7 +228,7 @@ public class DetailedItemActivity extends AppCompatActivity {
 
             ImageHandler(place.getImageURL(),logo);
             for (int i = 0; i < place.getObject().getJSONArray("serviceTags").length(); i++) {
-                tags.add(new Tag(place.getObject().getJSONArray("serviceTags").getString(i)));
+                tags.add(new Tag(place.getObject().getJSONArray("serviceTags").getJSONObject(i)));
             }
             tagAdapter.notifyDataSetChanged();
 //            Toast.makeText(this,"count of pics "+place.getObject().getJSONArray("imagesPathes").length()+"",Toast.LENGTH_SHORT).show();
@@ -259,8 +259,10 @@ public class DetailedItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if(latitude!=0&&longitude!=0){
-                    String uri = String.format(Locale.ENGLISH, "geo:%f,%f", latitude, longitude);
+                    //?q=<lat>,<long>(Label+Name)
+                    String uri = String.format(Locale.ENGLISH, "geo:"+latitude+","+longitude+"?q="+latitude+","+longitude+"(Label+Name)");
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+//                    intent.setPackage("com.google.android.apps.maps");
                     startActivity(intent);
                 }
             }
@@ -269,6 +271,14 @@ public class DetailedItemActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivity(newFacebookIntent(getPackageManager(),fbPageURL));
+            }
+        });
+        tel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(tel.getText()!=""||tel.getText()!=null){
+                    call(tel.getText().toString());
+                }
             }
         });
     }
@@ -363,5 +373,16 @@ public class DetailedItemActivity extends AppCompatActivity {
         } catch (PackageManager.NameNotFoundException ignored) {
         }
         return new Intent(Intent.ACTION_VIEW, uri);
+    }
+
+    private void call(String num) {
+        Intent in=new Intent(Intent.ACTION_CALL,Uri.fromParts("tel",num,null));
+        try{
+            startActivity(in);
+        }
+
+        catch (android.content.ActivityNotFoundException ex){
+            Toast.makeText(getApplicationContext(),"Error",Toast.LENGTH_SHORT).show();
+        }
     }
 }

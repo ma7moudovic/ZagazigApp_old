@@ -1,37 +1,44 @@
 package com.sharkawy.zagazigapp.dataModels;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 /**
  * Created by T on 4/22/2016.
  */
 public class Tag {
     String Tag ;
-//    String [] TAGS = {"مطاعم","كافيهات","سينمات","هدوم ولادى","هدوم بناتى","هدوم اطفال","موبيلات ولابات","جيم شبابي","جيم بناتى","مراكز تجميل","قاعات افراح","ستوديو تصوير","فوتوجرافيك","مستشفيات","عيادات","خدمات عربيات"};
-    String [] TAGS = {"سندوتشات" ,
-            "بيتزا" ,
-            "كشرى ",
-            "مشويات ",
-            "حلويات ",
-            "كريب ",
-            "اكل بيتى" ,
-            "هدوم خروج" ,
-            "بدل ",
-            "احزية ",
-            "توكيلات ",
-            "هدوم خروج",
-            "بيجامات و لانجرى",
-            "اكسسوارات و ميك اب",
-            "شنط و احذية"
-            ,"خدمات عامة" };
+    String id ;
+    JSONObject jsonObject ;
 
     public Tag() {
+    }
+
+    public Tag(JSONObject jsonObject) {
+        this.jsonObject = jsonObject;
+        try {
+            this.Tag=jsonObject.getString("description");
+            this.id=jsonObject.getString("id");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public Tag(String tag) {
         Tag = tag;
     }
 
+    public Tag(String id, String tag) {
+        this.id = id;
+        Tag = tag;
+    }
+
     public String getTag() {
-        return TAGS[Integer.parseInt(Tag)];
+        return Tag ;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setTag(String tag) {
