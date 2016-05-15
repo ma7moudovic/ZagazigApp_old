@@ -1,7 +1,9 @@
 package com.sharkawy.zagazigapp.activities;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -38,7 +40,6 @@ public class CategoryActivity extends AppCompatActivity {
     Spinner sp_areas , sp_tags;
     ProgressDialog pDialog ;
     private static String TAG = CategoryActivity.class.getSimpleName();
-
     RecyclerView recyclerView ;
     SearchResultAdapter adapter ;
     RecyclerView.LayoutManager layoutManager ;
@@ -48,10 +49,21 @@ public class CategoryActivity extends AppCompatActivity {
     int index ;
     boolean isFirstTime=true ;
     RelativeLayout category_bk ;
+    SharedPreferences sharedpreferences;
+    SharedPreferences.Editor editor;
+    public static final String MyPREFERENCES = "MyPrefs";
+    public static final String OFFLINECAT1="cat1";
+    public static final String OFFLINECAT2="cat2";
+    public static final String OFFLINECAT3="cat3";
+    public static final String OFFLINECAT4="cat4";
+    public static final String OFFLINECAT5="cat5";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
+
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        editor = sharedpreferences.edit();
 
         category_bk = (RelativeLayout) findViewById(R.id.category_bk);
         index = getIntent().getExtras().getInt("cat_index");
@@ -78,24 +90,6 @@ public class CategoryActivity extends AppCompatActivity {
 
         String [] arr ={"كل المناطق","القومية ","شارع المحافظة","مفارق المنصورة","فلل الجامعة","حي الزهور","المنتزة","شارع البحر","المحطة","شارع مديرالامن","عمر افندي","حي ثاني","شارع الغشام" ,"عمارة الاوقاف"};
         String [] subcategory = {"الكل","مطاعم","كافيهات","سينمات","هدوم ولادى","هدوم بناتى","هدوم اطفال","موبيلات ولابات","جيم شبابي","جيم بناتى","مراكز تجميل","قاعات افراح","ستوديو تصوير","فوتوجرافيك","مستشفيات","عيادات","خدمات عربيات"};
-//        String [] serviceTags={"سندوتشات","بيتزا","كشري","مشويات","حلويات","كريب","اكل بيتي","هدوم خروج","بدل","احذية","توكيلات","هدوم خروج","بيجامات ولانجري","اكسسورات وميك اب","ششنط واحذية"};
-
-        String [] serviceTAGS = {"سندوتشات" ,
-                "بيتزا" ,
-                "كشرى ",
-                "مشويات ",
-                "حلويات ",
-                "كريب ",
-                "اكل بيتى" ,
-                "هدوم خروج" ,
-                "بدل ",
-                "احزية ",
-                "توكيلات ",
-                "هدوم خروج",
-                "بيجامات و لانجرى",
-                "اكسسوارات و ميك اب",
-                "شنط و احذية"
-                ,"" };
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_spinner_item, arr);
@@ -214,6 +208,26 @@ public class CategoryActivity extends AppCompatActivity {
 
                     }else if(response.getString("message").toString().equals("success")){
 
+                        switch (index){
+                            case 1:
+                                editor.putString(OFFLINECAT1,response.toString());
+                                break;
+                            case 2:
+                                editor.putString(OFFLINECAT2,response.toString());
+                                break;
+                            case 3:
+                                editor.putString(OFFLINECAT3,response.toString());
+                                break;
+                            case 4:
+                                editor.putString(OFFLINECAT4,response.toString());
+                                break;
+                            case 5:
+                                editor.putString(OFFLINECAT5,response.toString());
+                                break;
+                            default:
+                                break;
+                        }
+                        editor.commit();
                         JSONArray data = response.getJSONArray("data");
 //                        Toast.makeText(CategoryActivity.this, data.toString(), Toast.LENGTH_LONG).show();
                         adapter.clear();
@@ -250,6 +264,36 @@ public class CategoryActivity extends AppCompatActivity {
                 } catch (Exception e) {
                     e.printStackTrace();
                     Toast.makeText(CategoryActivity.this,"Connection Error.",Toast.LENGTH_LONG).show();
+                    switch (index){
+                        case 1:
+                            if(sharedpreferences.contains(OFFLINECAT1)){
+                                populateData(sharedpreferences.getString(OFFLINECAT1,null));
+                            }
+                            break;
+                        case 2:
+                            if(sharedpreferences.contains(OFFLINECAT2)){
+                                populateData(sharedpreferences.getString(OFFLINECAT2,null));
+                            }
+                            break;
+                        case 3:
+                            if(sharedpreferences.contains(OFFLINECAT3)){
+                                populateData(sharedpreferences.getString(OFFLINECAT3,null));
+                            }
+                            break;
+                        case 4:
+                            if(sharedpreferences.contains(OFFLINECAT4)){
+                                populateData(sharedpreferences.getString(OFFLINECAT4,null));
+                            }
+                            break;
+                        case 5:
+                            if(sharedpreferences.contains(OFFLINECAT5)){
+                                populateData(sharedpreferences.getString(OFFLINECAT5,null));
+                            }
+                            break;
+                        default:
+                            break;
+
+                    }
                 }
             }
         });
@@ -258,6 +302,22 @@ public class CategoryActivity extends AppCompatActivity {
         AppController.getInstance().addToRequestQueue(jsonObjReq);
 
     }
+
+    private void populateData(String dataString) {
+        JSONObject jsonObject1 = null;
+        try {
+            jsonObject1 = new JSONObject(dataString);
+            JSONArray data = jsonObject1.getJSONArray("data");
+            adapter.clear();
+            for(int i =0 ;i<data.length();i++) {
+                adapter.add(new Place(data.getJSONObject(i)));
+            }
+
+        } catch (JSONException e1) {
+            e1.printStackTrace();
+        }
+    }
+
     private void showpDialog() {
         if (!pDialog.isShowing())
             pDialog.show();

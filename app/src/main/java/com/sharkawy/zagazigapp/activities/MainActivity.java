@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
 
     Spinner s1;
     Button btn_cat_1 ,btn_cat_2,btn_cat_3,btn_cat_4,btn_cat_5;
-    ImageButton Image_btn_fav ,Image_btn_offer , Image_btn_job ,Image_btn_course ;
+    ImageButton Image_btn_fav ,Image_btn_offer , Image_btn_job ,Image_btn_course ,Image_btn_search;
     EditText search_input ;
     TabLayout tabLayout ;
     ProgressDialog pDialog ;
@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity {
         Image_btn_offer = (ImageButton) findViewById(R.id.Btn_offer);
         Image_btn_job = (ImageButton) findViewById(R.id.Btn_job);
         Image_btn_course = (ImageButton) findViewById(R.id.Btn_course);
+        Image_btn_search = (ImageButton) findViewById(R.id.btnsearch);
 
         Image_btn_fav.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -168,25 +169,7 @@ public class MainActivity extends AppCompatActivity {
                 if ((event.getAction() == KeyEvent.ACTION_DOWN) &&
                         (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     // Perform action on key press
-                    String url="";
-                    if(search_input.getText().length()!=0){
-                        String tmp_url = "http://176.32.230.50/zagapp.com/handler.php?action=search&name=";
-                        if(s1.getSelectedItemPosition()==0){
-                            url ="http://176.32.230.50/zagapp.com/handler.php?action=search&name="+search_input.getText().toString().replace(" ","%20");
-                        }else {
-                            url ="http://176.32.230.50/zagapp.com/handler.php?action=search&area="+s1.getSelectedItemPosition()+"&name="+search_input.getText().toString().replace(" ","%20");
-                        }
-                        String URL = null;
-                        try {
-                            URL = URLDecoder.decode(URLEncoder.encode(url, "iso8859-1"), "UTF-8");
-                        } catch (UnsupportedEncodingException e) {
-                            e.printStackTrace();
-                        }
-//                        Toast.makeText(MainActivity.this,, Toast.LENGTH_SHORT).show();
-                        makeJsonObjectRequest(url);
-//                        Intent i = new Intent(MainActivity.this,SearchResultActivity.class);
-//                        startActivity(i);
-                    }
+                    prepareSearchQuery();
 
                     return true;
                 }
@@ -194,7 +177,33 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        Image_btn_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                prepareSearchQuery();
+            }
+        });
+
     }
+
+    private void prepareSearchQuery() {
+        String url="";
+        if(search_input.getText().length()!=0){
+            if(s1.getSelectedItemPosition()==0){
+                url ="http://176.32.230.50/zagapp.com/handler.php?action=search&name="+search_input.getText().toString().replace(" ","%20");
+            }else {
+                url ="http://176.32.230.50/zagapp.com/handler.php?action=search&area="+s1.getSelectedItemPosition()+"&name="+search_input.getText().toString().replace(" ","%20");
+            }
+            String URL = null;
+            try {
+                URL = URLDecoder.decode(URLEncoder.encode(url, "iso8859-1"), "UTF-8");
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+            makeJsonObjectRequest(url);
+        }
+    }
+
     private void makeJsonObjectRequest(String URL) {
         showpDialog();
 //                        Toast.makeText(MainActivity.this,URL,Toast.LENGTH_LONG).show();
