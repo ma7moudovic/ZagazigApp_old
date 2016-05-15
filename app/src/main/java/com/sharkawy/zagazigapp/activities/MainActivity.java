@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
     TabLayout tabLayout ;
     ProgressDialog pDialog ;
     private static String TAG = MainActivity.class.getSimpleName();
+    String CONFIG_URL = "http://176.32.230.22/mashaly.net/handler.php?action=config";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,86 +61,13 @@ public class MainActivity extends AppCompatActivity {
         pDialog.setMessage(getResources().getString(R.string.msg_loading));
 
         String [] arr ={"كل المناطق","القومية ","شارع المحافظة","مفارق المنصورة","فلل الجامعة","حي الزهور","المنتزة","شارع البحر","المحطة","شارع مديرالامن","عمر افندي","حي ثاني","شارع الغشام" ,"عمارة الاوقاف"};
-        String [] TAGS = {"مطاعم","كافيهات","سينمات","هدوم ولادى","هدوم بناتى","هدوم اطفال","موبيلات ولابات","جيم شبابي","جيم بناتى","مراكز تجميل","قاعات افراح","ستوديو تصوير","فوتوجرافيك","مستشفيات","عيادات","خدمات عربيات"};
-        String [] serviceTAGS = {"سندوتشات" ,
-                "بيتزا" ,
-                "كشرى ",
-                "مشويات ",
-                "حلويات ",
-                "كريب ",
-                "اكل بيتى" ,
-                "هدوم خروج" ,
-                "بدل ",
-                "احزية ",
-                "توكيلات ",
-                "هدوم خروج",
-                "بيجامات و لانجرى",
-                "اكسسوارات و ميك اب",
-                "شنط و احذية"
-                ,"" };
+
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_spinner_item, arr);
         dataAdapter.setDropDownViewResource
                 (android.R.layout.simple_spinner_dropdown_item);
         dataAdapter.setDropDownViewResource
                 (android.R.layout.simple_spinner_dropdown_item);
-
-//        final TabLayout.Tab favorites = tabLayout.newTab();
-//        final TabLayout.Tab offers = tabLayout.newTab();
-//        final TabLayout.Tab job = tabLayout.newTab();
-//        final TabLayout.Tab courses = tabLayout.newTab();
-//        final TabLayout.Tab home = tabLayout.newTab();
-
-//        favorites.setText("Favorites");
-//        offers.setText("Offers");
-//        job.setText("Job");
-//        courses.setText("Courses");
-//        home.setText("Home");
-
-//        tabLayout.addTab(home,0);
-//        tabLayout.addTab(favorites, 1);
-//        tabLayout.addTab(offers, 2);
-//        tabLayout.addTab(job, 3);
-//        tabLayout.addTab(courses,4);
-
-//        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-//            @Override
-//            public void onTabSelected(TabLayout.Tab tab) {
-//
-//                if(tab.getPosition()==1){
-////                    Toast.makeText(MainActivity.this,"Favorities", Toast.LENGTH_SHORT).show();
-//                    Intent i = new Intent(MainActivity.this,FavorivtesActivity.class);
-//                    i.putExtra("type",1);
-//                    startActivity(i);
-//
-//                }else if(tab.getPosition()==2){
-////                    Toast.makeText(MainActivity.this,"Offers", Toast.LENGTH_SHORT).show();
-//                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
-//                    i.putExtra("type",2);
-//                    startActivity(i);
-//                }else if(tab.getPosition()==3){
-////                    Toast.makeText(MainActivity.this,"JOBS", Toast.LENGTH_SHORT).show();
-//                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
-//                    i.putExtra("type",3);
-//                    startActivity(i);
-//                }else if(tab.getPosition()==4){
-////                    Toast.makeText(MainActivity.this,"Courses", Toast.LENGTH_SHORT).show();
-//                    Intent i = new Intent(MainActivity.this,SectorActivity.class);
-//                    i.putExtra("type",4);
-//                    startActivity(i);
-//                }
-//            }
-//
-//            @Override
-//            public void onTabUnselected(TabLayout.Tab tab) {
-//
-//            }
-//
-//            @Override
-//            public void onTabReselected(TabLayout.Tab tab) {
-//
-//            }
-//        });
 
         s1.setAdapter(dataAdapter);
         btn_cat_1=(Button)findViewById(R.id.btn_cat_1);
@@ -157,8 +85,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                    Toast.makeText(MainActivity.this,"Favorities", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(MainActivity.this,FavorivtesActivity.class);
+                Intent i = new Intent(MainActivity.this,FavorivtesActivity.class);
                     i.putExtra("type",1);
                     startActivity(i);
             }
@@ -193,9 +120,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(i);
             }
         });
-//        Animation animation = new TranslateAnimation(0, 500,0, 0);
-//        animation.setDuration(1000);
-//        btn_cat_1.startAnimation(animation);
+
         btn_cat_1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -273,8 +198,6 @@ public class MainActivity extends AppCompatActivity {
     private void makeJsonObjectRequest(String URL) {
         showpDialog();
 //                        Toast.makeText(MainActivity.this,URL,Toast.LENGTH_LONG).show();
-
-//        String URL ="http://www.mashaly.net/zag.php?filter="+s1.getSelectedItem().toString().replace(" ","%20");
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
                 URL, null, new Response.Listener<JSONObject>() {
 
@@ -293,6 +216,63 @@ public class MainActivity extends AppCompatActivity {
                         Intent intent = new Intent(MainActivity.this,SearchResultActivity.class);
                         intent.putExtra("data",data.toString());
                         startActivity(intent);
+
+                    }else if(response.getString("message").toString().equals("no data recived")){
+                        Toast.makeText(MainActivity.this,"no places with this name", Toast.LENGTH_LONG).show();
+
+                    } else{
+                        Toast.makeText(getApplicationContext(),
+                                "Something went wrong..!", Toast.LENGTH_SHORT).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                // hide the progress dialog
+                hidepDialog();
+
+                String responseBody = null;
+                JSONObject jsonObject=null ;
+                try {
+
+                    responseBody = new String( error.networkResponse.data, "utf-8" );
+                    jsonObject = new JSONObject( responseBody );
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(MainActivity.this,"Connection Error.",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq);
+
+    }
+
+    private void makeConfigureRequest(String URL) {
+        showpDialog();
+//                        Toast.makeText(MainActivity.this,URL,Toast.LENGTH_LONG).show();
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
+                URL, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+                // Parsing json object response
+                hidepDialog();
+//                Toast.makeText(MainActivity.this,response.toString(), Toast.LENGTH_LONG).show();
+                try {
+                    if(response.getString("message").toString().equals("success")){
+
+//                        Toast.makeText(MainActivity.this,response.toString(), Toast.LENGTH_LONG).show();
+                        JSONArray data = response.getJSONArray("categories");
+
 
                     }else if(response.getString("message").toString().equals("no data recived")){
                         Toast.makeText(MainActivity.this,"no places with this name", Toast.LENGTH_LONG).show();

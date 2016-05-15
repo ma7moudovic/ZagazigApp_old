@@ -15,12 +15,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sharkawy.zagazigapp.R;
 import com.sharkawy.zagazigapp.dataModels.Place;
 import com.sharkawy.zagazigapp.dataModels.Tag;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.ArrayList;
@@ -95,7 +94,11 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 //        Picasso.with(getpContext()).load("http://mashaly.net/"+pObjects.get(position).getImageURL()).into(holder.imageView);
 
 //        Toast.makeText(getpContext(),pObjects.get(position).getImageURL() , Toast.LENGTH_LONG).show();
-        ImageHandler(pObjects.get(position).getImageURL(),holder.imageView);
+//        ImageHandler(pObjects.get(position).getImageURL(),holder.imageView);
+        Glide.with(getpContext())
+                .load("http://176.32.230.50/zagapp.com/"+pObjects.get(position).getImageURL())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.imageView);
         try {
             List<Tag> tags = new ArrayList<>();
             for (int i = 0; i < pObjects.get(position).getObject().getJSONArray("serviceTags").length(); i++) {
@@ -140,7 +143,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
         }
 
     }//holder
-
+/**
     private void ImageHandler(final String URL , final ImageView imageV) {
         String root = Environment.getExternalStorageDirectory().toString();
         File myDir = new File(root + "/ZagApp/"+URL.replace("/","_"));
@@ -187,4 +190,5 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             });
         }
     }
+    */
 }

@@ -13,12 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sharkawy.zagazigapp.R;
 import com.sharkawy.zagazigapp.dataModels.Annonce;
 import com.sharkawy.zagazigapp.dataModels.Place;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
@@ -90,7 +89,12 @@ public class AnnonuceAdapter  extends RecyclerView.Adapter<AnnonuceAdapter.ViewH
         holder.annonuceDescView.setText(pObjects.get(position).getContent());
 //        Picasso.with(getpContext()).load("http://mashaly.net/" +"/places_imgs/icons/0.jpg").into(holder.imageView);
 //        Picasso.with(getpContext()).load("http://mashaly.net/"+pObjects.get(position).getIconURL()).into(holder.imageView);
-        ImageHandler(pObjects.get(position).getIconURL(),holder.imageView);
+//        ImageHandler(pObjects.get(position).getIconURL(),holder.imageView);
+
+        Glide.with(getpContext())
+                .load("http://176.32.230.50/zagapp.com/"+pObjects.get(position).getIconURL())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(holder.imageView);
     }
 
     @Override
@@ -113,7 +117,7 @@ public class AnnonuceAdapter  extends RecyclerView.Adapter<AnnonuceAdapter.ViewH
         }
 
     }//holder
-
+/**
     private void ImageHandler(final String URL , final ImageView imageV) {
         String root = Environment.getExternalStorageDirectory().toString();
         File myDir = new File(root + "/ZagApp/"+URL.replace("/","_"));
@@ -159,4 +163,5 @@ public class AnnonuceAdapter  extends RecyclerView.Adapter<AnnonuceAdapter.ViewH
             });
         }
     }
+ */
 }

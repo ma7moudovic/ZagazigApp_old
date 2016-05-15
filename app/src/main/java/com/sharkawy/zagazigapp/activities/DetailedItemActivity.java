@@ -22,6 +22,8 @@ import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.google.gson.Gson;
 import com.linearlistview.LinearListView;
 import com.sharkawy.zagazigapp.R;
@@ -30,9 +32,6 @@ import com.sharkawy.zagazigapp.adapters.TagAdapter;
 import com.sharkawy.zagazigapp.dataModels.Photo;
 import com.sharkawy.zagazigapp.dataModels.Place;
 import com.sharkawy.zagazigapp.dataModels.Tag;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -46,6 +45,7 @@ import java.util.Locale;
 
 public class DetailedItemActivity extends AppCompatActivity {
     String EXTRA_IMAGE ="extra_image";
+    String EXTRA_IMAGES_OBJECTS ="extra_object";
     TextView title ,category , desc ,address ,tel ,facebookPage;
     ImageView logo ;
     RecyclerView recyclerView ;
@@ -164,24 +164,6 @@ public class DetailedItemActivity extends AppCompatActivity {
         setContentView(R.layout.detials);
 
         String [] subcategory = {"مطاعم","كافيهات","سينمات","هدوم ولادى","هدوم بناتى","هدوم اطفال","موبيلات ولابات","جيم شبابي","جيم بناتى","مراكز تجميل","قاعات افراح","ستوديو تصوير","فوتوجرافيك","مستشفيات","عيادات","خدمات عربيات"};
-//        String [] serviceTags={"سندوتشات","بيتزا","كشري","مشويات","حلويات","كريب","اكل بيتي","هدوم خروج","بدل","احذية","توكيلات","هدوم خروج","بيجامات ولانجري","اكسسورات وميك اب","ششنط واحذية"};
-
-        String [] serviceTAGS = {"سندوتشات" ,
-                "بيتزا" ,
-                "كشرى ",
-                "مشويات ",
-                "حلويات ",
-                "كريب ",
-                "اكل بيتى" ,
-                "هدوم خروج" ,
-                "بدل ",
-                "احزية ",
-                "توكيلات ",
-                "هدوم خروج",
-                "بيجامات و لانجرى",
-                "اكسسوارات و ميك اب",
-                "شنط و احذية"
-                ,"" };
 
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
@@ -226,7 +208,12 @@ public class DetailedItemActivity extends AppCompatActivity {
             }
 //            Picasso.with(this).load("http://mashaly.net/" +place.getImageURL()).into(logo);
 
-            ImageHandler(place.getImageURL(),logo);
+//            ImageHandler(place.getImageURL(),logo);
+            Glide.with(this)
+                    .load("http://176.32.230.50/zagapp.com/"+place.getImageURL())
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .into(logo);
+
             for (int i = 0; i < place.getObject().getJSONArray("serviceTags").length(); i++) {
                 tags.add(new Tag(place.getObject().getJSONArray("serviceTags").getJSONObject(i)));
             }
@@ -250,7 +237,8 @@ public class DetailedItemActivity extends AppCompatActivity {
             public void onItemClick(LinearListView linearListView, View view,
                                     int position, long id) {
                 Intent i = new Intent(DetailedItemActivity.this,PhotoActivity.class);
-                i.putExtra(EXTRA_IMAGE,gallaryAdapter.getItem(position).getPhotoURL());
+                i.putExtra(EXTRA_IMAGE,position);
+                i.putExtra(EXTRA_IMAGES_OBJECTS,place.getObject().toString());
                 startActivity(i);
             }
         });
@@ -316,52 +304,6 @@ public class DetailedItemActivity extends AppCompatActivity {
         editor.commit();
 //        Toast.makeText(DetailedItemActivity.this,"Saved to your Favorites",Toast.LENGTH_SHORT).show();
     }
-    private void ImageHandler(final String URL , final ImageView imageV) {
-        String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/ZagApp/"+URL.replace("/","_"));
-        if (myDir.exists()) {
-            // Do Whatever you want sdcard exists
-            Bitmap bitmap1 = BitmapFactory.decodeFile(myDir.getAbsolutePath());
-            imageV.setImageBitmap(bitmap1);
-        }
-        else{
-//            Toast.makeText(getContext(), "not Exists", Toast.LENGTH_SHORT).show();
-            Picasso.with(DetailedItemActivity.this).load("http://176.32.230.50/zagapp.com/"+URL).into(new Target() {
-                @Override
-                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                    try {
-                        String root = Environment.getExternalStorageDirectory().toString();
-                        File myDir = new File(root + "/ZagApp");
-                        if (!myDir.exists()) {
-                            myDir.mkdirs();
-                        }
-//                    String name = new Date().toString() + ".jpg";
-                        String name = URL.replace("/","_");
-
-                        myDir = new File(myDir, name);
-                        FileOutputStream out = new FileOutputStream(myDir);
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
-                        out.flush();
-                        out.close();
-//                        Toast.makeText(DetailedItemActivity.this, "imageDownloaded", Toast.LENGTH_SHORT).show();
-                        imageV.setImageBitmap(bitmap);
-
-                    } catch (Exception e) {
-//                        Toast.makeText(DetailedItemActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-
-                @Override
-                public void onBitmapFailed(Drawable errorDrawable) {
-                }
-
-                @Override
-                public void onPrepareLoad(Drawable placeHolderDrawable) {
-                }
-            });
-        }
-    }
     public static Intent newFacebookIntent(PackageManager pm, String url) {
         Uri uri = Uri.parse(url);
         try {
@@ -376,7 +318,7 @@ public class DetailedItemActivity extends AppCompatActivity {
     }
 
     private void call(String num) {
-        Intent in=new Intent(Intent.ACTION_CALL,Uri.fromParts("tel",num,null));
+        Intent in=new Intent(Intent.ACTION_DIAL,Uri.fromParts("tel",num,null));
         try{
             startActivity(in);
         }

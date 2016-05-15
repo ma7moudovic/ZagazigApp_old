@@ -58,21 +58,6 @@
                     android:layout_toRightOf="@+id/photo"
                     android:text="Dabour" />
 
-                <!--<TextView-->
-                    <!--android:id="@+id/tvtxt1"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/tvcat"-->
-                    <!--android:layout_marginTop="8dp"-->
-                    <!--android:layout_toEndOf="@+id/photo"-->
-                    <!--android:layout_toRightOf="@+id/photo"-->
-                    <!--android:background="@drawable/custombackground"-->
-                    <!--android:paddingBottom="3dp"-->
-                    <!--android:paddingLeft="15dp"-->
-                    <!--android:paddingRight="15dp"-->
-                    <!--android:paddingTop="3dp"-->
-                    <!--android:text="type" />-->
-
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/recyclerListview_tags_detailed"
                     android:layout_width="wrap_content"

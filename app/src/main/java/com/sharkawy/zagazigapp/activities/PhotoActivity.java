@@ -1,29 +1,44 @@
 package com.sharkawy.zagazigapp.activities;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Environment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sharkawy.zagazigapp.R;
+import com.sharkawy.zagazigapp.adapters.FullScreenImageAdapter;
 import com.sharkawy.zagazigapp.dataModels.Photo;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
+import com.sharkawy.zagazigapp.utilities.Utils;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class PhotoActivity extends AppCompatActivity {
 
     ImageView imageView ;
     String EXTRA_IMAGE ="extra_image";
-//    String URL = "http://mashaly.net/places_imgs//icons//29.jpg" ;
+    String EXTRA_IMAGES_OBJECTS ="extra_object";
     String URL ;
+    int position =0 ;
+    private Utils utils;
+    private FullScreenImageAdapter adapter;
+    private ViewPager viewPager;
+    JSONObject jsonObject ;
+    ArrayList<Photo> arrayList = new ArrayList<Photo>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,63 +46,41 @@ public class PhotoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_photo);
 
         if(getIntent()!=null&&getIntent().getExtras()!=null){
-            if(getIntent().getExtras().containsKey(EXTRA_IMAGE)) {
-
-                URL = getIntent().getExtras().getString(EXTRA_IMAGE);
+            if(getIntent().getExtras().containsKey(EXTRA_IMAGE)||getIntent().getExtras().containsKey(EXTRA_IMAGES_OBJECTS)){
+                position = getIntent().getExtras().getInt(EXTRA_IMAGE);
+                try {
+                    jsonObject = new JSONObject(getIntent().getExtras().getString(EXTRA_IMAGES_OBJECTS));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
-        imageView = (ImageView) findViewById(R.id.imageID);
+//        imageView = (ImageView) findViewById(R.id.imageID);
+//        Glide.with(this)
+//                .load("http://176.32.230.50/zagapp.com/"+URL)
+//                .diskCacheStrategy(DiskCacheStrategy.ALL)
+//                .into(imageView);
 
-        ImageHandler(URL,imageView);
+        viewPager = (ViewPager) findViewById(R.id.pager);
+        utils = new Utils(getApplicationContext());
+        adapter = new FullScreenImageAdapter(this,arrayList);
+        viewPager.setAdapter(adapter);
 
+        try {
+            if(jsonObject.getJSONArray("imagesPathes").length()==0||jsonObject.getJSONArray("imagesPathes")==null){
+
+            }else {
+                for (int i = 0; i < jsonObject.getJSONArray("imagesPathes").length(); i++) {
+                    arrayList.add(new Photo(jsonObject.getJSONArray("imagesPathes").getJSONObject(i).getString("path"),jsonObject.getJSONArray("imagesPathes").getJSONObject(i).getString("thumb")));
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        adapter.notifyDataSetChanged();
+        // displaying selected image first
+        viewPager.setCurrentItem(position);
     }
 
-    private void ImageHandler(final String URL , final ImageView imageV) {
-        String root = Environment.getExternalStorageDirectory().toString();
-        File myDir = new File(root + "/ZagApp/"+URL.replace("/","_"));
-        if (myDir.exists()) {
-            // Do Whatever you want sdcard exists
-//            Toast.makeText(PhotoActivity.this, "Exists", Toast.LENGTH_SHORT).show();
-            Bitmap bitmap1 = BitmapFactory.decodeFile(myDir.getAbsolutePath());
-            imageV.setImageBitmap(bitmap1);
-
-        }
-        else{
-//            Toast.makeText(PhotoActivity.this, "not Exists", Toast.LENGTH_SHORT).show();
-            Picasso.with(this).load("http://176.32.230.50/zagapp.com/"+URL).into(new Target() {
-                @Override
-                public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-                    try {
-                        String root = Environment.getExternalStorageDirectory().toString();
-                        File myDir = new File(root + "/ZagApp");
-                        if (!myDir.exists()) {
-                            myDir.mkdirs();
-                        }
-//                    String name = new Date().toString() + ".jpg";
-                        String name = URL.replace("/","_");
-
-                        myDir = new File(myDir, name);
-                        FileOutputStream out = new FileOutputStream(myDir);
-                        bitmap.compress(Bitmap.CompressFormat.JPEG, 90, out);
-                        out.flush();
-                        out.close();
-//                        Toast.makeText(PhotoActivity.this, "imageDownloaded", Toast.LENGTH_SHORT).show();
-                        imageV.setImageBitmap(bitmap);
-
-                    } catch (Exception e) {
-                        Toast.makeText(PhotoActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-
-                    }
-                }
-
-                @Override
-                public void onBitmapFailed(Drawable errorDrawable) {
-                }
-
-                @Override
-                public void onPrepareLoad(Drawable placeHolderDrawable) {
-                }
-            });
-        }
-    }
 }

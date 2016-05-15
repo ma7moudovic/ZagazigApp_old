@@ -13,12 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.sharkawy.zagazigapp.R;
 import com.sharkawy.zagazigapp.activities.PhotoActivity;
 import com.sharkawy.zagazigapp.dataModels.Photo;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.util.List;
@@ -89,7 +88,12 @@ public class GallaryAdapter extends BaseAdapter {
         String yt_thumbnail_url = "http://mashaly.net/" + trailer.getPhotoThumb();
 //        String yt_thumbnail_url = "http://mashaly.net/" +"/places_imgs/icons/0.jpg";
 //        Picasso.with(getContext()).load(yt_thumbnail_url).into(viewHolder.imageView);
-        ImageHandler(trailer.getPhotoThumb(),viewHolder.imageView);
+//        ImageHandler(trailer.getPhotoThumb(),viewHolder.imageView);
+
+        Glide.with(getContext())
+                .load("http://176.32.230.50/zagapp.com/"+trailer.getPhotoURL())
+                .diskCacheStrategy(DiskCacheStrategy.ALL)
+                .into(viewHolder.imageView);
 
 //        viewHolder.nameView.setText(trailer.getName());
 
@@ -105,7 +109,7 @@ public class GallaryAdapter extends BaseAdapter {
 //            nameView = (TextView) view.findViewById(R.id.trailer_name);
         }
     }
-
+/*
     private void ImageHandler(final String URL , final ImageView imageV) {
         String root = Environment.getExternalStorageDirectory().toString();
         File myDir = new File(root + "/ZagApp/"+URL.replace("/","_"));
@@ -154,5 +158,5 @@ public class GallaryAdapter extends BaseAdapter {
             });
         }
     }
-
+*/
 }
