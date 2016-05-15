@@ -279,6 +279,7 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     if(response.getString("message").toString().equals("success")){
 
+
 //                        Toast.makeText(MainActivity.this,response.toString(), Toast.LENGTH_LONG).show();
                         JSONArray data = response.getJSONArray("categories");
 
