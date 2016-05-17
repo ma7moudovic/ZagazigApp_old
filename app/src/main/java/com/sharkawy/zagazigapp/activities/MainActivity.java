@@ -1,9 +1,13 @@
 package com.sharkawy.zagazigapp.activities;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,10 +27,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.sharkawy.zagazigapp.R;
 import com.sharkawy.zagazigapp.RecyclerItemClickListener;
 import com.sharkawy.zagazigapp.dataModels.Place;
+import com.sharkawy.zagazigapp.gcm.GcmIntentService;
+import com.sharkawy.zagazigapp.utilities.APIConfigure;
 import com.sharkawy.zagazigapp.utilities.AppController;
+import com.sharkawy.zagazigapp.utilities.Config;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,6 +57,9 @@ public class MainActivity extends AppCompatActivity {
     ProgressDialog pDialog ;
     private static String TAG = MainActivity.class.getSimpleName();
     String CONFIG_URL = "http://176.32.230.22/mashaly.net/handler.php?action=config";
+
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
+    private BroadcastReceiver mRegistrationBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,15 +196,44 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mRegistrationBroadcastReceiver = new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+
+                // checking for type intent filter
+                if (intent.getAction().equals(Config.REGISTRATION_COMPLETE)) {
+                    // gcm successfully registered
+                    // now subscribe to `global` topic to receive app wide notifications
+                    String token = intent.getStringExtra("token");
+
+                    Toast.makeText(getApplicationContext(), "GCM registration token: " + token, Toast.LENGTH_LONG).show();
+
+                } else if (intent.getAction().equals(Config.SENT_TOKEN_TO_SERVER)) {
+                    // gcm registration id is stored in our server's MySQL
+
+                    Toast.makeText(getApplicationContext(), "GCM registration token is stored in server!", Toast.LENGTH_LONG).show();
+
+                } else if (intent.getAction().equals(Config.PUSH_NOTIFICATION)) {
+                    // new push notification is received
+
+                    Toast.makeText(getApplicationContext(), "Push notification is received!", Toast.LENGTH_LONG).show();
+                }
+            }
+        };
+
+        if (checkPlayServices()) {
+            registerGCM();
+        }
+
     }
 
     private void prepareSearchQuery() {
         String url="";
         if(search_input.getText().length()!=0){
             if(s1.getSelectedItemPosition()==0){
-                url ="http://176.32.230.50/zagapp.com/handler.php?action=search&name="+search_input.getText().toString().replace(" ","%20");
+                url = APIConfigure.API_DOMAIN+APIConfigure.API_SEARCH_PATH+"name="+search_input.getText().toString().replace(" ","%20");
             }else {
-                url ="http://176.32.230.50/zagapp.com/handler.php?action=search&area="+s1.getSelectedItemPosition()+"&name="+search_input.getText().toString().replace(" ","%20");
+                url =APIConfigure.API_DOMAIN+APIConfigure.API_SEARCH_PATH+"area="+s1.getSelectedItemPosition()+"&name="+search_input.getText().toString().replace(" ","%20");
             }
             String URL = null;
             try {
@@ -329,5 +370,47 @@ public class MainActivity extends AppCompatActivity {
         if (pDialog.isShowing())
             pDialog.dismiss();
     }
+    // starting the service to register with GCM
+    private void registerGCM() {
+        Intent intent = new Intent(this, GcmIntentService.class);
+        intent.putExtra("key", "register");
+        startService(intent);
+    }
 
+    private boolean checkPlayServices() {
+        GoogleApiAvailability apiAvailability = GoogleApiAvailability.getInstance();
+        int resultCode = apiAvailability.isGooglePlayServicesAvailable(this);
+        if (resultCode != ConnectionResult.SUCCESS) {
+            if (apiAvailability.isUserResolvableError(resultCode)) {
+                apiAvailability.getErrorDialog(this, resultCode, PLAY_SERVICES_RESOLUTION_REQUEST)
+                        .show();
+            } else {
+                Log.i(TAG, "This device is not supported. Google Play Services not installed!");
+                Toast.makeText(getApplicationContext(), "This device is not supported. Google Play Services not installed!", Toast.LENGTH_LONG).show();
+                finish();
+            }
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        // register GCM registration complete receiver
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.REGISTRATION_COMPLETE));
+
+        // register new push message receiver
+        // by doing this, the activity will be notified each time a new message arrives
+        LocalBroadcastManager.getInstance(this).registerReceiver(mRegistrationBroadcastReceiver,
+                new IntentFilter(Config.PUSH_NOTIFICATION));
+    }
+
+    @Override
+    protected void onPause() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mRegistrationBroadcastReceiver);
+        super.onPause();
+    }
 }

@@ -16,7 +16,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.cache.DiskCache;
+import com.bumptech.glide.load.engine.cache.DiskLruCacheWrapper;
 import com.sharkawy.zagazigapp.R;
 import com.sharkawy.zagazigapp.dataModels.Place;
 import com.sharkawy.zagazigapp.dataModels.Tag;
@@ -95,6 +98,12 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
 
 //        Toast.makeText(getpContext(),pObjects.get(position).getImageURL() , Toast.LENGTH_LONG).show();
 //        ImageHandler(pObjects.get(position).getImageURL(),holder.imageView);
+        if (!Glide.isSetup()) {
+            GlideBuilder gb = new GlideBuilder(getpContext());
+            DiskCache dlw = DiskLruCacheWrapper.get(new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/myCatch/"), 250 * 1024 * 1024);
+            gb.setDiskCache(dlw);
+            Glide.setup(gb);
+        }
         Glide.with(getpContext())
                 .load("http://176.32.230.50/zagapp.com/"+pObjects.get(position).getImageURL())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)

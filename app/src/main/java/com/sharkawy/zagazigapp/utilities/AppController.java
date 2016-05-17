@@ -7,6 +7,8 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
 import com.crashlytics.android.Crashlytics;
+import com.sharkawy.zagazigapp.helper.MyPreferenceManager;
+
 import io.fabric.sdk.android.Fabric;
 
 /**
@@ -18,7 +20,7 @@ public class AppController extends Application {
     private RequestQueue mRequestQueue;
 
     private static AppController mInstance;
-
+    private MyPreferenceManager pref;
     @Override
     public void onCreate() {
         super.onCreate();
@@ -52,5 +54,12 @@ public class AppController extends Application {
         if (mRequestQueue != null) {
             mRequestQueue.cancelAll(tag);
         }
+    }
+
+    public MyPreferenceManager getPrefManager() {
+        if (pref == null) {
+            pref = new MyPreferenceManager(this);
+        }
+        return pref;
     }
 }

@@ -14,7 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.cache.DiskCache;
+import com.bumptech.glide.load.engine.cache.DiskLruCacheWrapper;
 import com.sharkawy.zagazigapp.R;
 import com.sharkawy.zagazigapp.dataModels.Annonce;
 import com.sharkawy.zagazigapp.dataModels.Place;
@@ -91,6 +94,12 @@ public class AnnonuceAdapter  extends RecyclerView.Adapter<AnnonuceAdapter.ViewH
 //        Picasso.with(getpContext()).load("http://mashaly.net/"+pObjects.get(position).getIconURL()).into(holder.imageView);
 //        ImageHandler(pObjects.get(position).getIconURL(),holder.imageView);
 
+        if (!Glide.isSetup()) {
+            GlideBuilder gb = new GlideBuilder(getpContext());
+            DiskCache dlw = DiskLruCacheWrapper.get(new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/myCatch/"), 250 * 1024 * 1024);
+            gb.setDiskCache(dlw);
+            Glide.setup(gb);
+        }
         Glide.with(getpContext())
                 .load("http://176.32.230.50/zagapp.com/"+pObjects.get(position).getIconURL())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)

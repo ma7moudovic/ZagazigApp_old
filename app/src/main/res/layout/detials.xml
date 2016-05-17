@@ -148,7 +148,6 @@
                 android:drawablePadding="5dp"
                 android:text="Facebook page"
                 android:textColor="@color/white" />
->>>>>>> origin/master
 
             <LinearLayout
                 android:id="@+id/LinearLayout02"

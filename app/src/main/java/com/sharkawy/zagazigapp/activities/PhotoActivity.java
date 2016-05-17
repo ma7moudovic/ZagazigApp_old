@@ -55,11 +55,6 @@ public class PhotoActivity extends AppCompatActivity {
                 }
             }
         }
-//        imageView = (ImageView) findViewById(R.id.imageID);
-//        Glide.with(this)
-//                .load("http://176.32.230.50/zagapp.com/"+URL)
-//                .diskCacheStrategy(DiskCacheStrategy.ALL)
-//                .into(imageView);
 
         viewPager = (ViewPager) findViewById(R.id.pager);
         utils = new Utils(getApplicationContext());

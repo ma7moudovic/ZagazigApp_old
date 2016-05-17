@@ -8,6 +8,7 @@ buildscript {
     }
 }
 apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
 apply plugin: 'io.fabric'
 
 repositories {
@@ -51,4 +52,6 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true;
     }
+    compile "com.google.android.gms:play-services:8.3.0"
+
 }

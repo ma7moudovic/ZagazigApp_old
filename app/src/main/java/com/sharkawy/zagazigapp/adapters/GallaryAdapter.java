@@ -14,7 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.cache.DiskCache;
+import com.bumptech.glide.load.engine.cache.DiskLruCacheWrapper;
 import com.sharkawy.zagazigapp.R;
 import com.sharkawy.zagazigapp.activities.PhotoActivity;
 import com.sharkawy.zagazigapp.dataModels.Photo;
@@ -89,7 +92,12 @@ public class GallaryAdapter extends BaseAdapter {
 //        String yt_thumbnail_url = "http://mashaly.net/" +"/places_imgs/icons/0.jpg";
 //        Picasso.with(getContext()).load(yt_thumbnail_url).into(viewHolder.imageView);
 //        ImageHandler(trailer.getPhotoThumb(),viewHolder.imageView);
-
+        if (!Glide.isSetup()) {
+            GlideBuilder gb = new GlideBuilder(getContext());
+            DiskCache dlw = DiskLruCacheWrapper.get(new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/myCatch/"), 250 * 1024 * 1024);
+            gb.setDiskCache(dlw);
+            Glide.setup(gb);
+        }
         Glide.with(getContext())
                 .load("http://176.32.230.50/zagapp.com/"+trailer.getPhotoURL())
                 .diskCacheStrategy(DiskCacheStrategy.ALL)

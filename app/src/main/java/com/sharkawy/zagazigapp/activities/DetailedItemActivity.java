@@ -17,13 +17,17 @@ import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.load.engine.cache.DiskCache;
+import com.bumptech.glide.load.engine.cache.DiskLruCacheWrapper;
 import com.google.gson.Gson;
 import com.linearlistview.LinearListView;
 import com.sharkawy.zagazigapp.R;
@@ -46,6 +50,8 @@ import java.util.Locale;
 public class DetailedItemActivity extends AppCompatActivity {
     String EXTRA_IMAGE ="extra_image";
     String EXTRA_IMAGES_OBJECTS ="extra_object";
+    private static final String EXTRA_IMAGES_FLAG = "extra_flag";
+
     TextView title ,category , desc ,address ,tel ,facebookPage;
     ImageView logo ;
     RecyclerView recyclerView ;
@@ -62,7 +68,7 @@ public class DetailedItemActivity extends AppCompatActivity {
     boolean isFavorited =false;
     double latitude , longitude ;
     String fbPageURL ;
-
+    ImageButton imageButtonGallery, imageButtonMenus ;
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.detailed_menu, menu);
@@ -176,6 +182,8 @@ public class DetailedItemActivity extends AppCompatActivity {
         tel = (TextView) findViewById(R.id.tvtel);
         logo = (ImageView) findViewById(R.id.photo);
         facebookPage = (TextView) findViewById(R.id.fbPage);
+        imageButtonGallery = (ImageButton) findViewById(R.id.btngallary);
+        imageButtonMenus = (ImageButton) findViewById(R.id.btnmenu);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerListview_tags_detailed);
         tags = new ArrayList<>();
@@ -198,9 +206,11 @@ public class DetailedItemActivity extends AppCompatActivity {
             desc.setText(place.getDesc());
             address.setText(place.getAddress());
             tel.setText(place.getTelephone());
-            if(!place.getLat().equals("null")&&!place.getLng().equals("null")){
-                latitude=Double.parseDouble(place.getLat());
-                longitude =Double.parseDouble(place.getLng());
+            if(place.getLat()!=null||place.getLng()!=null){
+                if(!place.getLat().equals("null")&&!place.getLng().equals("null")){
+                    latitude=Double.parseDouble(place.getLat());
+                    longitude =Double.parseDouble(place.getLng());
+                }
             }
 
             if(place.getFbPageURL()!=null){
@@ -209,6 +219,12 @@ public class DetailedItemActivity extends AppCompatActivity {
 //            Picasso.with(this).load("http://mashaly.net/" +place.getImageURL()).into(logo);
 
 //            ImageHandler(place.getImageURL(),logo);
+            if (!Glide.isSetup()) {
+                GlideBuilder gb = new GlideBuilder(this);
+                DiskCache dlw = DiskLruCacheWrapper.get(new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/myCatch/"), 250 * 1024 * 1024);
+                gb.setDiskCache(dlw);
+                Glide.setup(gb);
+            }
             Glide.with(this)
                     .load("http://176.32.230.50/zagapp.com/"+place.getImageURL())
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
@@ -267,6 +283,25 @@ public class DetailedItemActivity extends AppCompatActivity {
                 if(tel.getText()!=""||tel.getText()!=null){
                     call(tel.getText().toString());
                 }
+            }
+        });
+        imageButtonGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailedItemActivity.this,GalleryActivity.class);
+                intent.putExtra(EXTRA_IMAGES_OBJECTS,place.getObject().toString());
+                intent.putExtra(EXTRA_IMAGES_FLAG,"GALLERY");
+                startActivity(intent);
+            }
+        });
+
+        imageButtonMenus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailedItemActivity.this,GalleryActivity.class);
+                intent.putExtra(EXTRA_IMAGES_OBJECTS,place.getObject().toString());
+                intent.putExtra(EXTRA_IMAGES_FLAG,"MENUS");
+                startActivity(intent);
             }
         });
     }
