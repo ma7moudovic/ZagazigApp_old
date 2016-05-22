@@ -52,5 +52,5 @@ dependencies {
     compile('com.crashlytics.sdk.android:crashlytics:2.5.5@aar') {
         transitive = true;
     }
-    compile "com.google.android.gms:play-services:9.0.0"
+    compile "com.google.android.gms:play-services-gcm:9.0.0"
 }
