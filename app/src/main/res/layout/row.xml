@@ -4,14 +4,13 @@
     android:id="@+id/cv"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@null"
+    android:background="#fff"
     card_view:cardBackgroundColor="@android:color/transparent"
     card_view:cardElevation="3dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@mipmap/backrow"
         android:padding="10dp">
 
         <ImageView

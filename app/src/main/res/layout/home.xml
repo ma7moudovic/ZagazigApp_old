@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:background="@mipmap/home_background"
+    android:background="@drawable/app_background"
     android:layout_height="fill_parent">
 
     <LinearLayout
@@ -75,91 +75,188 @@
 
     </LinearLayout>
 
-    <ScrollView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_above="@+id/LinearLayout02"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
 
-        android:layout_below="@id/rel1">
 
-        <LinearLayout
-            android:id="@+id/btns"
+        <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:orientation="vertical">
+            android:layout_height="fill_parent"
+            android:layout_centerInParent="true"
+            android:layout_above="@+id/LinearLayout02"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
 
-            <Button
-                android:id="@+id/btn_cat_1"
+            android:layout_below="@id/rel1"
+            android:orientation="vertical"
+            android:weightSum="12">
+
+
+            <TableRow
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:background="@drawable/custombackgroundbutton"
-                android:text="خروجات"
-                android:textColor="#fff"
-                android:textSize="25sp" />
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:weightSum="1">
 
-            <Button
-                android:id="@+id/btn_cat_2"
+                <RelativeLayout
+                    android:id="@+id/relbtn1"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5sp"
+                    android:layout_marginRight="2.5sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_weight="0.5"
+                    android:padding="10dp">
+
+                    <Button
+                        android:id="@+id/btn_cat_1"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@mipmap/cat_rest"
+                        android:gravity="center"
+                        android:paddingBottom="10dp"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2.5sp"
+                    android:layout_marginRight="5sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_weight="0.5"
+                    android:padding="10dp">
+
+                    <Button
+                        android:id="@+id/btn_cat_11"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@mipmap/cat_khorogat"
+                        android:gravity="center"
+                        android:paddingBottom="10dp"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+
+                        />
+
+                </RelativeLayout>
+            </TableRow>
+
+            <TableRow
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:background="@drawable/custombackgroundbutton"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:weightSum="1">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5sp"
+                    android:layout_marginRight="2.5sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_weight="0.5"
+                    android:padding="10dp">
+
+                    <Button
+                        android:id="@+id/btn_cat_4"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@mipmap/cat_afrah"
+                        android:gravity="center"
+                        android:paddingBottom="10dp"
+                        android:textAlignment="center"
+
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
 
-                android:text="أناقه"
-                android:textColor="#fff"
-                android:textSize="25sp" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2.5sp"
+                    android:layout_marginRight="5sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_weight="0.5"
+                    android:padding="10dp">
+
+                    <Button
+                        android:id="@+id/btn_cat_2"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@mipmap/cat_anaka"
+                        android:gravity="center"
+                        android:paddingBottom="10dp"
+
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+
+                        />
 
 
-            <Button
-                android:id="@+id/btn_cat_3"
+                </RelativeLayout>
+            </TableRow>
+
+
+            <TableRow
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
+                android:layout_height="0dp"
+                android:layout_weight="4"
+                android:weightSum="1">
 
-                android:background="@drawable/custombackgroundbutton"
-                android:text="صحه وجمال"
-                android:textColor="#fff"
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="5sp"
+                    android:layout_marginRight="2.5sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_weight="0.5"
+                    android:padding="10dp">
 
-                android:textSize="25sp" />
+                    <Button
+                        android:id="@+id/btn_cat_5"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@mipmap/cat_khadmat"
+                        android:gravity="center"
+                        android:paddingBottom="10dp"
+                        android:textAlignment="center"
 
-            <Button
-                android:id="@+id/btn_cat_4"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:background="@drawable/custombackgroundbutton"
+                        android:textSize="20sp"
+                        android:textStyle="bold" />
 
-                android:text="أفراح ومناسبات"
-                android:textColor="#fff"
-                android:textSize="25sp" />
 
-            <Button
-                android:id="@+id/btn_cat_5"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginRight="40dp"
-                android:background="@drawable/custombackgroundbutton"
+                </RelativeLayout>
 
-                android:text="خدمات"
-                android:textColor="#fff"
-                android:textSize="25sp" />
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2.5sp"
+                    android:layout_marginRight="5sp"
+                    android:layout_marginTop="5sp"
+                    android:layout_weight="0.5"
+                    android:padding="10dp">
+
+                    <Button
+                        android:id="@+id/btn_cat_3"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@mipmap/cat_sahawegamal"
+                        android:gravity="center"
+                        android:paddingBottom="10dp"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+
+                        />
+
+                </RelativeLayout>
+            </TableRow>
         </LinearLayout>
-
-    </ScrollView>
 
 
     <LinearLayout

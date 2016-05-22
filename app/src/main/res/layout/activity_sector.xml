@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@drawable/catfive"
+    android:background="@drawable/app_background"
     tools:context="com.sharkawy.zagazigapp.activities.SectorActivity">
 
     <android.support.design.widget.AppBarLayout
