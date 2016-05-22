@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.home);
         s1 = (Spinner) findViewById(R.id.spinner);
         search_input = (EditText) findViewById(R.id.etsearch);
-        tabLayout = (TabLayout) findViewById(R.id.tabs);
+//        tabLayout = (TabLayout) findViewById(R.id.tabs);
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage(getResources().getString(R.string.msg_loading));

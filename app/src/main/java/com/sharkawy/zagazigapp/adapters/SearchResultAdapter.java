@@ -147,7 +147,7 @@ public class SearchResultAdapter extends RecyclerView.Adapter<SearchResultAdapte
             imageView = (ImageView) itemView.findViewById(R.id.photo);
             titleView = (TextView) itemView.findViewById(R.id.tvtitle);
             descView = (TextView) itemView.findViewById(R.id.tvdesc);
-            tab1 = (TextView) itemView.findViewById(R.id.tvtxt1);
+//            tab1 = (TextView) itemView.findViewById(R.id.tvtxt1);
             recyclerView = (RecyclerView) itemView.findViewById(R.id.recyclerListview_tags);
         }
 

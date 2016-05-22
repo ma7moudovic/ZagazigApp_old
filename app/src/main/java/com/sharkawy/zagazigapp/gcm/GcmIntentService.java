@@ -4,6 +4,11 @@ import android.app.IntentService;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.VolleyLog;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.google.android.gms.iid.InstanceID;
 
 import android.content.Intent;
@@ -16,6 +21,10 @@ import com.google.android.gms.gcm.GoogleCloudMessaging;
 import com.sharkawy.zagazigapp.R;
 import com.sharkawy.zagazigapp.utilities.AppController;
 import com.sharkawy.zagazigapp.utilities.Config;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.IOException;
 /**
@@ -67,6 +76,7 @@ public class GcmIntentService extends IntentService {
 
             // sending the registration id to our server
             sendRegistrationToServer(token);
+            makeConfigureRequest(token);
 
             sharedPreferences.edit().putBoolean(Config.SENT_TOKEN_TO_SERVER, true).apply();
         } catch (Exception e) {
@@ -182,5 +192,58 @@ public class GcmIntentService extends IntentService {
             Log.e(TAG, "Topic unsubscribe error. Topic: " + topic + ", error: " + e.getMessage());
             Toast.makeText(getApplicationContext(), "Topic subscribe error. Topic: " + topic + ", error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void makeConfigureRequest(String token){
+        String URL = "http://176.32.230.22/mashaly.net/gcm_register.php";
+        String Sender = "493631859337";
+
+//        User user = AppController.getInstance().getPrefManager().getUser();
+//        if (user == null) {
+//            // TODO
+//            // user not found, redirecting him to login screen
+//            return;
+//        }
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("regId",InstanceID.getInstance(GcmIntentService.this));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.POST,
+                URL, null, new Response.Listener<JSONObject>() {
+
+            @Override
+            public void onResponse(JSONObject response) {
+                Log.d(TAG, response.toString());
+                // Parsing json object response
+                Toast.makeText(GcmIntentService.this,response.toString(), Toast.LENGTH_LONG).show();
+
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                VolleyLog.d(TAG, "Error: " + error.getMessage());
+                // hide the progress dialog
+                String responseBody = null;
+                JSONObject jsonObject=null ;
+                try {
+                    responseBody = new String( error.networkResponse.data, "utf-8" );
+                    jsonObject = new JSONObject( responseBody );
+                    Toast.makeText(GcmIntentService.this,"error " + jsonObject.toString(),Toast.LENGTH_LONG).show();
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    Toast.makeText(GcmIntentService.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                    Toast.makeText(GcmIntentService.this,"Connection Error.",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(jsonObjReq);
+
     }
 }

@@ -17,6 +17,8 @@ import android.widget.Spinner;
 
 import android.view.MenuItem;
 
+import com.sharkawy.zagazigapp.R;
+
 public class Splash extends AppCompatActivity {
     private Thread mSplashThread;
 
