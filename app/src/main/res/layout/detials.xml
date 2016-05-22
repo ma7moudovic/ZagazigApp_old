@@ -94,7 +94,7 @@
                 android:layout_height="wrap_content"
                 android:text="Description"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -112,7 +112,7 @@
                 android:drawablePadding="5dp"
                 android:text="Address"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -130,7 +130,7 @@
                 android:drawablePadding="0dp"
                 android:text="Tel.#"
                 android:textColor="@color/white"
-                android:textSize="25sp"
+                android:textSize="24sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -201,7 +201,7 @@
                         android:layout_height="wrap_content"
                         android:text="Photos"
                         android:textColor="@color/white"
-                        android:textSize="20sp"
+                        android:textSize="24sp"
                         android:textStyle="bold" />
 
                     <HorizontalScrollView
