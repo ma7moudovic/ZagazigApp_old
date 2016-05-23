@@ -6,6 +6,7 @@ package com.sharkawy.zagazigapp.utilities;
 public class APIConfigure {
     public static final String API_SEARCH_PATH="action=search&";
     public static final String API_SECTOR_PATH="action=announce&type=";
+    public static final String API_CONFIG="action=config";
     String PIC_URL_COMPLETE="";
     String PIC_URL_THUMB="";
     public static final String API_DOMAIN="http://176.32.230.22/mashaly.net/handler.php?";

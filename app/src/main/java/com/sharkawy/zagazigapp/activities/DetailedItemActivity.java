@@ -13,6 +13,7 @@ import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -52,7 +53,7 @@ public class DetailedItemActivity extends AppCompatActivity {
     String EXTRA_IMAGES_OBJECTS ="extra_object";
     private static final String EXTRA_IMAGES_FLAG = "extra_flag";
 
-    TextView title ,category , desc ,address ,tel ,facebookPage;
+    TextView title  , desc ,address ,tel ,facebookPage;
     ImageView logo ;
     RecyclerView recyclerView ;
     private LinearListView mTrailersView;
@@ -176,7 +177,7 @@ public class DetailedItemActivity extends AppCompatActivity {
 
         txtView_photos = (TextView) findViewById(R.id.txtView_photos);
         title = (TextView) findViewById(R.id.tvtitle);
-        category = (TextView) findViewById(R.id.tvcat);
+//        category = (TextView) findViewById(R.id.tvcat);
         desc = (TextView) findViewById(R.id.tvdesc);
         address = (TextView) findViewById(R.id.tvadd);
         tel = (TextView) findViewById(R.id.tvtel);
@@ -189,6 +190,7 @@ public class DetailedItemActivity extends AppCompatActivity {
         tags = new ArrayList<>();
         TagAdapter tagAdapter = new TagAdapter(this,tags);
         recyclerView.setLayoutManager(new GridLayoutManager(this, 3));
+//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(tagAdapter);
 
         mTrailersView = (LinearListView) findViewById(R.id.detailed_trailers);
@@ -202,7 +204,7 @@ public class DetailedItemActivity extends AppCompatActivity {
             place = new Place(jsonObject);
             title.setText(place.getName());
 
-            category.setText(subcategory[Integer.parseInt(place.getCategoryID())-1]);
+//            category.setText(subcategory[Integer.parseInt(place.getCategoryID())-1]);
             desc.setText(place.getDesc());
             address.setText(place.getAddress());
             tel.setText(place.getTelephone());
@@ -232,6 +234,8 @@ public class DetailedItemActivity extends AppCompatActivity {
 
             for (int i = 0; i < place.getObject().getJSONArray("serviceTags").length(); i++) {
                 tags.add(new Tag(place.getObject().getJSONArray("serviceTags").getJSONObject(i)));
+
+                Toast.makeText(DetailedItemActivity.this,tags.get(i).getTag().toString(),Toast.LENGTH_SHORT).show();
             }
             tagAdapter.notifyDataSetChanged();
 //            Toast.makeText(this,"count of pics "+place.getObject().getJSONArray("imagesPathes").length()+"",Toast.LENGTH_SHORT).show();

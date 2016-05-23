@@ -62,10 +62,13 @@ public class SectorActivity extends AppCompatActivity {
 
         if(getIntent().getExtras().getInt("type")==2){
             url="http://176.32.230.50/zagapp.com/handler.php?action=announce&type=offer";
+            getSupportActionBar().setTitle("عروض");
         }else if(getIntent().getExtras().getInt("type")==3){
             url="http://176.32.230.50/zagapp.com/handler.php?action=announce&type=job";
+            getSupportActionBar().setTitle("وظائف");
         }else if(getIntent().getExtras().getInt("type")==4){
             url="http://176.32.230.50/zagapp.com/handler.php?action=announce&type=course";
+            getSupportActionBar().setTitle("كورسات");
         }
 
         makeJsonObjectRequest(url);

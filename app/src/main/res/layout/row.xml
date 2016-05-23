@@ -1,34 +1,42 @@
-<android.support.v7.widget.CardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cv"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    card_view:contentPaddingBottom="8dp"
+    android:background="@drawable/new_layer"
     card_view:cardBackgroundColor="@android:color/transparent"
-    card_view:cardElevation="3dp">
+    card_view:cardElevation="3dp"
+    card_view:contentPaddingBottom="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/custombackground"
+        android:layout_gravity="right"
+        android:background="@drawable/new_layer"
+        android:gravity="right"
         android:padding="10dp">
 
         <ImageView
             android:id="@+id/photo"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:scaleType="fitXY"
-            android:src="@mipmap/ic_launcher"
-            android:layout_centerVertical="true"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="16dp"
             android:paddingLeft="8dp"
-            android:layout_alignParentEnd="true" />
+            android:scaleType="fitXY"
+            android:src="@mipmap/ic_launcher" />
+
         <RelativeLayout
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:gravity="right">
 
         </RelativeLayout>
+
         <TextView
             android:id="@+id/tvtitle"
             android:layout_width="wrap_content"
@@ -36,7 +44,6 @@
             android:layout_alignParentTop="true"
             android:layout_toLeftOf="@+id/photo"
             android:text="مطعم الأسطوره"
-            android:textColor="@color/white"
             android:textSize="30sp" />
 
         <TextView
@@ -45,21 +52,19 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/tvtitle"
             android:layout_toLeftOf="@+id/photo"
-            android:text="اكل سورى"
-            android:textColor="@color/white" />
+            android:text="اكل سورى" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerListview_tags"
-            card_view:cardBackgroundColor="@android:color/transparent"
-            card_view:cardElevation="0dp"
-            xmlns:android="http://schemas.android.com/apk/res/android"
+        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/recyclerListview_tags"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_marginTop="10dp"
             android:layout_below="@+id/tvdesc"
+            android:layout_marginTop="10dp"
             android:layout_toLeftOf="@+id/photo"
-            android:layout_toStartOf="@+id/photo" />
+            card_view:cardBackgroundColor="@android:color/transparent"
+            card_view:cardElevation="0dp" />
+        />
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

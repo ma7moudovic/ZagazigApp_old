@@ -1,11 +1,305 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/widget34"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    android:layout_weight="16"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/app_background">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:id="@+id/body"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/cv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@mipmap/app_background"
+                card_view:cardBackgroundColor="@android:color/transparent"
+                card_view:cardElevation="0dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/new_layer"
+                    android:padding="10dp">
+
+                    <ImageView
+                        android:id="@+id/photo"
+                        android:layout_width="140dp"
+                        android:layout_height="140dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_alignParentTop="true"
+                        android:layout_marginLeft="16dp"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/ic_launcher" />
+
+                    <TextView
+                        android:id="@+id/tvtitle"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/photo"
+                        android:layout_toStartOf="@+id/photo"
+                        android:textStyle="bold"
+                        android:gravity="right|center"
+                        android:text="Karim"
+                        android:textSize="30sp" />
+
+                    <!--<TextView-->
+                    <!--android:id="@+id/tvtxt1"-->
+                    <!--android:layout_width="wrap_content"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:layout_below="@+id/tvcat"-->
+                    <!--android:layout_marginTop="8dp"-->
+                    <!--android:layout_toEndOf="@+id/photo"-->
+                    <!--android:layout_toRightOf="@+id/photo"-->
+                    <!--android:background="@drawable/custombackground"-->
+                    <!--android:paddingBottom="3dp"-->
+                    <!--android:paddingLeft="15dp"-->
+                    <!--android:paddingRight="15dp"-->
+                    <!--android:paddingTop="3dp"-->
+                    <!--android:text="type" />-->
 
 
-</RelativeLayout>
+                </RelativeLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="10dp"></LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right|center"
+                android:background="@drawable/new_layer"
+                android:gravity="right|center">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="right"
+
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvvv"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="right|center"
+                        android:gravity="right|center"
+                        android:text="الخدمات"
+                        android:textSize="30sp" />
+
+                    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+                        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                        android:id="@+id/recyclerListview_tags_detailed"
+                        android:layout_width="wrap_content"
+                        android:layout_height="100dp"
+                        android:layout_toLeftOf="@+id/tvvv"
+                        card_view:cardBackgroundColor="@android:color/transparent"
+                        card_view:cardElevation="0dp" />
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+            <LinearLayout
+                android:layout_width="fill_parent"
+                android:layout_height="10dp"></LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:background="@drawable/new_layer"
+                android:gravity="right"
+                android:orientation="vertical"
+                android:padding="7dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:text="الوصف"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvdesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:text="jkkdhf gjfdjgj;hfdkjhgjfd kjhhf;kjgfd kjgfdkjhg jfdg kjhfdj hjfdh gkfd gklfhjd ijri jg'rkijg irdshfgkjhdflkjhgio fdgk fdkj; gkjfdhg kjhfdjk gfdkjh gjkfdhg u rkfdgkfd jgidfh kjndf;kghd;kf jj;dhf kjh h gkfdh gidfog dfioghsfd[oi h" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#8c8f8f"></LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="5dp"
+                    android:drawableRight="@mipmap/address"
+                    android:gravity="right|center"
+                    android:text="العنوان"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvadd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:text="jkkdhf hjd ijri jg'rkijg irdshfgkjhdflkjhgio fdgk fdkj; gkjfdhg kjhfdjk gfdkjh gjkfdhg u rkfdgkfd jgidfh kjndf;kghd;kf jj;dhf kjh h gkfdh gidfog dfioghsfd[oi h" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#8c8f8f"></LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="10dp"
+                    android:drawablePadding="0dp"
+                    android:drawableRight="@mipmap/phone"
+                    android:gravity="right|center"
+                    android:text="الهاتف"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvtel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:gravity="right"
+                    android:text="0123456789"
+                    android:textSize="20sp" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#8c8f8f"></LinearLayout>
+                <TextView
+                    android:id="@+id/fbPage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:drawablePadding="5dp"
+                    android:drawableRight="@mipmap/fb"
+                    android:gravity="right|center"
+                    android:text="صفحه الفيس بوك"
+                    android:textSize="24sp" />
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#8c8f8f"></LinearLayout>
+                <LinearLayout
+                    android:id="@+id/LinearLayout02"
+                    android:layout_width="fill_parent"
+                    android:layout_height="50dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="10dp"
+                    android:gravity="bottom">
+
+                    <ImageButton
+                        android:id="@+id/btnmenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/food" />
+
+
+                    <ImageButton
+                        android:id="@+id/btngallary"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:background="@color/colorPrimary"
+                        android:scaleType="fitCenter"
+
+                        android:src="@mipmap/icon">
+
+                    </ImageButton>
+                </LinearLayout>
+
+
+                <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/detail_trailers_cardview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    card_view:cardBackgroundColor="@android:color/transparent"
+                    card_view:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="right"
+                        android:gravity="right"
+                        android:orientation="vertical"
+                        android:padding="10dp">
+
+                        <TextView
+                            android:id="@+id/txtView_photos"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:gravity="right"
+                            android:text="صور المكان"
+                            android:textSize="24sp"
+                            android:textStyle="bold" />
+
+                        <HorizontalScrollView
+                            android:layout_width="match_parent"
+                            android:layout_height="160dp"
+                            android:layout_gravity="right"
+                            android:layout_marginTop="20dp"
+                            android:gravity="right">
+
+                            <com.linearlistview.LinearListView
+                                android:id="@+id/detailed_trailers"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:divider="?android:dividerHorizontal"
+                                android:orientation="horizontal"
+                                android:showDividers="middle" />
+
+                        </HorizontalScrollView>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+            </LinearLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</ScrollView>

@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
@@ -61,6 +62,10 @@ public class MainActivity extends AppCompatActivity {
     private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
     private BroadcastReceiver mRegistrationBroadcastReceiver;
 
+    SharedPreferences sharedpreferences;
+    SharedPreferences.Editor editor;
+    public static final String MyPREFERENCES = "MyPrefs";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,6 +76,9 @@ public class MainActivity extends AppCompatActivity {
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage(getResources().getString(R.string.msg_loading));
+
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
+        editor = sharedpreferences.edit();
 
         String[] arr = {"كل المناطق", "القومية ", "شارع المحافظة", "مفارق المنصورة", "فلل الجامعة", "حي الزهور", "المنتزة", "شارع البحر", "المحطة", "شارع مديرالامن", "عمر افندي", "حي ثاني", "شارع الغشام", "عمارة الاوقاف"};
 
@@ -234,6 +242,12 @@ public class MainActivity extends AppCompatActivity {
             registerGCM();
         }
 
+        if(sharedpreferences.contains("categories")){
+            String jsonString = sharedpreferences.getString("categories",null);
+            if(jsonString==null){
+                makeConfigureRequest();
+            }
+        }
     }
 
     private void prepareSearchQuery() {
@@ -314,33 +328,26 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void makeConfigureRequest(String URL) {
-        showpDialog();
+    private void makeConfigureRequest() {
+//        showpDialog();
 //                        Toast.makeText(MainActivity.this,URL,Toast.LENGTH_LONG).show();
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.GET,
-                URL, null, new Response.Listener<JSONObject>() {
+                APIConfigure.API_DOMAIN+APIConfigure.API_CONFIG, null, new Response.Listener<JSONObject>() {
 
             @Override
             public void onResponse(JSONObject response) {
                 Log.d(TAG, response.toString());
                 // Parsing json object response
                 hidepDialog();
-//                Toast.makeText(MainActivity.this,response.toString(), Toast.LENGTH_LONG).show();
+                Toast.makeText(MainActivity.this,response.toString(), Toast.LENGTH_LONG).show();
                 try {
-                    if (response.getString("message").toString().equals("success")) {
-
 
 //                        Toast.makeText(MainActivity.this,response.toString(), Toast.LENGTH_LONG).show();
-                        JSONArray data = response.getJSONArray("categories");
+                    JSONArray data = response.getJSONArray("categories");
+                    editor.putString("categories",data.toString());
+                    editor.commit();
 
 
-                    } else if (response.getString("message").toString().equals("no data recived")) {
-                        Toast.makeText(MainActivity.this, "no places with this name", Toast.LENGTH_LONG).show();
-
-                    } else {
-                        Toast.makeText(getApplicationContext(),
-                                "Something went wrong..!", Toast.LENGTH_SHORT).show();
-                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

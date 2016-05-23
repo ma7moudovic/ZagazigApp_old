@@ -21,6 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.google.gson.JsonObject;
 import com.sharkawy.zagazigapp.R;
 import com.sharkawy.zagazigapp.RecyclerItemClickListener;
 import com.sharkawy.zagazigapp.adapters.SearchResultAdapter;
@@ -57,6 +58,9 @@ public class CategoryActivity extends AppCompatActivity {
     public static final String OFFLINECAT3="cat3";
     public static final String OFFLINECAT4="cat4";
     public static final String OFFLINECAT5="cat5";
+
+    ArrayList<String> subcategory = new ArrayList<>();
+    ArrayAdapter<String> tagsAdapter ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,26 +78,32 @@ public class CategoryActivity extends AppCompatActivity {
             case 1:
                 getSupportActionBar().setTitle("مطاعم");
                 getSupportActionBar().setIcon(R.mipmap.cat_rest);
+                getSubCatsDropDownMenu(1);
                 break;
             case 11:
                 getSupportActionBar().setTitle("خروجات");
                 getSupportActionBar().setIcon(R.mipmap.cat_khorogat);
+                getSubCatsDropDownMenu(2);
                 break;
             case 2:
                 getSupportActionBar().setTitle("أناقة");
                 getSupportActionBar().setIcon(R.mipmap.cat_anaka);
+                getSubCatsDropDownMenu(3);
                 break;
             case 3:
                 getSupportActionBar().setTitle("صحة وجمال");
                 getSupportActionBar().setIcon(R.mipmap.cat_sahawegamal);
+                getSubCatsDropDownMenu(4);
                 break;
             case 4:
                 getSupportActionBar().setTitle("افراح ومناسبات");
                 getSupportActionBar().setIcon(R.mipmap.cat_afrah);
+                getSubCatsDropDownMenu(5);
                 break;
             case 5:
                 getSupportActionBar().setTitle("خدمات");
                 getSupportActionBar().setIcon(R.mipmap.cat_khadmat);
+                getSubCatsDropDownMenu(6);
                 break;
         }
 
@@ -101,7 +111,7 @@ public class CategoryActivity extends AppCompatActivity {
         pDialog.setMessage(getResources().getString(R.string.msg_loading));
 
         String [] arr ={"كل المناطق","القومية ","شارع المحافظة","مفارق المنصورة","فلل الجامعة","حي الزهور","المنتزة","شارع البحر","المحطة","شارع مديرالامن","عمر افندي","حي ثاني","شارع الغشام" ,"عمارة الاوقاف"};
-        String [] subcategory = {"الكل","مطاعم","كافيهات","سينمات","هدوم ولادى","هدوم بناتى","هدوم اطفال","موبيلات ولابات","جيم شبابي","جيم بناتى","مراكز تجميل","قاعات افراح","ستوديو تصوير","فوتوجرافيك","مستشفيات","عيادات","خدمات عربيات"};
+//        String [] subcategory = {"الكل","مطاعم","كافيهات","سينمات","هدوم ولادى","هدوم بناتى","هدوم اطفال","موبيلات ولابات","جيم شبابي","جيم بناتى","مراكز تجميل","قاعات افراح","ستوديو تصوير","فوتوجرافيك","مستشفيات","عيادات","خدمات عربيات"};
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_spinner_item, arr);
@@ -110,7 +120,7 @@ public class CategoryActivity extends AppCompatActivity {
         dataAdapter.setDropDownViewResource
                 (android.R.layout.simple_spinner_dropdown_item);
 
-        ArrayAdapter<String> tagsAdapter = new ArrayAdapter<String>
+        tagsAdapter = new ArrayAdapter<String>
                 (this, android.R.layout.simple_spinner_item, subcategory);
         tagsAdapter.setDropDownViewResource
                 (android.R.layout.simple_spinner_dropdown_item);
@@ -315,6 +325,26 @@ public class CategoryActivity extends AppCompatActivity {
 
     }
 
+    private void getSubCatsDropDownMenu(int index){
+        if(sharedpreferences.contains("categories")){
+            String jsonString = sharedpreferences.getString("categories",null);
+            if(jsonString!=null){
+                try {
+                    JSONArray jsonArray = new JSONArray(jsonString);
+                    JSONObject cat = jsonArray.getJSONObject(index);
+                    JSONArray subCategories = cat.getJSONArray("subCategories");
+                    for(int i = 0 ;i<subCategories.length();i++){
+                        subcategory.add(subCategories.getJSONObject(i).getString("description"));
+                        tagsAdapter.notifyDataSetChanged();
+                    }
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        }
+    }
     private void populateData(String dataString) {
         JSONObject jsonObject1 = null;
         try {
