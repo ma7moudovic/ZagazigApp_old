@@ -147,7 +147,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(MainActivity.this, CategoryActivity.class);
-                i.putExtra("cat_index", 1);
+                i.putExtra("cat_index", 11);
                 startActivity(i);
             }
         });

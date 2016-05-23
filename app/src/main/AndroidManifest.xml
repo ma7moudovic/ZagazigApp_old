@@ -36,16 +36,17 @@
             android:windowSoftInputMode="stateHidden">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activities.SearchResultActivity"
             android:label="@string/title_activity_search_result"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".activities.MainActivity"/>
         <activity android:name=".activities.DetailedItemActivity" />
-        <activity android:name=".activities.CategoryActivity" />
+        <activity android:name=".activities.CategoryActivity"
+            android:parentActivityName=".activities.MainActivity"></activity>
         <activity
             android:name=".activities.SectorActivity"
             android:label="@string/title_activity_sector"
@@ -54,7 +55,8 @@
         <activity
             android:name=".activities.FavorivtesActivity"
             android:label="@string/title_activity_favorivtes"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".activities.MainActivity"/>
 
         <meta-data
             android:name="io.fabric.ApiKey"
@@ -94,18 +96,15 @@
                 <action android:name="com.google.android.gms.iid.InstanceID" />
             </intent-filter>
         </service>
-
         <!-- END Added for GCM -->
         <activity
             android:name=".activities.Splash"
             android:label="@string/title_activity_splash"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
     </application>
 

@@ -42,7 +42,11 @@ public class FavorivtesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorivtes);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("الاماكن المفضلة");
         setSupportActionBar(toolbar);
+
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         list= new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerListView_favList);

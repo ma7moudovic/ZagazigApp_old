@@ -62,28 +62,40 @@ public class CategoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_category);
 
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         editor = sharedpreferences.edit();
 
         category_bk = (RelativeLayout) findViewById(R.id.category_bk);
         index = getIntent().getExtras().getInt("cat_index");
-//        switch (index){
-//            case 1:
-//                category_bk.setBackgroundResource(R.mipmap.firstcatgory);
-//                break;
-//            case 2:
-//                category_bk.setBackgroundResource(R.mipmap.cattwo);
-//                break;
-//            case 3:
-//                category_bk.setBackgroundResource(R.mipmap.catthree);
-//                break;
-//            case 4:
-//                category_bk.setBackgroundResource(R.mipmap.catfour);
-//                break;
-//            case 5:
-//                category_bk.setBackgroundResource(R.mipmap.catfive);
-//                break;
-//        }
+        switch (index){
+            case 1:
+                getSupportActionBar().setTitle("مطاعم");
+                getSupportActionBar().setIcon(R.mipmap.cat_rest);
+                break;
+            case 11:
+                getSupportActionBar().setTitle("خروجات");
+                getSupportActionBar().setIcon(R.mipmap.cat_khorogat);
+                break;
+            case 2:
+                getSupportActionBar().setTitle("أناقة");
+                getSupportActionBar().setIcon(R.mipmap.cat_anaka);
+                break;
+            case 3:
+                getSupportActionBar().setTitle("صحة وجمال");
+                getSupportActionBar().setIcon(R.mipmap.cat_sahawegamal);
+                break;
+            case 4:
+                getSupportActionBar().setTitle("افراح ومناسبات");
+                getSupportActionBar().setIcon(R.mipmap.cat_afrah);
+                break;
+            case 5:
+                getSupportActionBar().setTitle("خدمات");
+                getSupportActionBar().setIcon(R.mipmap.cat_khadmat);
+                break;
+        }
 
         pDialog = new ProgressDialog(this);
         pDialog.setMessage(getResources().getString(R.string.msg_loading));

@@ -35,6 +35,9 @@ public class SearchResultActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         list= new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerListview_searchResult);
         layoutManager=new LinearLayoutManager(this);

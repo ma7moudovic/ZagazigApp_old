@@ -46,6 +46,9 @@ public class SectorActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         pDialog = new ProgressDialog(this);
         pDialog.setMessage(getResources().getString(R.string.msg_loading));
 
