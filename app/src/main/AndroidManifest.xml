@@ -99,7 +99,7 @@
         <!-- END Added for GCM -->
         <activity
             android:name=".activities.Splash"
-            android:label="@string/title_activity_splash"
+            android:label="@string/app_name"
             android:theme="@style/AppTheme.FullScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
