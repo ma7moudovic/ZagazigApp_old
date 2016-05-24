@@ -41,18 +41,33 @@
                         android:scaleType="fitXY"
                         android:src="@mipmap/ic_launcher" />
 
-                    <TextView
-                        android:id="@+id/tvtitle"
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_toLeftOf="@+id/photo"
                         android:layout_toStartOf="@+id/photo"
-                        android:textStyle="bold"
-                        android:gravity="right|center"
-                        android:text="Karim"
-                        android:textSize="30sp" />
+                        android:orientation="vertical">
 
+                        <TextView
+                            android:id="@+id/tvtitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:gravity="right"
+                            android:text="Karim"
+                            android:layout_gravity="right"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/tvcat"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:gravity="right"
+
+                            android:text="Dabour" />
+                    </LinearLayout>
                     <!--<TextView-->
                     <!--android:id="@+id/tvtxt1"-->
                     <!--android:layout_width="wrap_content"-->
@@ -100,8 +115,7 @@
                         android:text="الخدمات"
                         android:textSize="30sp" />
 
-                    <android.support.v7.widget.RecyclerView
-                        xmlns:android="http://schemas.android.com/apk/res/android"
+                    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
                         xmlns:card_view="http://schemas.android.com/apk/res-auto"
                         android:id="@+id/recyclerListview_tags_detailed"
                         android:layout_width="wrap_content"
@@ -144,12 +158,14 @@
                     android:layout_gravity="right"
                     android:gravity="right"
                     android:text="jkkdhf gjfdjgj;hfdkjhgjfd kjhhf;kjgfd kjgfdkjhg jfdg kjhfdj hjfdh gkfd gklfhjd ijri jg'rkijg irdshfgkjhdflkjhgio fdgk fdkj; gkjfdhg kjhfdjk gfdkjh gjkfdhg u rkfdgkfd jgidfh kjndf;kghd;kf jj;dhf kjh h gkfdh gidfog dfioghsfd[oi h" />
+
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="2dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="#8c8f8f"></LinearLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -169,12 +185,14 @@
                     android:layout_gravity="right"
                     android:gravity="right"
                     android:text="jkkdhf hjd ijri jg'rkijg irdshfgkjhdflkjhgio fdgk fdkj; gkjfdhg kjhfdjk gfdkjh gjkfdhg u rkfdgkfd jgidfh kjndf;kghd;kf jj;dhf kjh h gkfdh gidfog dfioghsfd[oi h" />
+
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="2dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="#8c8f8f"></LinearLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -195,12 +213,14 @@
                     android:gravity="right"
                     android:text="0123456789"
                     android:textSize="20sp" />
+
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="2dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="#8c8f8f"></LinearLayout>
+
                 <TextView
                     android:id="@+id/fbPage"
                     android:layout_width="wrap_content"
@@ -211,12 +231,14 @@
                     android:gravity="right|center"
                     android:text="صفحه الفيس بوك"
                     android:textSize="24sp" />
+
                 <LinearLayout
                     android:layout_width="fill_parent"
                     android:layout_height="2dp"
-                    android:layout_marginTop="10dp"
                     android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
                     android:background="#8c8f8f"></LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/LinearLayout02"
                     android:layout_width="fill_parent"
