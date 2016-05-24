@@ -53,9 +53,9 @@
                             android:id="@+id/tvtitle"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_gravity="right"
                             android:gravity="right"
                             android:text="Karim"
-                            android:layout_gravity="right"
                             android:textSize="30sp"
                             android:textStyle="bold" />
 
@@ -103,6 +103,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="right"
+                    android:padding="7dp"
                     android:orientation="horizontal">
 
                     <TextView
@@ -302,6 +303,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="160dp"
                             android:layout_gravity="right"
+                            android:background="@null"
                             android:layout_marginTop="20dp"
                             android:gravity="right">
 
