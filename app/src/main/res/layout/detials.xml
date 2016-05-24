@@ -185,6 +185,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
                     android:gravity="right"
+                    android:textSize="20sp"
                     android:text="jkkdhf hjd ijri jg'rkijg irdshfgkjhdflkjhgio fdgk fdkj; gkjfdhg kjhfdjk gfdkjh gjkfdhg u rkfdgkfd jgidfh kjndf;kghd;kf jj;dhf kjh h gkfdh gidfog dfioghsfd[oi h" />
 
                 <LinearLayout
@@ -213,7 +214,7 @@
                     android:layout_gravity="right"
                     android:gravity="right"
                     android:text="0123456789"
-                    android:textSize="20sp" />
+                    android:textSize="24sp" />
 
                 <LinearLayout
                     android:layout_width="fill_parent"

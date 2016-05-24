@@ -3,15 +3,16 @@
     xmlns:card_view="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/category_bk"
-    android:background="@drawable/app_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/app_background"
+    android:padding="5dp"
     tools:context="com.sharkawy.zagazigapp.activities.CategoryActivity">
 
     <LinearLayout
         android:id="@+id/cr_sp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         android:orientation="horizontal">
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
