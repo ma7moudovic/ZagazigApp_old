@@ -32,6 +32,9 @@
         <LinearLayout
             android:layout_width="0.0dip"
             android:layout_height="fill_parent"
+            android:background="@drawable/custombackgroundbutton"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:layout_weight="2">
 
             <Spinner
@@ -39,7 +42,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="right"
-                android:layout_marginRight="3dp"
                 android:gravity="right"
                 android:minHeight="0dp"
                 android:spinnerMode="dropdown"

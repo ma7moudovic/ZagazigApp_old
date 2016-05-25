@@ -12,37 +12,44 @@
     <LinearLayout
         android:id="@+id/cr_sp"
         android:layout_width="match_parent"
+        android:padding="1dp"
         android:layout_height="50dp"
         android:orientation="horizontal">
 
         <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             card_view:cardBackgroundColor="@android:color/transparent"
             card_view:cardElevation="0dp">
 
             <Spinner
                 android:id="@+id/sp_subCats"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></Spinner>
+                android:layout_width="match_parent"
+                android:background="@drawable/spinner_border"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_height="match_parent"></Spinner>
         </android.support.v7.widget.CardView>
 
         <android.support.v7.widget.CardView
 
             xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:card_view="http://schemas.android.com/apk/res-auto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             card_view:cardBackgroundColor="@android:color/transparent"
             card_view:cardElevation="0dp">
 
             <Spinner
                 android:id="@+id/sp_aresa"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"></Spinner>
+                android:layout_width="match_parent"
+                android:background="@drawable/spinner_border"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_height="match_parent"></Spinner>
         </android.support.v7.widget.CardView>
     </LinearLayout>
 

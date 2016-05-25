@@ -36,37 +36,40 @@
                         android:layout_width="140dp"
                         android:layout_height="140dp"
                         android:layout_alignParentRight="true"
+                        android:layout_alignParentEnd="true"
                         android:layout_alignParentTop="true"
                         android:layout_marginLeft="16dp"
+                        android:layout_marginStart="16dp"
                         android:scaleType="fitXY"
                         android:src="@mipmap/ic_launcher" />
 
-                    <TextView
-                        android:id="@+id/tvtitle"
+
+
+                        <TextView
+                            android:id="@+id/tvtitle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="right"
+                            android:gravity="right"
+                            android:text="Karim"
+                            android:layout_centerVertical="true"
+                            android:layout_toLeftOf="@+id/photo"
+                            android:layout_toStartOf="@+id/photo"
+                            android:textSize="30sp"
+                            android:textStyle="bold" />
+
+                    <ImageButton
+                        android:id="@+id/btnmenu"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_toLeftOf="@+id/photo"
-                        android:layout_toStartOf="@+id/photo"
-                        android:textStyle="bold"
-                        android:gravity="right|center"
-                        android:text="Karim"
-                        android:textSize="30sp" />
 
-                    <!--<TextView-->
-                    <!--android:id="@+id/tvtxt1"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="wrap_content"-->
-                    <!--android:layout_below="@+id/tvcat"-->
-                    <!--android:layout_marginTop="8dp"-->
-                    <!--android:layout_toEndOf="@+id/photo"-->
-                    <!--android:layout_toRightOf="@+id/photo"-->
-                    <!--android:background="@drawable/custombackground"-->
-                    <!--android:paddingBottom="3dp"-->
-                    <!--android:paddingLeft="15dp"-->
-                    <!--android:paddingRight="15dp"-->
-                    <!--android:paddingTop="3dp"-->
-                    <!--android:text="type" />-->
+                        android:background="@null"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitCenter"
+                        android:src="@mipmap/food" />
 
 
                 </RelativeLayout>
@@ -88,8 +91,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="right"
-
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:padding="7dp">
 
                     <TextView
                         android:id="@+id/tvvv"
@@ -97,8 +100,6 @@
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
                         android:layout_alignParentRight="true"
-                        android:layout_centerVertical="true"
-                        android:layout_gravity="right|center"
                         android:gravity="right|center"
                         android:text="الخدمات"
                         android:textSize="30sp" />
@@ -108,7 +109,7 @@
                         android:id="@+id/recyclerListview_tags_detailed"
                         android:layout_width="wrap_content"
                         android:layout_height="100dp"
-                        android:layout_toLeftOf="@+id/tvvv"
+                        android:layout_below="@+id/tvvv"
                         card_view:cardBackgroundColor="@android:color/transparent"
                         card_view:cardElevation="0dp" />
                 </RelativeLayout>
@@ -121,7 +122,7 @@
                 android:layout_height="10dp"></LinearLayout>
 
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
@@ -130,111 +131,233 @@
                 android:orientation="vertical"
                 android:padding="7dp">
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:gravity="right"
-                    android:text="الوصف"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                <RelativeLayout
+                    android:id="@+id/linwasf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
 
-                <TextView
-                    android:id="@+id/tvdesc"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:gravity="right"
-                    android:text="jkkdhf gjfdjgj;hfdkjhgjfd kjhhf;kjgfd kjgfdkjhg jfdg kjhfdj hjfdh gkfd gklfhjd ijri jg'rkijg irdshfgkjhdflkjhgio fdgk fdkj; gkjfdhg kjhfdjk gfdkjh gjkfdhg u rkfdgkfd jgidfh kjndf;kghd;kf jj;dhf kjh h gkfdh gidfog dfioghsfd[oi h" />
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="#8c8f8f"></LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="10dp"
-                    android:drawablePadding="5dp"
-                    android:drawableRight="@mipmap/address"
-                    android:gravity="right|center"
-                    android:text="العنوان"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/wasf"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="right"
+                        android:gravity="right"
+                        android:text="الوصف : "
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/tvadd"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:gravity="right"
-                    android:text="jkkdhf hjd ijri jg'rkijg irdshfgkjhdflkjhgio fdgk fdkj; gkjfdhg kjhfdjk gfdkjh gjkfdhg u rkfdgkfd jgidfh kjndf;kghd;kf jj;dhf kjh h gkfdh gidfog dfioghsfd[oi h" />
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="#8c8f8f"></LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:layout_marginTop="10dp"
-                    android:drawablePadding="0dp"
-                    android:drawableRight="@mipmap/phone"
-                    android:gravity="right|center"
-                    android:text="الهاتف"
-                    android:textSize="24sp"
-                    android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tvdesc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toLeftOf="@+id/wasf"
+                        android:layout_toStartOf="@+id/wasf"
+                        android:gravity="right"
+                        android:text="jkkdhf gjfdjgj;hfdkjhgjfd kjhhf;kjgfd kjgfdkjhg jfdg kjhfdj hjfdh gkfd gklfhjd ijri jg'rkijg irdshfgkjhdflkjhgio fdgk fdkj; gkjfdhg kjhfdjk gfdkjh gjkfdhg u rkfdgkfd jgidfh kjndf;kghd;kf jj;dhf kjh h gkfdh gidfog dfioghsfd[oi h" />
+                </RelativeLayout>
 
-                <TextView
-                    android:id="@+id/tvtel"
+                <LinearLayout
+                    android:id="@+id/lin11"
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/linwasf"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#8c8f8f"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/linadd"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/lin11">
+
+                    <TextView
+                        android:id="@+id/anwan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="right"
+                        android:layout_marginTop="10dp"
+                        android:drawablePadding="5dp"
+                        android:gravity="right|center"
+                        android:text="العنوان : "
+                        android:textSize="24sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/tvadd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/anwan"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="right"
+                        android:layout_toEndOf="@+id/imgadd"
+                        android:layout_toLeftOf="@+id/anwan"
+                        android:layout_toRightOf="@+id/imgadd"
+                        android:layout_toStartOf="@+id/anwan"
+                        android:gravity="right"
+                        android:text="jkkdhf hjd ijri jg'rkikf jj;dhf kjh h gkfdh gidfog dfioghsfd[oi h"
+                        android:textSize="20sp" />
+
+                    <ImageView
+                        android:id="@+id/imgadd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="left"
+                        android:src="@mipmap/address" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin22"
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/linadd"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#8c8f8f"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/linphone"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
+                    android:layout_below="@+id/lin22"
+                    android:gravity="right">
+
+
+                    <TextView
+                        android:id="@+id/tvtel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@+id/imgcall"
+                        android:layout_toLeftOf="@+id/adddd"
+                        android:layout_toRightOf="@+id/imgcall"
+                        android:layout_toStartOf="@+id/adddd"
+                        android:gravity="right"
+                        android:text="0123456789"
+
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:id="@+id/adddd"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="right"
+                        android:gravity="right"
+                        android:text="الهاتف : "
+                        android:textSize="24sp"
+
+                        android:textStyle="bold" />
+
+
+                    <ImageView
+                        android:id="@+id/imgcall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="left"
+                        android:src="@mipmap/phone" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/lin33"
+                    android:layout_width="fill_parent"
+                    android:layout_height="2dp"
+                    android:layout_below="@+id/linphone"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="10dp"
+                    android:background="#8c8f8f"
                     android:gravity="right"
-                    android:text="0123456789"
-                    android:textSize="20sp" />
-                <LinearLayout
-                    android:layout_width="fill_parent"
-                    android:layout_height="2dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginBottom="10dp"
-                    android:background="#8c8f8f"></LinearLayout>
-                <TextView
-                    android:id="@+id/fbPage"
-                    android:layout_width="wrap_content"
+                    android:orientation="horizontal"></LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/linfb"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:drawablePadding="5dp"
-                    android:drawableRight="@mipmap/fb"
-                    android:gravity="right|center"
-                    android:text="صفحه الفيس بوك"
-                    android:textSize="24sp" />
+                    android:layout_below="@+id/lin33"
+                    android:gravity="right|center">
+
+                    <TextView
+                        android:id="@+id/fbPage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="right"
+                        android:layout_toEndOf="@+id/imgfb"
+                        android:layout_toRightOf="@+id/imgfb"
+                        android:drawablePadding="5dp"
+                        android:text="صفحه الفيس بوك"
+                        android:textSize="24sp" />
+
+                    <ImageView
+                        android:id="@+id/imgfb"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="left"
+                        android:src="@mipmap/fb" />
+                </RelativeLayout>
+
                 <LinearLayout
+                    android:id="@+id/lin44"
                     android:layout_width="fill_parent"
                     android:layout_height="2dp"
-                    android:layout_marginTop="10dp"
+                    android:layout_below="@+id/linfb"
                     android:layout_marginBottom="10dp"
-                    android:background="#8c8f8f"></LinearLayout>
+
+                    android:layout_marginTop="10dp"
+                    android:background="#8c8f8f"
+                    android:orientation="horizontal"></LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/LinearLayout02"
                     android:layout_width="fill_parent"
                     android:layout_height="50dp"
-                    android:layout_alignParentBottom="true"
+                    android:layout_below="@+id/lin44"
                     android:layout_marginTop="10dp"
-                    android:gravity="bottom">
+                    android:gravity="bottom"
+                    android:orientation="vertical">
 
-                    <ImageButton
-                        android:id="@+id/btnmenu"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@null"
-                        android:scaleType="fitCenter"
-                        android:src="@mipmap/food" />
+                    <!--<ImageButton-->
+                    <!--android:id="@+id/btnmenu"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:background="@null"-->
+                    <!--android:scaleType="fitCenter"-->
+                    <!--android:src="@mipmap/food" />-->
 
 
                     <ImageButton
@@ -256,6 +379,7 @@
                     android:id="@+id/detail_trailers_cardview"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_below="@+id/LinearLayout02"
                     android:layout_marginTop="10dp"
                     card_view:cardBackgroundColor="@android:color/transparent"
                     card_view:cardElevation="0dp">
@@ -263,6 +387,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_below="@+id/detail_trailers_cardview"
                         android:layout_gravity="right"
                         android:gravity="right"
                         android:orientation="vertical"
@@ -274,7 +399,7 @@
                             android:layout_height="wrap_content"
                             android:layout_gravity="right"
                             android:gravity="right"
-                            android:text="صور المكان"
+                            android:text="صور المكان : "
                             android:textSize="24sp"
                             android:textStyle="bold" />
 
@@ -283,6 +408,7 @@
                             android:layout_height="160dp"
                             android:layout_gravity="right"
                             android:layout_marginTop="20dp"
+                            android:background="@null"
                             android:gravity="right">
 
                             <com.linearlistview.LinearListView
@@ -297,7 +423,7 @@
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
 
-            </LinearLayout>
+            </RelativeLayout>
         </LinearLayout>
 
 
